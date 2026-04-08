@@ -1,0 +1,71 @@
+.invoice-settings-page {
+  padding: 20px;
+}
+
+/* Header */
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.settings-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Buttons */
+.btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #4f6ef7;
+  color: #fff;
+  border: none;
+}
+
+/* Entries */
+.entries {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Table */
+.settings-table-wrapper {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.settings-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.settings-table th,
+.settings-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.settings-table th {
+  background: #f9fafb;
+  font-weight: 600;
+}
+
+/* No data */
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+}

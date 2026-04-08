@@ -1,0 +1,106 @@
+.rule-page {
+  padding: 20px;
+}
+
+/* Header */
+.rule-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  background: #fff;
+  padding: 16px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Title */
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  color: #1f2937;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* 👉 Button ko right push karne ka main fix */
+.list-btn {
+  margin-left: auto;   /* 🔥 ye important hai */
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 6px;
+}
+
+/* Form */
+.rule-form {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  max-width: 600px;
+}
+
+/* Fields */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Flex row */
+.form-group.flex {
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.form-group.flex div {
+  flex: 1;
+}
+
+.form-group.flex input {
+  flex: 1;
+}
+
+/* Checkbox */
+.checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Button */
+.btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #4f6ef7;
+  color: #fff;
+  border: none;
+}
+
+.submit {
+  margin-top: 10px;
+}

@@ -1,0 +1,238 @@
+/* ===== PAGE ===== */
+.affiliate-postback-page {
+  background: #f5f7fb;
+  min-height: 100vh;
+}
+
+.main-wrapper {
+  display: flex;
+}
+
+.content-wrapper {
+  flex: 1;
+  padding: 20px;
+}
+
+/* ===== HEADER ===== */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.page-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+/* ===== BUTTON ROW FIX (IMPORTANT) ===== */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex-wrap: nowrap;      /* ❌ wrap band */
+  white-space: nowrap;    /* ❌ break band */
+  overflow-x: auto;       /* small screen scroll */
+
+  margin-left: auto;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  background: #2f6fed;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: #fff;
+}
+
+.btn-outline {
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+/* ===== TABLE ===== */
+.table-container {
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.postback-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.postback-table th {
+  text-align: left;
+  padding: 10px;
+  background: #f8f9fc;
+}
+
+.postback-table td {
+  padding: 10px;
+  border-top: 1px solid #eee;
+}
+
+/* ===== STATUS ===== */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+
+.status-badge.approved {
+  background: #e6f7ee;
+  color: #1aa36f;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.action-trigger {
+  background: #e9ecef;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.action-manage {
+  background: #2f6fed;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* ===== FOOTER ===== */
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.pagination {
+  display: flex;
+  gap: 5px;
+}
+/* ===== TOPBAR ===== */
+.topbar {
+  height: 50px;
+  background: #f8f9fc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-btn {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.shortcut {
+  background: #e9ecef;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.top-right {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 220px;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  height: calc(100vh - 50px);
+  transition: 0.3s;
+  padding: 10px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.sidebar li:hover {
+  background: #f1f3f9;
+}
+
+/* ===== COLLAPSE EFFECT ===== */
+.affiliate-postback-page.collapsed .sidebar {
+  width: 60px;
+}
+
+.affiliate-postback-page.collapsed .sidebar li {
+  text-align: center;
+}
+
+/* ===== MAIN WRAPPER ===== */
+.main-wrapper {
+  display: flex;
+}
+
+/* ===== CONTENT ===== */
+.content-wrapper {
+  flex: 1;
+  padding: 15px;
+}
+.sidebar {
+  width: 220px;
+  transition: 0.3s;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.affiliate-postback-page.collapsed .sidebar {
+  width: 60px;
+}
+
+.main-wrapper {
+  display: flex;
+}
+
+.content-wrapper {
+  flex: 1;
+  padding: 20px;
+}

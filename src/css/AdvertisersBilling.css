@@ -1,0 +1,119 @@
+.billing-page {
+  padding: 20px;
+}
+
+/* Header */
+.billing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.billing-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #4f6ef7;
+  color: #fff;
+  border: none;
+}
+
+.input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.entries {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Table */
+.billing-table-wrapper {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.billing-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.billing-table th,
+.billing-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.billing-table th {
+  background: #f9fafb;
+  font-weight: 600;
+}
+
+.link {
+  color: #2563eb;
+  cursor: pointer;
+}
+
+/* Status */
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #d97706;
+}
+
+.status.paid {
+  background: #e6f7ee;
+  color: #16a34a;
+}
+
+/* Option button */
+.option-btn {
+  background: #f1f5f9;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.pagination button {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.pagination .active {
+  background: #3b82f6;
+  color: #fff;
+}

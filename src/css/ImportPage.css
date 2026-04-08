@@ -1,0 +1,61 @@
+.import-page {
+  padding: 20px;
+}
+
+.import-header {
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Grid */
+.import-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Card */
+.import-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  text-align: left;
+  border: 1px solid #eee;
+  transition: 0.2s;
+}
+
+.import-card:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* Icon */
+.icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+/* Colors */
+.icon.green { color: #22c55e; }
+.icon.orange { color: #f97316; }
+.icon.blue { color: #3b82f6; }
+.icon.yellow { color: #eab308; }
+
+/* Button */
+.btn.upload {
+  background: #0ea5e9;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn.setup {
+  background: #0284c7;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}

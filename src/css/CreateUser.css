@@ -1,0 +1,84 @@
+.create-user-container{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#f5f6fa;
+}
+
+.create-user-card{
+width:420px;
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.create-user-card h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+.create-user-card input,
+.create-user-card select{
+width:100%;
+padding:10px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+.create-user-card button{
+width:100%;
+padding:12px;
+background:#4f46e5;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.create-user-card button:hover{
+background:#4338ca;
+}
+
+.success{
+background:#d1fae5;
+padding:10px;
+margin-bottom:10px;
+border-radius:5px;
+}
+
+.error{
+background:#fee2e2;
+padding:10px;
+margin-bottom:10px;
+border-radius:5px;
+}
+.error-banner{
+background:#fee2e2;
+border:1px solid #f87171;
+color:#b91c1c;
+padding:12px;
+border-radius:6px;
+margin-bottom:15px;
+font-size:14px;
+}
+
+.success-banner{
+background:#dcfce7;
+border:1px solid #4ade80;
+color:#166534;
+padding:12px;
+border-radius:6px;
+margin-bottom:15px;
+font-size:14px;
+}
+
+.error-text{
+color:#dc2626;
+font-size:13px;
+margin-top:-10px;
+margin-bottom:10px;
+display:block;
+}

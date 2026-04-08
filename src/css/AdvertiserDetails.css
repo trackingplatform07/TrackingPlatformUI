@@ -1,0 +1,1016 @@
+.main-container {
+  display: flex;
+  height: 100vh;
+}
+
+.content {
+  flex: 1;
+  background: #f5f6fa;
+  overflow: auto;
+}
+
+.page-wrapper {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* PANELS */
+.left-panel {
+  width: 420px;
+  min-width: 280px;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* PROFILE */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  background: #2f80ed;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.sub-text {
+  font-size: 13px;
+  color: gray;
+}
+
+.status {
+  background: green;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+/* BUTTONS (2 PER ROW) */
+/* BUTTONS - 2 PER ROW PERFECT */
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.btn-group button {
+  flex: 1 1 calc(50% - 10px); /* 2 buttons per row */
+  padding: 8px;
+  border: 1px solid #3b82f6;
+  background: #e0edff;
+  color: #1d4ed8;
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.btn-group button:hover {
+  background: #3b82f6;
+  color: #fff;
+}
+
+/* INFO */
+.info-grid {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+}
+
+/* DROPDOWN */
+.dropdown-wrapper select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #f8f9fb;
+}
+
+.selected-box {
+  margin-top: 8px;
+  background: #eef2f7;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.clear-btn {
+  cursor: pointer;
+}
+
+/* REPORT */
+.report-box {
+  display: flex;
+  gap: 20px;
+}
+
+.report-item {
+  flex: 1;
+  background: #eaf2fb;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.chart-placeholder {
+  height: 150px;
+  background: #f1f3f6;
+  margin-top: 10px;
+}
+
+/* TABLE */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 500px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .btn-group {
+    grid-template-columns: 1fr;
+  }
+
+  .page-wrapper {
+    flex-direction: column;
+  }
+}
+
+/* HEADER ROW FIX */
+.profile-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* EDIT BUTTON STYLE */
+.edit-btn {
+  padding: 2px 6px;        /* 🔽 reduce horizontal space */
+  font-size: 11px;         /* slightly smaller */
+  border-radius: 5px;
+  border: 1px solid #3b82f6;
+  background: #e0edff;
+  color: #1d4ed8;
+  cursor: pointer;
+
+  height: 24px;            /* 🔽 smaller height */
+  min-width: auto;         /* remove extra width */
+  width: auto;             /* auto fit content */
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+}
+
+.edit-btn:hover {
+  background: #3b82f6;
+  color: #fff;
+}
+/* COMMON INPUT + SELECT STYLE */
+.info-grid input,
+.info-grid select,
+.info-grid textarea {
+  width: 100%;
+  padding: 6px 10px;
+  margin-top: 4px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+
+  font-size: 13px;
+  background: #f9fafb;
+
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* FOCUS EFFECT */
+.info-grid input:focus,
+.info-grid select:focus,
+.info-grid textarea:focus {
+  border-color: #3b82f6;
+  background: #fff;
+}
+
+/* SELECT ARROW CLEAN */
+.info-grid select {
+  cursor: pointer;
+}
+
+/* TEXTAREA FIX */
+.info-grid textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+/* ============================================
+   ACTION BUTTONS SET - EXACTLY LIKE YOUR IMAGE
+   ============================================ */
+.action-buttons-set {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+  padding: 16px 0;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.action-btn {
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.action-btn:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+  transform: translateY(-1px);
+}
+
+.action-btn.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* Click animation */
+.action-btn:active {
+  transform: scale(0.96);
+}
+
+/* ============================================
+   IMPROVED INFO ROWS
+   ============================================ */
+.info-section {
+  margin-bottom: 24px;
+}
+
+.info-section h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-row label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.info-row span {
+  font-size: 14px;
+  color: #1e293b;
+  padding: 6px 0;
+}
+
+.info-row input,
+.info-row select,
+.info-row textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s;
+  background: #fff;
+}
+
+.info-row input:focus,
+.info-row select:focus,
+.info-row textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.info-row textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.status-badge.active {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.status-badge.inactive {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Action Buttons for Edit Mode */
+.action-buttons {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.cancel-btn {
+  padding: 8px 20px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  color: #64748b;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.submit-btn {
+  padding: 8px 24px;
+  border: none;
+  background: #3b82f6;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submit-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* Right Panel Improvements */
+.dropdown-wrapper {
+  margin-bottom: 20px;
+}
+
+.dropdown-wrapper select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dropdown-wrapper select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Report Box */
+.report-box {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.report-item {
+  flex: 1;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.report-item p {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.report-item h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.chart-placeholder {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  border: 1px dashed #cbd5e1;
+}
+
+.chart-message {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* Manage Controls */
+.manage-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.full-width {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* Billing */
+.billing-info {
+  padding: 8px 0;
+}
+
+.text-muted {
+  color: #64748b;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+/* Table Empty State */
+.empty-state {
+  text-align: center;
+  padding: 32px !important;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  font-weight: 600;
+  color: #475569;
+  font-size: 13px;
+}
+
+/* Card Enhancements */
+.card {
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .action-buttons-set {
+    grid-template-columns: 1fr;
+  }
+  
+  .report-box {
+    flex-direction: column;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .cancel-btn, .submit-btn {
+    width: 100%;
+  }
+}
+/* Add these styles to your AdvertiserDetails.css file */
+
+/* Reports Header */
+.reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.legend-color.revenue-color {
+  background: #3b82f6;
+}
+
+.legend-color.conversions-color {
+  background: #10b981;
+}
+
+/* Trend Indicators */
+.trend {
+  display: inline-block;
+  font-size: 11px;
+  margin-top: 8px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.trend.positive {
+  color: #059669;
+  background: #d1fae5;
+}
+
+.trend.negative {
+  color: #dc2626;
+  background: #fee2e2;
+}
+
+/* Chart Container */
+.chart-container {
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.chart-wrapper {
+  display: flex;
+  min-width: 600px;
+  position: relative;
+  padding: 20px 0 20px 0;
+}
+
+.chart-y-axis {
+  width: 70px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #64748b;
+}
+
+.chart-y-axis-right {
+  width: 70px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #64748b;
+  text-align: right;
+}
+
+.y-axis-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.y-axis-tick {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.chart-area {
+  flex: 1;
+  position: relative;
+}
+
+.revenue-chart,
+.conversions-chart {
+  width: 100%;
+  height: auto;
+}
+
+.revenue-chart {
+  margin-bottom: 20px;
+}
+
+.conversions-chart {
+  margin-top: 20px;
+}
+
+.chart-x-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+
+.x-axis-tick {
+  font-size: 10px;
+  color: #94a3b8;
+  text-align: center;
+  flex: 1;
+}
+
+/* Chart Stats */
+.chart-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chart-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .reports-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .chart-legend {
+    flex-wrap: wrap;
+  }
+  
+  .chart-wrapper {
+    min-width: 500px;
+  }
+}
+
+/* Tooltip effect for chart points */
+.revenue-chart circle,
+.conversions-chart circle {
+  transition: r 0.2s ease;
+  cursor: pointer;
+}
+
+.revenue-chart circle:hover,
+.conversions-chart circle:hover {
+  r: 5;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+/* Add these styles to your AdvertiserDetails.css file */
+
+/* Status Badge Styles */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  width: fit-content;
+  transition: all 0.2s ease;
+}
+
+/* Active Status - Green */
+.status-active {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Inactive Status - Gray */
+.status-inactive {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Rejected Status - Red (Like live website) */
+.status-rejected {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  box-shadow: 0 1px 3px rgba(220, 38, 38, 0.1);
+  animation: pulse-red 2s infinite;
+}
+
+/* Pending Status - Orange/Yellow */
+.status-pending {
+  background: linear-gradient(135deg, #fed7aa 0%, #fde68a 100%);
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Approved Status - Blue */
+.status-approved {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1e40af;
+  border: 1px solid #93c5fd;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Pulse Animation for Rejected Status */
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(220, 38, 38, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
+}
+
+/* Hover Effects */
+.status-badge:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.98);
+}
+
+.status-rejected:hover {
+  background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
+}
+
+/* Optional: Add a subtle border animation for rejected status */
+.status-rejected {
+  position: relative;
+  overflow: hidden;
+}
+
+.status-rejected::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.status-rejected:hover::before {
+  left: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .status-badge {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+}
+
+/* Alternative styling for different status variations */
+.status-badge.status-rejected {
+  /* Additional rejected-specific styles */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Optional: Add a small dot indicator for rejected */
+.status-rejected::after {
+  content: '●';
+  margin-left: 4px;
+  font-size: 8px;
+  opacity: 0.7;
+}
+
+/* Dark mode support (if needed) */
+@media (prefers-color-scheme: dark) {
+  .status-rejected {
+    background: linear-gradient(135deg, #7f1a1a 0%, #991b1b 100%);
+    color: #fecaca;
+    border-color: #dc2626;
+  }
+}
+/* Add these styles to your AdvertiserDetails.css file */
+
+/* Edit Actions Container - Right aligned, single row */
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Small Cancel Button */
+.cancel-btn-small {
+  padding: 6px 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.3px;
+}
+
+.cancel-btn-small:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #475569;
+  transform: translateY(-1px);
+}
+
+.cancel-btn-small:active {
+  transform: translateY(0);
+}
+
+/* Small Submit Button */
+.submit-btn-small {
+  /* padding: 6px 20px; */
+  background: #3b82f6;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 7px;
+}
+
+.submit-btn-small:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+}
+
+.submit-btn-small:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Optional: Add icons to buttons for better UX */
+.cancel-btn-small::before {
+  content: "✕";
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.submit-btn-small::before {
+  content: "✓";
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .edit-actions {
+    gap: 10px;
+  }
+  
+  .cancel-btn-small,
+  .submit-btn-small {
+    padding: 5px 14px;
+    font-size: 12px;
+  }
+}
+
+/* Optional: Add a loading state for buttons */
+.submit-btn-small.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.submit-btn-small.loading::before {
+  content: "⟳";
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

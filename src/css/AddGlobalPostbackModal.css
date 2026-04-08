@@ -1,0 +1,354 @@
+/* AddGlobalPostbackModal.css */
+
+.modal-overlay-gp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-box-gp {
+  background: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn-gp {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  color: #999;
+  z-index: 10;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-btn-gp:hover {
+  color: #000;
+  background-color: #f0f0f0;
+}
+
+.modal-header-gp {
+  padding: 20px;
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+  padding-right: 50px; /* Space for close button */
+}
+
+.modal-body-gp {
+  padding: 20px;
+}
+
+.mb-0-gp {
+  margin-bottom: 0;
+}
+
+.icon-plus-gp {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.row-gp {
+  display: flex;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+
+.col-md-4-gp {
+  width: 33.333%;
+  padding-right: 12px;
+  font-weight: 500;
+  padding-top: 8px;
+}
+
+.col-md-6-gp {
+  width: 50%;
+}
+
+.col-12-gp {
+  width: 100%;
+}
+
+.col-5-gp {
+  width: 41.666%;
+}
+
+.col-1-gp {
+  width: 8.333%;
+}
+
+.col-10-gp {
+  width: 83.333%;
+}
+
+.select-gp,
+.input-gp,
+.textarea-gp {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.textarea-gp {
+  resize: vertical;
+}
+
+.text-muted-gp {
+  color: #6b7280;
+}
+
+.text-xs-gp {
+  font-size: 12px;
+}
+
+.text-right-gp {
+  text-align: right;
+}
+
+.text-danger-gp {
+  color: #ef4444;
+  cursor: pointer;
+}
+
+.advance-checkbox-row-gp {
+  margin-top: 16px;
+}
+
+.advance-setup-gp {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.fieldset-gp {
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.legend-gp {
+  padding: 0 8px;
+  width: auto;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.header-row-gp,
+.field-row-gp {
+  margin-bottom: 12px;
+}
+
+.btn-outline-gp {
+  padding: 6px 12px;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-outline-gp:hover {
+  background: #f9fafb;
+}
+
+.btn-primary-gp {
+  padding: 8px 20px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary-gp:hover {
+  background: #2563eb;
+}
+
+.btn-primary-gp:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-row-gp {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.partner-template-gp {
+  margin-bottom: 16px;
+}
+
+.alert-info-gp {
+  padding: 12px;
+  background: #e0f2fe;
+  border: 1px solid #bae6fd;
+  border-radius: 4px;
+  color: #0369a1;
+  font-size: 14px;
+}
+
+.icon-times-gp {
+  width: 16px;
+  height: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.icon-times-gp:hover {
+  color: #dc2626;
+}
+
+.tokens-title-gp {
+  margin-top: 32px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-tags-gp {
+  width: 18px;
+  height: 18px;
+}
+
+.tokens-table-container-gp {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+.table-gp {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-gp tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-gp tbody tr:hover {
+  background: #f9fafb;
+}
+
+.token-label-gp {
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  width: 40%;
+}
+
+.token-input-gp {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: monospace;
+  background: #f9fafb;
+}
+
+.token-input-gp:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+@media (max-width: 768px) {
+  .row-gp {
+    flex-direction: column;
+  }
+  
+  .col-md-4-gp,
+  .col-md-6-gp,
+  .col-5-gp,
+  .col-1-gp,
+  .col-10-gp {
+    width: 100%;
+    padding-right: 0;
+  }
+  
+  .col-md-4-gp {
+    margin-bottom: 8px;
+  }
+  
+  .modal-header-gp {
+    padding-right: 50px;
+  }
+  
+  .close-btn-gp {
+    top: 12px;
+    right: 16px;
+  }
+}
+/* Add this to your CSS file */
+
+.checkbox-label-gp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-label-gp input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.checkbox-text-gp {
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.checkbox-label-gp:hover .checkbox-text-gp {
+  color: #374151;
+}
+
+.checkbox-label-gp input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.checkbox-label-gp input[type="checkbox"]:disabled + .checkbox-text-gp {
+  color: #9ca3af;
+  cursor: not-allowed;
+}
