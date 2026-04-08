@@ -27,6 +27,7 @@ const AffiliatePostback = () => {
   const [itemsPerPage, setItemsPerPage] = useState(20);
   const [totalItems, setTotalItems] = useState(0);
   
+  
   // Data state
   const [data, setData] = useState([]);
   const [affiliatesList, setAffiliatesList] = useState([]);
