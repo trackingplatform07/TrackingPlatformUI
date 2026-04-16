@@ -2,11 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import AddGlobalPostbackModal from '../components/AddGlobalPostbackModal';
+import AddOfferPostbackModal from '../components/AddOfferPostbackModal'; // Add this import
 import "../css/Affiliates.css";
 import { useNavigate } from "react-router-dom";
 
 const AffiliatePostback = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showOfferModal, setShowOfferModal] = useState(false); // Add state for offer modal
   const [editingPostback, setEditingPostback] = useState(null);
   const navigate = useNavigate();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -486,6 +488,12 @@ const AffiliatePostback = () => {
 
   const handleModalClose = () => {
     setShowModal(false);
+    setShowOfferModal(false);
+    setEditingPostback(null);
+  };
+
+  const handleOfferModalClose = () => {
+    setShowOfferModal(false);
     setEditingPostback(null);
   };
 
@@ -570,9 +578,23 @@ const AffiliatePostback = () => {
                 />
               )}
 
-              <button className="btn primary small" onClick={() => navigate("/add-offer-postback")}>
+              <button 
+                className="btn primary small" 
+                onClick={() => {
+                  setEditingPostback(null);
+                  setShowOfferModal(true);
+                }}
+              >
                 + Add Offer Postback
               </button>
+
+              {showOfferModal && (
+                <AddOfferPostbackModal 
+                  onClose={handleOfferModalClose}
+                  editingData={editingPostback}
+                  onSaved={handlePostbackSaved}
+                />
+              )}
 
               <button className="btn small" onClick={() => navigate("/import-postback")}>
                 Import Postback

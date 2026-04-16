@@ -17,6 +17,7 @@ import AdvertiserDetails from "./pages/AdvertiserDetails";
 import AffiliateSignup from "./AffiliateSignup";
 import AffiliateDetails from "./pages/AffiliateDetails"; 
 import AffiliatePostback from "./pages/AffiliatePostback"; 
+import ImportAffiliates from "./pages/ImportAffiliates";
 
 
 import './css/App.css';
@@ -36,6 +37,7 @@ function App() {
         <Route path="/advertisers" element={<AdvertisersPage />} />
         <Route path="/advertisers-billing" element={<AdvertisersBilling />} />
         <Route path="/import" element={<ImportPage />} />
+        <Route path="/import-affiliates" element={<ImportAffiliates />} />
         <Route path="/create-invoice" element={<CreateInvoice />} />
         <Route path="/invoice-settings" element={<InvoiceSettings />} />
         <Route path="/create-invoice-rule" element={<CreateInvoiceRule />} />
