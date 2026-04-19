@@ -596,9 +596,19 @@ const AffiliatePostback = () => {
                 />
               )}
 
-              <button className="btn small" onClick={() => navigate("/import-postback")}>
-                Import Postback
-              </button>
+               <button
+                   className="btn small"
+                   onClick={() => document.getElementById("fileUpload").click()}
+                 >
+                   Import Postback
+                 </button>
+                 
+                 <input
+                   type="file"
+                   id="fileUpload"
+                   style={{ display: "none" }}
+                   onChange={(e) => console.log(e.target.files[0])}
+               />
 
               <select 
                 className="of-select" 
