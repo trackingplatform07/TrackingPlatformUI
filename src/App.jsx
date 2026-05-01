@@ -18,7 +18,7 @@ import AffiliateSignup from "./AffiliateSignup";
 import AffiliateDetails from "./pages/AffiliateDetails"; 
 import AffiliatePostback from "./pages/AffiliatePostback"; 
 import ImportAffiliates from "./pages/ImportAffiliates";
-
+import CreateOfferPage from "./pages/CreateOfferPage";
 
 import './css/App.css';
  
@@ -45,7 +45,7 @@ function App() {
         <Route path="/affiliate-signup" element={<AffiliateSignup />} />
         <Route path="/affiliate/:id" element={<AffiliateDetails />} /> 
         <Route path="/affiliate-postback" element={<AffiliatePostback />} />
-
+<Route path="/offers/create" element={<CreateOfferPage />} />s
 
       </Routes>
     </div>
