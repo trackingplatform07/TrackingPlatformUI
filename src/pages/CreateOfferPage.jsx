@@ -46,7 +46,8 @@ export default function CreateOfferPage() {
     status: "Approve",
     alertToAffiliates: false,
     deepLinks: "Enable",
-    terms: "",
+    deepLinks: true, // Changed from "Enable" to boolean true
+    terms: "", 
     offerDescription: "",
     privateNote: "",
     paOfferTerms: "",
@@ -451,15 +452,16 @@ export default function CreateOfferPage() {
                         className="form-control"
                       />
                     </div>
-                    <div className="form-group checkbox-group">
-                      <label className="checkbox-label">
+                    <div className="form-group">
+                      <label>Hide Payout</label>
+                      <label className="switch">
                         <input
                           type="checkbox"
                           name="hidePayout"
                           checked={formData.hidePayout}
                           onChange={handleChange}
                         />
-                        <span>Hide Payout</span>
+                        <span className="slider round"></span>
                       </label>
                     </div>
                   </div>
@@ -548,28 +550,29 @@ export default function CreateOfferPage() {
                   </div>
 
                   <div className="form-row">
-                    <div className="form-group checkbox-group">
-                      <label className="checkbox-label">
+                    <div className="form-group" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <label>Alert to Affiliates</label>
+                      <label className="switch">
                         <input
                           type="checkbox"
                           name="alertToAffiliates"
                           checked={formData.alertToAffiliates}
                           onChange={handleChange}
                         />
-                        <span>Alert to Affiliates</span>
+                        <span className="slider round"></span>
                       </label>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                       <label>Deep Links</label>
-                      <select 
-                        name="deepLinks" 
-                        value={formData.deepLinks} 
+                      <label className="switch">
+                        <input
+                          type="checkbox"
+                          name="deepLinks"
+                          checked={formData.deepLinks}
                         onChange={handleChange}
-                        className="form-control"
-                      >
-                        <option>Enable</option>
-                        <option>Disable</option>
-                      </select>
+                        />
+                        <span className="slider round"></span>
+                      </label>
                     </div>
                   </div>
                 </div>
