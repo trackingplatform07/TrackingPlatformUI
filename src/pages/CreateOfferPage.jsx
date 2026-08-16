@@ -1,8 +1,149 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Underline from "@tiptap/extension-underline";
+import Link from "@tiptap/extension-link";
+import {
+  FaBold,
+  FaItalic,
+  FaUnderline,
+  FaStrikethrough,
+  FaListOl,
+  FaListUl,
+  FaQuoteRight,
+  FaUndo,
+  FaRedo,
+  FaLink,
+  FaUnlink,
+  FaImage,
+  FaTable,
+  FaAlignLeft,
+  FaLock,
+  FaUserTie,
+  FaMagic,
+} from "react-icons/fa";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import "../css/CreateOfferPage.css";
+
+const editorTabs = [
+  { id: "offerDescription", label: "Offer Description", icon: FaTable },
+  { id: "privateNote", label: "Private Note", icon: FaLock },
+  { id: "paOfferTerms", label: "Offer Terms/KPI", icon: FaUserTie },
+];
+
+function RichTextOfferEditor({ formData, setFormData }) {
+  const [activeTab, setActiveTab] = useState("offerDescription");
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Underline,
+      Link.configure({ openOnClick: false, autolink: true }),
+    ],
+    content: formData.offerDescription,
+    editorProps: {
+      attributes: {
+        class: "offer-rich-text-content",
+        "aria-label": "Offer description editor",
+      },
+    },
+    onUpdate: ({ editor: currentEditor }) => {
+      setFormData((previous) => ({
+        ...previous,
+        [activeTab]: currentEditor.getHTML(),
+      }));
+    },
+  });
+
+  useEffect(() => {
+    if (!editor) return;
+    const nextContent = formData[activeTab] || "";
+    if (editor.getHTML() !== nextContent) {
+      editor.commands.setContent(nextContent, { emitUpdate: false });
+    }
+  }, [activeTab, editor, formData]);
+
+  const selectTab = (tabId) => {
+    if (editor) {
+      setFormData((previous) => ({
+        ...previous,
+        [activeTab]: editor.getHTML(),
+      }));
+    }
+    setActiveTab(tabId);
+  };
+
+  const setLink = () => {
+    const url = window.prompt("Paste the link URL");
+    if (url) editor?.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+  };
+
+  if (!editor) return null;
+
+  return (
+    <div className="offer-rich-text" aria-label="Offer information editor">
+      <div className="offer-editor-tabs" role="tablist" aria-label="Offer information tabs">
+        {editorTabs.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            role="tab"
+            aria-selected={activeTab === tab.id}
+            className={`offer-editor-tab ${activeTab === tab.id ? "active" : ""}`}
+            onClick={() => selectTab(tab.id)}
+          >
+            {React.createElement(tab.icon, { "aria-hidden": true })}
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="offer-editor-shell">
+        <div className="offer-editor-toolbar" role="toolbar" aria-label="Text formatting">
+          <button type="button" title="Undo" onClick={() => editor.chain().focus().undo().run()} disabled={!editor.can().undo()}><FaUndo /></button>
+          <button type="button" title="Redo" onClick={() => editor.chain().focus().redo().run()} disabled={!editor.can().redo()}><FaRedo /></button>
+          <span className="toolbar-divider" />
+          <button type="button" title="Numbered list" className={editor.isActive("orderedList") ? "is-active" : ""} onClick={() => editor.chain().focus().toggleOrderedList().run()}><FaListOl /></button>
+          <button type="button" title="Bulleted list" className={editor.isActive("bulletList") ? "is-active" : ""} onClick={() => editor.chain().focus().toggleBulletList().run()}><FaListUl /></button>
+          <button type="button" title="Quote" className={editor.isActive("blockquote") ? "is-active" : ""} onClick={() => editor.chain().focus().toggleBlockquote().run()}><FaQuoteRight /></button>
+          <span className="toolbar-divider" />
+          <button type="button" title="Bold" className={editor.isActive("bold") ? "is-active" : ""} onClick={() => editor.chain().focus().toggleBold().run()}><FaBold /></button>
+          <button type="button" title="Italic" className={editor.isActive("italic") ? "is-active" : ""} onClick={() => editor.chain().focus().toggleItalic().run()}><FaItalic /></button>
+          <button type="button" title="Underline" className={editor.isActive("underline") ? "is-active" : ""} onClick={() => editor.chain().focus().toggleUnderline().run()}><FaUnderline /></button>
+          <button type="button" title="Strikethrough" className={editor.isActive("strike") ? "is-active" : ""} onClick={() => editor.chain().focus().toggleStrike().run()}><FaStrikethrough /></button>
+          <span className="toolbar-divider" />
+          <button type="button" title="Add link" onClick={setLink}><FaLink /></button>
+          <button type="button" title="Remove link" onClick={() => editor.chain().focus().unsetLink().run()} disabled={!editor.isActive("link")}><FaUnlink /></button>
+          <button type="button" title="Image uploads are not configured" disabled><FaImage /></button>
+          <button type="button" title="Table support is not configured" disabled><FaTable /></button>
+          <button type="button" title="Paragraph" onClick={() => editor.chain().focus().setParagraph().run()}><FaAlignLeft /></button>
+          <span className="toolbar-divider" />
+          <select
+            aria-label="Styles"
+            value={editor.isActive("heading", { level: 2 }) ? "h2" : editor.isActive("heading", { level: 3 }) ? "h3" : "paragraph"}
+            onChange={(event) => {
+              const command = editor.chain().focus();
+              event.target.value === "paragraph" ? command.setParagraph().run() : command.toggleHeading({ level: Number(event.target.value.slice(1)) }).run();
+            }}
+          >
+            <option value="paragraph">Styles</option>
+            <option value="h2">Heading 2</option>
+            <option value="h3">Heading 3</option>
+          </select>
+          <select aria-label="Format" defaultValue="format" onChange={(event) => event.target.value === "clear" && editor.chain().focus().clearNodes().unsetAllMarks().run()}>
+            <option value="format">Format</option>
+            <option value="clear">Clear formatting</option>
+          </select>
+        </div>
+        <EditorContent editor={editor} />
+        <div className="offer-editor-status">
+          <button type="button" className="ai-rewrite-button" title="AI rewrite can be connected when an AI service is available"><FaMagic /> AI Rewrite</button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function CreateOfferPage() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -45,7 +186,6 @@ export default function CreateOfferPage() {
     offerVisibility: "Public",
     status: "Approve",
     alertToAffiliates: false,
-    deepLinks: "Enable",
     deepLinks: true, // Changed from "Enable" to boolean true
     terms: "", 
     offerDescription: "",
@@ -154,46 +294,25 @@ export default function CreateOfferPage() {
             <h1 className="offer-title">Create Offer</h1>
           </div>
 
-          {/* Step Navigation */}
-          <div className="step-navigation">
-            <div 
-              className={`step-item ${activeStep === 1 ? 'active' : ''} ${activeStep > 1 ? 'completed' : ''}`}
-              onClick={() => setActiveStep(1)}
-            >
-              <div className="step-number">1</div>
-              <div className="step-label">GENERAL-STEP1</div>
-            </div>
-            <div className="step-line"></div>
-            <div 
-              className={`step-item ${activeStep === 2 ? 'active' : ''} ${activeStep > 2 ? 'completed' : ''}`}
-              onClick={() => setActiveStep(2)}
-            >
-              <div className="step-number">2</div>
-              <div className="step-label">TARGETING-STEP2</div>
-            </div>
-            <div className="step-line"></div>
-            <div 
-              className={`step-item ${activeStep === 3 ? 'active' : ''} ${activeStep > 3 ? 'completed' : ''}`}
-              onClick={() => setActiveStep(3)}
-            >
-              <div className="step-number">3</div>
-              <div className="step-label">CREATIVES-STEP3</div>
-            </div>
-            <div className="step-line"></div>
-            <div 
-              className={`step-item ${activeStep === 4 ? 'active' : ''}`}
-              onClick={() => setActiveStep(4)}
-            >
-              <div className="step-number">4</div>
-              <div className="step-label">AFFILIATES-STEP4</div>
-            </div>
+          <div className="step-navigation compact-steps">
+            {[
+              "▣  GENERAL - STEP 1",
+              "▣  LANDING - STEP 2",
+              "◉  TARGETING - STEP 3",
+              "▣  CREATIVES - STEP 4",
+              "♧  AFFILIATES - STEP 5",
+            ].map((step, index) => (
+              <button key={step} type="button" className={`compact-step ${activeStep === index + 1 ? "active" : ""}`} onClick={() => index < 4 && setActiveStep(index + 1)}>
+                {step}
+              </button>
+            ))}
           </div>
 
           <form onSubmit={handleSubmit}>
             {/* Step 1: General */}
             {activeStep === 1 && (
               <div className="offer-form">
-                <div className="form-section">
+                <div className="form-section general-info-section">
                   <div className="form-row">
                     <div className="form-group">
                       <label>Offer Type</label>
@@ -324,8 +443,7 @@ export default function CreateOfferPage() {
                   <div className="form-row">
                     <div className="form-group">
                       <label>Offer URL *</label>
-                      <input
-                        type="text"
+                      <textarea
                         name="offerUrl"
                         value={formData.offerUrl}
                         onChange={handleChange}
@@ -581,67 +699,7 @@ export default function CreateOfferPage() {
                 <div className="form-section">
                   <div className="form-group">
                     <label>Terms</label>
-                    <textarea
-                      name="terms"
-                      value={formData.terms}
-                      onChange={handleChange}
-                      className="form-control"
-                      rows="3"
-                      placeholder="Enter terms and conditions"
-                    ></textarea>
-                  </div>
-
-                  <div className="form-group">
-                    <label>Offer Description</label>
-                    <textarea
-                      name="offerDescription"
-                      value={formData.offerDescription}
-                      onChange={handleChange}
-                      className="form-control"
-                      rows="3"
-                      placeholder="Enter offer description"
-                    ></textarea>
-                  </div>
-
-                  <div className="form-group">
-                    <label>Private Note</label>
-                    <textarea
-                      name="privateNote"
-                      value={formData.privateNote}
-                      onChange={handleChange}
-                      className="form-control"
-                      rows="2"
-                      placeholder="Enter private note"
-                    ></textarea>
-                  </div>
-
-                  <div className="form-group">
-                    <label>PA Offer Terms/KPI</label>
-                    <textarea
-                      name="paOfferTerms"
-                      value={formData.paOfferTerms}
-                      onChange={handleChange}
-                      className="form-control"
-                      rows="2"
-                      placeholder="Enter PA Offer Terms/KPI"
-                    ></textarea>
-                  </div>
-
-                  <div className="form-group">
-                    <label>Styles</label>
-                    <div className="styles-editor">
-                      <button type="button" className="style-btn">Format</button>
-                      <button type="button" className="style-btn">ABCD</button>
-                      <button type="button" className="style-btn">AI Rewrite</button>
-                    </div>
-                    <textarea
-                      name="styles"
-                      value={formData.styles}
-                      onChange={handleChange}
-                      className="form-control"
-                      rows="4"
-                      placeholder="Enter custom styles"
-                    ></textarea>
+                    <RichTextOfferEditor formData={formData} setFormData={setFormData} />
                   </div>
                 </div>
               </div>
