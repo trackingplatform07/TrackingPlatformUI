@@ -830,10 +830,10 @@ input:checked + .slider:before {
   display: contents;
 }
 
-.general-info-section .form-row:nth-child(1) .form-group:nth-child(2) label,
+/* .general-info-section .form-row:nth-child(1) .form-group:nth-child(2) label,
 .general-info-section .form-row:nth-child(1) .form-group:nth-child(2) input {
   grid-column: 1 / 3;
-}
+} */
 
 .general-info-section .form-row:nth-child(2) .form-group:first-child {
   position: absolute;
@@ -967,4 +967,333 @@ input:checked + .slider:before {
   border-color: #cbd3db;
   border-radius: 9px;
   background: #f7f7f7;
+}
+
+.compact-pricing-section {
+  min-height: 58px;
+  grid-template-columns: 180px 1fr !important;
+}
+
+.compact-pricing-section .section-title {
+  width: 165px !important;
+  line-height: 19px;
+  white-space: normal;
+}
+
+.compact-pricing-section .form-row {
+  display: grid !important;
+  grid-template-columns: 147px 147px 147px;
+  align-items: center;
+  gap: 33px !important;
+  min-width: 0;
+}
+
+.compact-pricing-section + .compact-pricing-section .form-group:last-child .switch {
+  margin: 0;
+}
+
+.compact-pricing-section + .compact-pricing-section .form-group:last-child::after {
+  content: "Hide Payout";
+  color: #000;
+  font: 14px Arial, sans-serif;
+}
+
+.compact-schedule-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: nowrap;
+  min-height: 66px;
+  padding: 8px 12px;
+  margin: 0;
+  border-bottom: 0;
+}
+
+.compact-schedule-section .section-title {
+  width: 165px;
+  margin: 0;
+  padding: 0;
+  color: #000;
+  font: 14px Arial, sans-serif;
+}
+
+.compact-schedule-section .section-title::before {
+  display: none;
+}
+
+.compact-schedule-section .compact-schedule-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  flex-wrap: nowrap;
+  min-width: 794px;
+  margin: 0;
+}
+
+.compact-schedule-section .form-group {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 0 0 auto;
+}
+
+.compact-schedule-section .form-group > label:first-child {
+  display: none;
+}
+
+.compact-schedule-section .form-control,
+.compact-schedule-section .time-group .form-control {
+  width: 150px;
+  min-height: 30px;
+  padding: 6px 10px;
+  border-color: #cbd3db;
+  border-radius: 8px;
+  background: #f7f7f7;
+}
+
+.compact-schedule-section .form-group:nth-child(3) {
+  margin-left: 16px;
+}
+
+.compact-schedule-section .form-group:nth-child(3) > label:first-child {
+  display: block;
+  width: 120px;
+  padding: 8px 12px;
+  border: 1px solid #cbd3db;
+  border-radius: 8px 0 0 8px;
+  background: #f7f7f7;
+  font: 14px Arial, sans-serif;
+}
+
+.compact-schedule-section .form-group:nth-child(3) .switch {
+  width: 58px;
+  height: 34px;
+  padding: 5px 10px;
+  border: 1px solid #cbd3db;
+  border-left: 0;
+  background: #f7f7f7;
+}
+
+.compact-schedule-section .time-group {
+  gap: 0;
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.compact-schedule-section .time-separator {
+  display: none;
+}
+
+.compact-offer-settings {
+  min-height: 105px;
+  padding: 8px 12px;
+  margin: 0;
+  border-bottom: 0;
+}
+
+.compact-offer-settings .form-row {
+  display: flex;
+  align-items: center;
+  gap: 33px;
+  flex-wrap: nowrap;
+  margin: 8px 0 18px;
+}
+
+.compact-offer-settings .form-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.compact-offer-settings .form-group > label:not(.switch) {
+  margin: 0;
+  color: #000;
+  font: 14px Arial, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.compact-offer-settings .form-control {
+  width: 147px;
+  min-height: 30px;
+  padding: 6px 12px;
+  border-color: #cbd3db;
+  border-radius: 9px;
+  background: #f7f7f7;
+}
+
+.compact-offer-settings .setting-toggle {
+  gap: 10px;
+  white-space: nowrap;
+}
+
+/* Keep the Visibility, Status and Alert controls on the same reference row. */
+.compact-offer-settings .form-row:first-child .form-group:first-child > label:not(.switch) {
+  width: 168px;
+}
+
+.compact-offer-settings .form-row:first-child .form-group:nth-child(2) > label:not(.switch) {
+  width: 78px;
+}
+
+.compact-offer-settings .switch {
+  margin: 0;
+}
+
+/* Keep the Deep Links control aligned with the other compact form rows. */
+.compact-offer-settings .deep-links-toggle {
+  display: grid;
+  grid-template-columns: 168px 36px auto;
+  gap: 10px;
+}
+
+.compact-offer-settings .deep-links-toggle > label:not(.switch) {
+  margin: 0;
+  color: #000;
+  font: 14px Arial, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Landing - Step 2 */
+.landing-v2-form {
+  min-height: 320px;
+}
+
+.landing-v2 {
+  min-height: 300px;
+  padding: 20px 22px;
+  background: #fff;
+}
+
+.landing-v2-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  border-bottom: 1px solid #e3e6e8;
+}
+
+.landing-v2-toolbar h2 {
+  margin: 0;
+  color: #050505;
+  font: 700 14px Arial, sans-serif;
+}
+
+.landing-v2-actions,
+.landing-random-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.landing-v2-actions {
+  gap: 12px;
+}
+
+.landing-random-toggle {
+  gap: 7px;
+  color: #050505;
+  font: 12px Arial, sans-serif;
+  white-space: nowrap;
+}
+
+.landing-random-toggle .switch {
+  width: 32px;
+  height: 19px;
+}
+
+.landing-random-toggle .slider:before {
+  width: 17px;
+  height: 17px;
+  left: 1px;
+  bottom: 1px;
+}
+
+.landing-random-toggle input:checked + .slider:before {
+  transform: translateX(13px);
+}
+
+.landing-v2-actions button {
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: #4b6979;
+  color: #fff;
+  font: 700 9px Arial, sans-serif;
+  line-height: 1.1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.landing-v2-actions button:hover {
+  background: #395564;
+}
+
+.landing-table-wrap {
+  overflow-x: auto;
+}
+
+.landing-v2-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  color: #000;
+  font: 11px Arial, sans-serif;
+  text-align: left;
+}
+
+.landing-v2-table th {
+  height: 25px;
+  border-bottom: 1px solid #dfe3e5;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.landing-v2-table td {
+  height: 23px;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.landing-v2-table th:nth-child(1), .landing-v2-table td:nth-child(1) { width: 4.2%; padding-left: 4px; }
+.landing-v2-table th:nth-child(2), .landing-v2-table td:nth-child(2) { width: 13.2%; }
+.landing-v2-table th:nth-child(3), .landing-v2-table td:nth-child(3) { width: 8.8%; }
+.landing-v2-table th:nth-child(4), .landing-v2-table td:nth-child(4) { width: 6.8%; }
+.landing-v2-table th:nth-child(5), .landing-v2-table td:nth-child(5) { width: 12.5%; }
+.landing-v2-table th:nth-child(6), .landing-v2-table td:nth-child(6) { width: 10.6%; }
+.landing-v2-table th:nth-child(7), .landing-v2-table td:nth-child(7) { width: 9.8%; }
+.landing-v2-table th:nth-child(8), .landing-v2-table td:nth-child(8) { width: 14.2%; }
+.landing-v2-table th:nth-child(9), .landing-v2-table td:nth-child(9) { width: 9.2%; }
+
+@media (max-width: 900px) {
+  .landing-v2-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 10px;
+  }
+
+  .landing-v2-actions {
+    flex-wrap: wrap;
+  }
+}
+
+/* The reference screen uses a flat compact form, rather than a padded card. */
+@media (min-width: 769px) {
+  .offer-form {
+    padding: 10px;
+  }
+}
+
+@media (min-width: 769px) {
+  .compact-pricing-section,
+  .compact-schedule-section,
+  .compact-offer-settings {
+    overflow-x: auto;
+  }
+
+  .compact-schedule-section .compact-schedule-row {
+    min-width: 794px;
+  }
 }

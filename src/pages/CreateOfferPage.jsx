@@ -149,6 +149,10 @@ export default function CreateOfferPage() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeStep, setActiveStep] = useState(1);
   const navigate = useNavigate();
+  const [affiliateRandomUrl, setAffiliateRandomUrl] = useState(false);
+  const [landingPages, setLandingPages] = useState([
+    { id: "", name: "default_url", type: "default", url: "test", targeting: "", affiliate: "", weight: "", updatedAt: "", status: "" },
+  ]);
 
   const [formData, setFormData] = useState({
     // General Step 1
@@ -177,16 +181,17 @@ export default function CreateOfferPage() {
     hidePayout: false,
     
     // Schedule
-    startDate: "",
-    endDate: "",
+    startDate: "2026-08-16T13:00",
+    endDate: "2028-08-16T13:00",
     dailyStartTime: "00:00:00",
     dailyEndTime: "00:00:00",
+    dailyScheduleEnabled: false,
     
     // Offer Settings
     offerVisibility: "Public",
     status: "Approve",
     alertToAffiliates: false,
-    deepLinks: true, // Changed from "Enable" to boolean true
+    deepLinks: false,
     terms: "", 
     offerDescription: "",
     privateNote: "",
@@ -492,7 +497,7 @@ export default function CreateOfferPage() {
                 </div>
 
                 {/* Advertiser Pricing */}
-                <div className="form-section">
+                <div className="form-section compact-pricing-section">
                   <h3 className="section-title">Advertiser Pricing (Revenue) *</h3>
                   <div className="form-row">
                     <div className="form-group">
@@ -542,8 +547,8 @@ export default function CreateOfferPage() {
                 </div>
 
                 {/* Affiliate Pricing */}
-                <div className="form-section">
-                  <h3 className="section-title">Affiliate Pricing (Payout)</h3>
+                <div className="form-section compact-pricing-section">
+                  <h3 className="section-title">Affiliate Pricing (Payout) *</h3>
                   <div className="form-row">
                     <div className="form-group">
                       <label>Select Model</label>
@@ -588,7 +593,7 @@ export default function CreateOfferPage() {
                 {/* Schedule */}
                 <div className="form-section">
                   <h3 className="section-title">Schedule</h3>
-                  <div className="form-row">
+                  <div className="form-row compact-schedule-row">
                     <div className="form-group">
                       <label>Start Date & Time</label>
                       <input
@@ -609,17 +614,19 @@ export default function CreateOfferPage() {
                         className="form-control"
                       />
                     </div>
-                  </div>
-
-                  <div className="form-row">
                     <div className="form-group">
                       <label>Daily Start/Stop</label>
+                      <label className="switch">
+                        <input type="checkbox" name="dailyScheduleEnabled" checked={formData.dailyScheduleEnabled} onChange={handleChange} />
+                        <span className="slider round"></span>
+                      </label>
                       <div className="time-group">
                         <input
                           type="time"
                           name="dailyStartTime"
                           value={formData.dailyStartTime}
                           onChange={handleChange}
+                          step="1"
                           className="form-control"
                         />
                         <span className="time-separator">to</span>
@@ -628,6 +635,7 @@ export default function CreateOfferPage() {
                           name="dailyEndTime"
                           value={formData.dailyEndTime}
                           onChange={handleChange}
+                          step="1"
                           className="form-control"
                         />
                       </div>
@@ -665,22 +673,14 @@ export default function CreateOfferPage() {
                         <option>Draft</option>
                       </select>
                     </div>
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      <label>Alert to Affiliates</label>
+                    <div className="form-group setting-toggle">
                       <label className="switch">
-                        <input
-                          type="checkbox"
-                          name="alertToAffiliates"
-                          checked={formData.alertToAffiliates}
-                          onChange={handleChange}
-                        />
+                        <input type="checkbox" name="alertToAffiliates" checked={formData.alertToAffiliates} onChange={handleChange} />
                         <span className="slider round"></span>
                       </label>
+                      <label>Alert to Affiliates</label>
                     </div>
-                    <div className="form-group" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                     <div className="form-group deep-links-toggle">
                       <label>Deep Links</label>
                       <label className="switch">
                         <input
@@ -691,6 +691,7 @@ export default function CreateOfferPage() {
                         />
                         <span className="slider round"></span>
                       </label>
+                      <label>Enable</label>
                     </div>
                   </div>
                 </div>
@@ -705,92 +706,44 @@ export default function CreateOfferPage() {
               </div>
             )}
 
-            {/* Step 2: Targeting */}
+            {/* Step 2: Landing pages */}
             {activeStep === 2 && (
-              <div className="offer-form">
-                <div className="form-section">
-                  <h3 className="section-title">Targeting Settings</h3>
-                  <div className="form-group">
-                    <label>Countries</label>
-                    <select className="form-control" multiple size="5">
-                      <option>United States</option>
-                      <option>United Kingdom</option>
-                      <option>Canada</option>
-                      <option>Australia</option>
-                      <option>India</option>
-                      <option>Germany</option>
-                      <option>France</option>
-                    </select>
-                    <small className="form-help">Hold Ctrl/Cmd to select multiple</small>
-                  </div>
-                  
-                  <div className="form-group">
-                    <label>Devices</label>
-                    <div className="checkbox-group-row">
-                      <label className="checkbox-label">
-                        <input type="checkbox" /> 
-                        <span>Desktop</span>
+              <div className="offer-form landing-v2-form">
+                <section className="landing-v2" aria-label="Landing Page V2">
+                  <div className="landing-v2-toolbar">
+                    <h2>Landing Page V2</h2>
+                    <div className="landing-v2-actions">
+                      <label className="landing-random-toggle">
+                        <span>Affiliate Random URL</span>
+                        <span className="switch">
+                          <input type="checkbox" checked={affiliateRandomUrl} onChange={(event) => setAffiliateRandomUrl(event.target.checked)} />
+                          <span className="slider round" />
+                        </span>
                       </label>
-                      <label className="checkbox-label">
-                        <input type="checkbox" /> 
-                        <span>Mobile</span>
-                      </label>
-                      <label className="checkbox-label">
-                        <input type="checkbox" /> 
-                        <span>Tablet</span>
-                      </label>
+                      <button type="button" onClick={() => setLandingPages((pages) => [...pages, { id: "", name: `landing_url_${pages.length}`, type: "default", url: "", targeting: "", affiliate: "", weight: "", updatedAt: "", status: "" }])}>+ Add Landing Page</button>
+                      <button type="button">Manage Weight</button>
+                      <button type="button">☁ Import Landing Page (.csv)</button>
                     </div>
                   </div>
 
-                  <div className="form-group">
-                    <label>Operating Systems</label>
-                    <div className="checkbox-group-row">
-                      <label className="checkbox-label">
-                        <input type="checkbox" /> 
-                        <span>Windows</span>
-                      </label>
-                      <label className="checkbox-label">
-                        <input type="checkbox" /> 
-                        <span>macOS</span>
-                      </label>
-                      <label className="checkbox-label">
-                        <input type="checkbox" /> 
-                        <span>iOS</span>
-                      </label>
-                      <label className="checkbox-label">
-                        <input type="checkbox" /> 
-                        <span>Android</span>
-                      </label>
-                    </div>
+                  <div className="landing-table-wrap">
+                    <table className="landing-v2-table">
+                      <thead>
+                        <tr>
+                          <th>ID</th><th>Name</th><th>Type</th><th>URL</th><th>Targeting</th><th>Affiliate</th><th>Weight</th><th>Updated At</th><th>Status</th><th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {landingPages.map((page, index) => (
+                          <tr key={`${page.name}-${index}`}>
+                            <td>{page.id}</td><td>{page.name}</td><td>{page.type}</td><td>{page.url}</td><td>{page.targeting}</td><td>{page.affiliate}</td><td>{page.weight}</td><td>{page.updatedAt}</td><td>{page.status}</td><td />
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
-
-                  <div className="form-group">
-                    <label>Browsers</label>
-                    <div className="checkbox-group-row">
-                      <label className="checkbox-label">
-                        <input type="checkbox" /> 
-                        <span>Chrome</span>
-                      </label>
-                      <label className="checkbox-label">
-                        <input type="checkbox" /> 
-                        <span>Firefox</span>
-                      </label>
-                      <label className="checkbox-label">
-                        <input type="checkbox" /> 
-                        <span>Safari</span>
-                      </label>
-                      <label className="checkbox-label">
-                        <input type="checkbox" /> 
-                        <span>Edge</span>
-                      </label>
-                    </div>
-                  </div>
+                </section>
                 </div>
-                <div className="form-actions">
-                  <button type="button" className="btn secondary" onClick={prevStep}>Previous</button>
-                  <button type="button" className="btn primary" onClick={nextStep}>Next: Creatives</button>
-                </div>
-              </div>
             )}
 
             {/* Step 3: Creatives */}
