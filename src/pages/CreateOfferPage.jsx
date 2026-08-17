@@ -145,6 +145,15 @@ function RichTextOfferEditor({ formData, setFormData }) {
   );
 }
 
+function WizardStepFooter({ onPrevious, onNext }) {
+  return (
+    <div className="wizard-step-footer">
+      <button type="button" className="btn secondary" onClick={onPrevious}>Previous</button>
+      <button type="button" className="btn primary" onClick={onNext}>Submit &amp; Next Set Targeting</button>
+    </div>
+  );
+}
+
 export default function CreateOfferPage() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeStep, setActiveStep] = useState(1);
@@ -152,6 +161,15 @@ export default function CreateOfferPage() {
   const [affiliateRandomUrl, setAffiliateRandomUrl] = useState(false);
   const [landingPages, setLandingPages] = useState([
     { id: "", name: "default_url", type: "default", url: "test", targeting: "", affiliate: "", weight: "", updatedAt: "", status: "" },
+  ]);
+  const [targetingRules, setTargetingRules] = useState([]);
+  const [creativeUploadType, setCreativeUploadType] = useState("");
+  const [creativeFileName, setCreativeFileName] = useState("");
+  const [affiliateSearch, setAffiliateSearch] = useState("");
+  const [offerAffiliates, setOfferAffiliates] = useState([
+    { id: 1, initials: "TI", color: "#a868f5", offer: "22009958 - test", affiliate: "565890 - test test (test)" },
+    { id: 2, initials: "NA", color: "#57528e", offer: "22009958 - test", affiliate: "311875 - New Affiliate (Affiliate)" },
+    { id: 3, initials: "TA", color: "#fb6191", offer: "22009958 - test", affiliate: "122115 - Test Affiliate 1" },
   ]);
 
   const [formData, setFormData] = useState({
@@ -270,7 +288,7 @@ export default function CreateOfferPage() {
         return;
       }
     }
-    if (activeStep < 4) {
+    if (activeStep < 5) {
       setActiveStep(activeStep + 1);
       window.scrollTo(0, 0);
     }
@@ -307,7 +325,7 @@ export default function CreateOfferPage() {
               "▣  CREATIVES - STEP 4",
               "♧  AFFILIATES - STEP 5",
             ].map((step, index) => (
-              <button key={step} type="button" className={`compact-step ${activeStep === index + 1 ? "active" : ""}`} onClick={() => index < 4 && setActiveStep(index + 1)}>
+              <button key={step} type="button" className={`compact-step ${activeStep === index + 1 ? "active" : ""}`} onClick={() => setActiveStep(index + 1)}>
                 {step}
               </button>
             ))}
@@ -743,96 +761,159 @@ export default function CreateOfferPage() {
                     </table>
                   </div>
                 </section>
+                <div className="form-actions landing-v2-footer">
+                  <button type="button" className="btn secondary" onClick={prevStep}>Previous</button>
+                  <button type="button" className="btn primary" onClick={nextStep}>Submit &amp; Next Set Targeting</button>
+                </div>
                 </div>
             )}
 
-            {/* Step 3: Creatives */}
+            {/* Step 3: Targeting */}
             {activeStep === 3 && (
-              <div className="offer-form">
-                <div className="form-section">
-                  <h3 className="section-title">Creatives</h3>
-                  <div className="form-group">
-                    <label>Banner Images</label>
-                    <input type="file" multiple className="form-control" accept="image/*" />
-                    <small className="form-help">Upload multiple banners (JPG, PNG, GIF)</small>
-                  </div>
-                  
-                  <div className="form-group">
-                    <label>Video URL</label>
-                    <input type="text" className="form-control" placeholder="Enter video URL (YouTube, Vimeo, etc.)" />
-                  </div>
-
-                  <div className="form-group">
-                    <label>HTML Banner</label>
-                    <textarea 
-                      className="form-control" 
-                      rows="5"
-                      placeholder="Paste HTML code for banner"
-                    ></textarea>
-                  </div>
-
-                  <div className="form-group">
-                    <label>Preview</label>
-                    <div className="preview-placeholder">
-                      <p>Creative preview will appear here</p>
+              <div className="offer-form targeting-v2-form">
+                <section className="targeting-v2" aria-label="Targeting Rules">
+                  <div className="targeting-v2-toolbar">
+                    <div className="targeting-v2-heading">
+                      <h2>▧&nbsp; Targeting Rules</h2>
+                      <button type="button" onClick={() => setTargetingRules((rules) => [...rules, { id: rules.length + 1, enabled: true }])}>+ Add Rule</button>
+                    </div>
+                    <div className="targeting-v2-actions">
+                      <button type="button" onClick={nextStep}>◉ Next Upload Creative</button>
+                      <button type="button" className="targeting-old-version">Targeting Old Version →</button>
                     </div>
                   </div>
+                  {targetingRules.map((rule) => (
+                    <article className="target-rule-card" key={rule.id}>
+                      <div className="target-rule-card-title">＋&nbsp; Create Target Rule</div>
+                      <div className="target-rule-card-body">
+                        <div className="target-rule-name">
+                          <label>Rule Name</label>
+                          <input type="text" placeholder="Rule name" aria-label="Rule name" />
+                        </div>
+
+                        <div className="target-rule-divider" />
+
+                        <div className="target-rule-actions-row">
+                          {['Action On Clicks', 'Action On Conversions', 'Action On Impressions'].map((label) => (
+                            <label key={label}>
+                              <span>{label}</span>
+                              <select defaultValue="none"><option value="none">No Action</option><option>Redirect</option><option>Block</option></select>
+                            </label>
+                          ))}
+                        </div>
+
+                        <div className="target-rule-divider" />
+
+                        <div className="target-rule-conditions">
+                          {[
+                            ['Country', 'Select Country'], ['OS', 'Select OS'], ['Browser', 'Select Browser'], ['Device Type', 'Select Device Type'], ['ISP', 'Select ISP'],
+                          ].map(([label, placeholder]) => (
+                            <div className="target-rule-condition" key={label}>
+                              <label>{label}</label>
+                              <select defaultValue="equal"><option value="equal">is equal</option><option>is not equal</option></select>
+                              <input type="text" placeholder={placeholder} aria-label={placeholder} />
+                            </div>
+                          ))}
+                          <button type="button" className="target-rule-add-more">＋ Add More</button>
+                        </div>
+
+                        <div className="target-rule-divider" />
+
+                        <div className="target-rule-footer-row">
+                          <label>Affiliate Visibility</label>
+                          <select defaultValue="show"><option value="show">Show</option><option>Hide</option></select>
+                          <label className="switch target-rule-switch">
+                            <input type="checkbox" checked={rule.enabled} onChange={(event) => setTargetingRules((rules) => rules.map((item) => item.id === rule.id ? { ...item, enabled: event.target.checked } : item))} />
+                            <span className="slider round" />
+                          </label>
+                          <span>Enable Rule</span>
+                        </div>
+
+                        <div className="target-rule-divider target-rule-last-divider" />
+                        <div className="target-rule-submit-row"><button type="button">◉ Submit</button></div>
+                      </div>
+                    </article>
+                  ))}
+                </section>
+                <WizardStepFooter onPrevious={prevStep} onNext={nextStep} />
                 </div>
-                <div className="form-actions">
-                  <button type="button" className="btn secondary" onClick={prevStep}>Previous</button>
-                  <button type="button" className="btn primary" onClick={nextStep}>Next: Affiliates</button>
-                </div>
-              </div>
             )}
 
-            {/* Step 4: Affiliates */}
+            {/* Step 4: Creatives */}
             {activeStep === 4 && (
-              <div className="offer-form">
-                <div className="form-section">
-                  <h3 className="section-title">Affiliate Settings</h3>
-                  <div className="form-group">
-                    <label>Select Affiliates</label>
-                    <select className="form-control" multiple size="5">
-                      <option>All Affiliates</option>
-                      <option>Premium Affiliates</option>
-                      <option>New Affiliates</option>
-                      <option>Top Performers</option>
+              <div className="offer-form creatives-v2-form">
+                <section className="creatives-v2" aria-label="Creatives">
+                  <div className="creatives-v2-upload-row">
+                    <label htmlFor="creative-upload-type">Upload</label>
+                    <select id="creative_type" className="form-control" name="creative_type" value={creativeUploadType} onChange={(event) => { setCreativeUploadType(event.target.value); setCreativeFileName(""); }}>
+                      <option value="">Choose Creatives</option>
+                      <option value="html">HTML ( Zip File Only )</option>
+                      <option value="html_file">HTML File</option>
+                      <option value="image">Image ( PNG , JPEG , GIF , ICO , SVG , WEBP )</option>
+                      <option value="video">Video ( MP4 , MPEG , WEBM )</option>
+                      <option value="link">Link</option>
+                      <option value="logo">Offer Logo (Single File)</option>
                     </select>
+                    {creativeUploadType && creativeUploadType !== "link" && (
+                      <label className="creative-file-picker">
+                        ☁&nbsp; {creativeFileName || (creativeUploadType === "html" ? "Choose Zip File" : "Choose File")}
+                        <input
+                          type="file"
+                          accept={creativeUploadType === "html" ? ".zip,application/zip" : undefined}
+                          onChange={(event) => setCreativeFileName(event.target.files?.[0]?.name || "")}
+                        />
+                      </label>
+                    )}
+                    <button type="button">◉ Next Assign Affiliate</button>
                   </div>
-                  
-                  <div className="form-group">
-                    <label>Approval Required</label>
-                    <div className="radio-group-row">
-                      <label className="radio-label">
-                        <input type="radio" name="approval" value="auto" defaultChecked />
-                        <span>Auto Approve</span>
-                      </label>
-                      <label className="radio-label">
-                        <input type="radio" name="approval" value="manual" />
-                        <span>Manual Approve</span>
-                      </label>
+                  <div className="creatives-v2-table-wrap">
+                    <table className="creatives-v2-table">
+                      <thead>
+                        <tr><th>CreativeID</th><th>OfferID</th><th>Title</th><th>Dimensions</th><th>Size</th><th>Preview</th><th>Action</th><th>Affiliate Tracking URL</th></tr>
+                      </thead>
+                      <tbody><tr><td colSpan="8" /></tr></tbody>
+                    </table>
+                  </div>
+                </section>
+                <WizardStepFooter onPrevious={prevStep} onNext={nextStep} />
+                </div>
+            )}
+
+            {/* Step 5: Affiliates */}
+            {activeStep === 5 && (
+              <div className="offer-form affiliates-v2-form">
+                <section className="affiliates-v2" aria-label="Manage Affiliates">
+                  <div className="affiliates-v2-main">
+                    <div className="affiliates-v2-toolbar">
+                      <div className="affiliates-v2-title">♧&nbsp; Manage Affiliates <button type="button" aria-label="Refresh affiliates">⟳</button></div>
+                      <label className="affiliates-v2-search">Search:<input value={affiliateSearch} onChange={(event) => setAffiliateSearch(event.target.value)} /></label>
                     </div>
+                    <div className="affiliates-v2-columns"><span>◉&nbsp; OfferID</span><span>♙&nbsp; Affiliate</span><span>⚙&nbsp; Action</span></div>
+                    <h2 className="affiliates-v2-unassigned">?&nbsp;&nbsp; Not Assigned</h2>
+                    <div className="affiliates-v2-rows">
+                      {offerAffiliates.filter((item) => item.affiliate.toLowerCase().includes(affiliateSearch.toLowerCase()) || item.offer.toLowerCase().includes(affiliateSearch.toLowerCase())).map((item) => (
+                        <div className="affiliate-v2-row" key={item.id}>
+                          <span>{item.offer}</span>
+                          <span className="affiliate-v2-name"><i style={{ background: item.color }}>{item.initials}</i>{item.affiliate}</span>
+                          <span className="affiliate-v2-actions"><button type="button" onClick={() => setOfferAffiliates((items) => items.filter((affiliate) => affiliate.id !== item.id))}>＋ Assign Offer</button><button type="button">⊗ Reject</button></span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="affiliates-v2-bottom">
+                      <label><input type="checkbox" /> Send Alert to Affiliate</label>
+                      <label><input type="checkbox" /> Send Alert to Admin</label>
+                      <button type="button" onClick={() => setOfferAffiliates([])}>＋ Assign All</button>
+                    </div>
+                    <div className="affiliates-v2-finish"><button type="button" onClick={handleSubmit}>✓ Finish Offer Create</button></div>
                   </div>
 
-                  <div className="form-group">
-                    <label>Affiliate Commission</label>
-                    <div className="form-row">
-                      <div className="form-group">
-                        <input type="text" className="form-control" placeholder="Special commission %" />
-                      </div>
-                      <div className="form-group">
-                        <select className="form-control">
-                          <option>Fixed Amount</option>
-                          <option>Percentage</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-actions">
-                  <button type="button" className="btn secondary" onClick={prevStep}>Previous</button>
-                  <button type="submit" className="btn primary">Submit & Save</button>
-                </div>
+                  <aside className="affiliates-v2-summary">
+                    <div className="affiliates-v2-share">♧ <strong>Affiliate Tracking URL</strong><small>Share Affiliate Tracking URL</small></div>
+                    {[['▤', '3', 'ALL AFFILIATES', '#00a9f4'], ['◷', '0', 'PENDING', '#f4b900'], ['☑', '0', 'APPROVED', '#20b855'], ['⊗', '0', 'REJECTED', '#ff4a42']].map(([icon, count, label, color]) => (
+                      <div className="affiliates-v2-stat" key={label}><i style={{ color }}>{icon}</i><div><b>{count}</b><span>↗&nbsp; {label}</span></div></div>
+                    ))}
+                  </aside>
+                </section>
               </div>
             )}
 
