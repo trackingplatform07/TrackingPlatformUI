@@ -166,6 +166,10 @@ export default function CreateOfferPage() {
   const [creativeUploadType, setCreativeUploadType] = useState("");
   const [creativeFileName, setCreativeFileName] = useState("");
   const [affiliateSearch, setAffiliateSearch] = useState("");
+  const [advertiserDropdownOpen, setAdvertiserDropdownOpen] = useState(false);
+  const [advertiserSearch, setAdvertiserSearch] = useState("");
+  const [advertisersLoading, setAdvertisersLoading] = useState(true);
+  const [advertisersError, setAdvertisersError] = useState("");
   const [offerAffiliates, setOfferAffiliates] = useState([
     { id: 1, initials: "TI", color: "#a868f5", offer: "22009958 - test", affiliate: "565890 - test test (test)" },
     { id: 2, initials: "NA", color: "#57528e", offer: "22009958 - test", affiliate: "311875 - New Affiliate (Affiliate)" },
@@ -217,11 +221,7 @@ export default function CreateOfferPage() {
     styles: "",
   });
 
-  const [advertisers, setAdvertisers] = useState([
-    { id: 1, name: "Advertiser 1" },
-    { id: 2, name: "Advertiser 2" },
-    { id: 3, name: "Advertiser 3" },
-  ]);
+  const [advertisers, setAdvertisers] = useState([]);
 
   const [categories, setCategories] = useState([
     { id: 1, name: "Category 1" },
@@ -233,6 +233,54 @@ export default function CreateOfferPage() {
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [newAdvertiser, setNewAdvertiser] = useState("");
   const [newCategory, setNewCategory] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadAdvertisers = async () => {
+      try {
+        setAdvertisersLoading(true);
+        setAdvertisersError("");
+        const response = await fetch("https://localhost:7129/api/Advertisers", {
+          headers: { accept: "*/*" },
+          signal: controller.signal,
+        });
+
+        if (!response.ok) throw new Error("Unable to load advertisers");
+
+        const data = await response.json();
+        setAdvertisers(Array.isArray(data) ? data : data.items || data.data || []);
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setAdvertisers([]);
+          setAdvertisersError("Unable to load advertisers");
+        }
+      } finally {
+        if (!controller.signal.aborted) setAdvertisersLoading(false);
+      }
+    };
+
+    loadAdvertisers();
+    return () => controller.abort();
+  }, []);
+
+  const advertiserName = (advertiser) =>
+    [advertiser.firstName, advertiser.lastName].filter(Boolean).join(" ") || advertiser.companyName || "Unnamed Advertiser";
+
+  const advertiserInitials = (advertiser) =>
+    advertiserName(advertiser).split(" ").filter(Boolean).slice(0, 2).map((name) => name[0]).join("").toUpperCase();
+
+  const selectedAdvertiser = advertisers.find((advertiser) => String(advertiser.id) === String(formData.advertiser));
+  const filteredAdvertisers = advertisers.filter((advertiser) => {
+    const searchText = `${advertiser.id} ${advertiserName(advertiser)} ${advertiser.companyName || ""}`.toLowerCase();
+    return searchText.includes(advertiserSearch.trim().toLowerCase());
+  });
+
+  const selectAdvertiser = (advertiser) => {
+    setFormData((previous) => ({ ...previous, advertiser: String(advertiser.id) }));
+    setAdvertiserSearch("");
+    setAdvertiserDropdownOpen(false);
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -251,7 +299,7 @@ export default function CreateOfferPage() {
 
   const handleAddAdvertiser = () => {
     if (newAdvertiser.trim()) {
-      setAdvertisers([...advertisers, { id: Date.now(), name: newAdvertiser }]);
+      setAdvertisers([...advertisers, { id: Date.now(), firstName: newAdvertiser, lastName: "" }]);
       setNewAdvertiser("");
       setShowAdvertiserModal(false);
     }
@@ -377,26 +425,47 @@ export default function CreateOfferPage() {
                     </div>
                     <div className="form-group">
                       <label>Advertiser *</label>
-                      <div className="select-with-button">
-                        <select 
-                          name="advertiser" 
-                          value={formData.advertiser} 
-                          onChange={handleChange}
-                          className="form-control"
-                          required
+                      <div className="select-with-button advertiser-picker">
+                        <button
+                          type="button"
+                          className="advertiser-picker-trigger"
+                          aria-haspopup="listbox"
+                          aria-expanded={advertiserDropdownOpen}
+                          onClick={() => setAdvertiserDropdownOpen((isOpen) => !isOpen)}
                         >
-                          <option value="">Select Advertiser</option>
-                          {advertisers.map(adv => (
-                            <option key={adv.id} value={adv.name}>{adv.name}</option>
-                          ))}
-                        </select>
-                        <button 
-                          type="button" 
-                          className="btn secondary small"
-                          onClick={() => setShowAdvertiserModal(true)}
-                        >
-                          + Create
+                          <span>{selectedAdvertiser ? `${selectedAdvertiser.id} ~ ${advertiserName(selectedAdvertiser)}` : "Select Advertiser"}</span>
+                          <span aria-hidden="true">▾</span>
                         </button>
+                        {advertiserDropdownOpen && (
+                          <div className="advertiser-picker-menu" role="listbox" aria-label="Advertisers">
+                            <input
+                              type="search"
+                              autoFocus
+                              value={advertiserSearch}
+                              onChange={(event) => setAdvertiserSearch(event.target.value)}
+                              placeholder="Search advertiser"
+                              aria-label="Search advertisers"
+                            />
+                            <div className="advertiser-picker-options">
+                              {advertisersLoading && <p>Loading advertisers…</p>}
+                              {!advertisersLoading && advertisersError && <p>{advertisersError}</p>}
+                              {!advertisersLoading && !advertisersError && filteredAdvertisers.length === 0 && <p>No advertisers found</p>}
+                              {filteredAdvertisers.map((advertiser) => (
+                                <button
+                                  type="button"
+                                  role="option"
+                                  aria-selected={String(advertiser.id) === String(formData.advertiser)}
+                                  className="advertiser-picker-option"
+                                  key={advertiser.id}
+                                  onClick={() => selectAdvertiser(advertiser)}
+                                >
+                                  <span className="advertiser-avatar">{advertiserInitials(advertiser)}</span>
+                                  <span><strong>{advertiser.id} ~ {advertiserName(advertiser)}</strong><small>{advertiser.status || advertiser.companyName || "Advertiser"}</small></span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
