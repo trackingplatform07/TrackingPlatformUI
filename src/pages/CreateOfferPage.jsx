@@ -226,11 +226,15 @@ export default function CreateOfferPage() {
   const [categories, setCategories] = useState([]);
   const [categoriesLoading, setCategoriesLoading] = useState(true);
   const [categoriesError, setCategoriesError] = useState("");
+  const [currencies, setCurrencies] = useState([]);
+  const [currenciesLoading, setCurrenciesLoading] = useState(true);
+  const [currenciesError, setCurrenciesError] = useState("");
 
   const [showAdvertiserModal, setShowAdvertiserModal] = useState(false);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [newAdvertiser, setNewAdvertiser] = useState("");
   const [newCategoryRows, setNewCategoryRows] = useState([""]);
+  const [editedCategoryIds, setEditedCategoryIds] = useState([]);
   const [categorySaving, setCategorySaving] = useState(false);
   const [categoryActionError, setCategoryActionError] = useState("");
 
@@ -261,6 +265,37 @@ export default function CreateOfferPage() {
     };
 
     loadAdvertisers();
+    return () => controller.abort();
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadCurrencies = async () => {
+      try {
+        setCurrenciesLoading(true);
+        setCurrenciesError("");
+        const response = await fetch("https://api.frankfurter.dev/v2/rates?base=USD", { signal: controller.signal });
+        if (!response.ok) throw new Error("Unable to load currencies");
+
+        const rates = await response.json();
+        const currencyNames = new Intl.DisplayNames(["en"], { type: "currency" });
+        const codes = [...new Set(["USD", ...rates.map((rate) => rate.quote)])].sort();
+        setCurrencies(codes.map((code) => ({
+          code,
+          name: currencyNames.of(code) || code,
+        })));
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setCurrencies([]);
+          setCurrenciesError("Unable to load currencies");
+        }
+      } finally {
+        if (!controller.signal.aborted) setCurrenciesLoading(false);
+      }
+    };
+
+    loadCurrencies();
     return () => controller.abort();
   }, []);
 
@@ -352,6 +387,7 @@ export default function CreateOfferPage() {
 
   const openCategoryModal = () => {
     setNewCategoryRows([""]);
+    setEditedCategoryIds([]);
     setCategoryActionError("");
     setShowCategoryModal(true);
     loadCategoriesForModal();
@@ -361,10 +397,20 @@ export default function CreateOfferPage() {
     setNewCategoryRows((rows) => rows.map((row, rowIndex) => rowIndex === index ? value : row));
   };
 
+  const updateExistingCategory = (id, offerCategoryName) => {
+    setCategories((items) => items.map((category) => category.id === id ? { ...category, offerCategoryName } : category));
+    setEditedCategoryIds((ids) => ids.includes(id) ? ids : [...ids, id]);
+  };
+
   const saveNewCategories = async () => {
     const names = [...new Set(newCategoryRows.map((name) => name.trim()).filter(Boolean))];
-    if (!names.length) {
-      setCategoryActionError("Enter at least one category name before saving.");
+    const changedCategories = categories.filter((category) => editedCategoryIds.includes(category.id));
+    if (!names.length && !changedCategories.length) {
+      setCategoryActionError("Enter a new category name or edit an existing category before saving.");
+      return;
+    }
+    if (changedCategories.some((category) => !category.offerCategoryName.trim())) {
+      setCategoryActionError("Category names cannot be empty.");
       return;
     }
 
@@ -372,15 +418,33 @@ export default function CreateOfferPage() {
       setCategorySaving(true);
       setCategoryActionError("");
       const now = new Date().toISOString();
-      await Promise.all(names.map(async (offerCategoryName) => {
+      const createRequests = names.map(async (offerCategoryName) => {
         const response = await fetch("https://localhost:7150/api/OfferCategories", {
           method: "POST",
           headers: { accept: "*/*", "Content-Type": "application/json" },
           body: JSON.stringify({ id: 0, offerCategoryName, createdOn: now, createdBy: "string", modifiedOn: now, modifiedBy: "string", isActive: true }),
         });
         if (!response.ok) throw new Error("Unable to save categories");
-      }));
+      });
+      const updateRequests = changedCategories.map(async (category) => {
+        const response = await fetch(`https://localhost:7150/api/OfferCategories/${category.id}`, {
+          method: "PUT",
+          headers: { accept: "*/*", "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id: category.id,
+            offerCategoryName: category.offerCategoryName.trim(),
+            createdOn: category.createdOn || now,
+            createdBy: category.createdBy || "string",
+            modifiedOn: now,
+            modifiedBy: "string",
+            isActive: category.isActive !== false,
+          }),
+        });
+        if (!response.ok) throw new Error("Unable to update category");
+      });
+      await Promise.all([...createRequests, ...updateRequests]);
       setNewCategoryRows([""]);
+      setEditedCategoryIds([]);
       await loadCategoriesForModal();
     } catch {
       setCategoryActionError("Unable to save categories. Please try again.");
@@ -693,10 +757,17 @@ export default function CreateOfferPage() {
                         className="form-control"
                       >
                         <option value="">Select Model</option>
-                        <option value="cpa">CPA</option>
                         <option value="cpc">CPC</option>
-                        <option value="cpm">CPM</option>
+                        <option value="cpv">CPV</option>
                         <option value="cpl">CPL</option>
+                        <option value="cpd">CPD</option>
+                        <option value="cpa">CPA</option>
+                        <option value="cpi">CPI</option>
+                        <option value="cps">CPS</option>
+                        <option value="cpm">CPM</option>
+                        <option value="cpe">CPE</option>
+                        <option value="cpcv">CPCV</option>
+                        <option value="cpa+cps">CPA+CPS</option>
                       </select>
                     </div>
                     <div className="form-group">
@@ -718,13 +789,9 @@ export default function CreateOfferPage() {
                         className="form-control"
                       >
                         <option value="">Select Currency</option>
-                        <option value="USD">USD - US Dollar</option>
-                        <option value="EUR">EUR - Euro</option>
-                        <option value="GBP">GBP - British Pound</option>
-                        <option value="INR">INR - Indian Rupee</option>
-                        <option value="AUD">AUD - Australian Dollar</option>
-                        <option value="CAD">CAD - Canadian Dollar</option>
-                        <option value="SGD">SGD - Singapore Dollar</option>
+                        {currenciesLoading && <option disabled>Loading currencies…</option>}
+                        {!currenciesLoading && currenciesError && <option disabled>{currenciesError}</option>}
+                        {currencies.map((currency) => <option key={currency.code} value={currency.code}>{currency.code} ({currency.name})</option>)}
                       </select>
                     </div>
                   </div>
@@ -743,10 +810,17 @@ export default function CreateOfferPage() {
                         className="form-control"
                       >
                         <option value="">Select Model</option>
-                        <option value="cpa">CPA</option>
-                        <option value="cpc">CPC</option>
-                        <option value="cpm">CPM</option>
+                         <option value="cpc">CPC</option>
+                        <option value="cpv">CPV</option>
                         <option value="cpl">CPL</option>
+                        <option value="cpd">CPD</option>
+                        <option value="cpa">CPA</option>
+                        <option value="cpi">CPI</option>
+                        <option value="cps">CPS</option>
+                        <option value="cpm">CPM</option>
+                        <option value="cpe">CPE</option>
+                        <option value="cpcv">CPCV</option>
+                        <option value="cpa+cps">CPA+CPS</option>
                       </select>
                     </div>
                     <div className="form-group">
@@ -1127,7 +1201,7 @@ export default function CreateOfferPage() {
               {categoriesLoading && <p className="category-manager-message">Loading categories…</p>}
               {!categoriesLoading && categories.map((category) => (
                 <div className="category-manager-row" key={category.id}>
-                  <input value={category.offerCategoryName} readOnly aria-label={`Category ${category.offerCategoryName}`} />
+                  <input value={category.offerCategoryName} onChange={(event) => updateExistingCategory(category.id, event.target.value)} aria-label={`Category ${category.offerCategoryName}`} />
                   <button type="button" className="category-delete-button" onClick={() => deleteCategory(category)} aria-label={`Delete ${category.offerCategoryName}`}>▣</button>
                 </div>
               ))}
