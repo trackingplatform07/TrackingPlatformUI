@@ -223,16 +223,16 @@ export default function CreateOfferPage() {
 
   const [advertisers, setAdvertisers] = useState([]);
 
-  const [categories, setCategories] = useState([
-    { id: 1, name: "Category 1" },
-    { id: 2, name: "Category 2" },
-    { id: 3, name: "Category 3" },
-  ]);
+  const [categories, setCategories] = useState([]);
+  const [categoriesLoading, setCategoriesLoading] = useState(true);
+  const [categoriesError, setCategoriesError] = useState("");
 
   const [showAdvertiserModal, setShowAdvertiserModal] = useState(false);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [newAdvertiser, setNewAdvertiser] = useState("");
-  const [newCategory, setNewCategory] = useState("");
+  const [newCategoryRows, setNewCategoryRows] = useState([""]);
+  const [categorySaving, setCategorySaving] = useState(false);
+  const [categoryActionError, setCategoryActionError] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -261,6 +261,36 @@ export default function CreateOfferPage() {
     };
 
     loadAdvertisers();
+    return () => controller.abort();
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadCategories = async () => {
+      try {
+        setCategoriesLoading(true);
+        setCategoriesError("");
+        const response = await fetch("https://localhost:7150/api/OfferCategories", {
+          headers: { accept: "*/*" },
+          signal: controller.signal,
+        });
+
+        if (!response.ok) throw new Error("Unable to load offer categories");
+
+        const data = await response.json();
+        setCategories((Array.isArray(data) ? data : data.items || data.data || []).filter((category) => category.isActive !== false));
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setCategories([]);
+          setCategoriesError("Unable to load categories");
+        }
+      } finally {
+        if (!controller.signal.aborted) setCategoriesLoading(false);
+      }
+    };
+
+    loadCategories();
     return () => controller.abort();
   }, []);
 
@@ -305,11 +335,76 @@ export default function CreateOfferPage() {
     }
   };
 
-  const handleAddCategory = () => {
-    if (newCategory.trim()) {
-      setCategories([...categories, { id: Date.now(), name: newCategory }]);
-      setNewCategory("");
-      setShowCategoryModal(false);
+  const loadCategoriesForModal = async () => {
+    try {
+      setCategoriesLoading(true);
+      setCategoriesError("");
+      const response = await fetch("https://localhost:7150/api/OfferCategories", { headers: { accept: "*/*" } });
+      if (!response.ok) throw new Error("Unable to load offer categories");
+      const data = await response.json();
+      setCategories((Array.isArray(data) ? data : data.items || data.data || []).filter((category) => category.isActive !== false));
+    } catch {
+      setCategoriesError("Unable to load categories");
+    } finally {
+      setCategoriesLoading(false);
+    }
+  };
+
+  const openCategoryModal = () => {
+    setNewCategoryRows([""]);
+    setCategoryActionError("");
+    setShowCategoryModal(true);
+    loadCategoriesForModal();
+  };
+
+  const updateNewCategoryRow = (index, value) => {
+    setNewCategoryRows((rows) => rows.map((row, rowIndex) => rowIndex === index ? value : row));
+  };
+
+  const saveNewCategories = async () => {
+    const names = [...new Set(newCategoryRows.map((name) => name.trim()).filter(Boolean))];
+    if (!names.length) {
+      setCategoryActionError("Enter at least one category name before saving.");
+      return;
+    }
+
+    try {
+      setCategorySaving(true);
+      setCategoryActionError("");
+      const now = new Date().toISOString();
+      await Promise.all(names.map(async (offerCategoryName) => {
+        const response = await fetch("https://localhost:7150/api/OfferCategories", {
+          method: "POST",
+          headers: { accept: "*/*", "Content-Type": "application/json" },
+          body: JSON.stringify({ id: 0, offerCategoryName, createdOn: now, createdBy: "string", modifiedOn: now, modifiedBy: "string", isActive: true }),
+        });
+        if (!response.ok) throw new Error("Unable to save categories");
+      }));
+      setNewCategoryRows([""]);
+      await loadCategoriesForModal();
+    } catch {
+      setCategoryActionError("Unable to save categories. Please try again.");
+    } finally {
+      setCategorySaving(false);
+    }
+  };
+
+  const deleteCategory = async (category) => {
+    if (!window.confirm(`Delete the "${category.offerCategoryName}" category?`)) return;
+
+    try {
+      setCategoryActionError("");
+      const response = await fetch(`https://localhost:7150/api/OfferCategories/${category.id}`, {
+        method: "DELETE",
+        headers: { accept: "*/*" },
+      });
+      if (!response.ok) throw new Error("Unable to delete category");
+      setCategories((items) => items.filter((item) => item.id !== category.id));
+      if (formData.offerCategory === category.offerCategoryName) {
+        setFormData((previous) => ({ ...previous, offerCategory: "" }));
+      }
+    } catch {
+      setCategoryActionError("Unable to delete category. Please try again.");
     }
   };
 
@@ -481,14 +576,16 @@ export default function CreateOfferPage() {
                           className="form-control"
                         >
                           <option value="">Select Category</option>
+                          {categoriesLoading && <option disabled>Loading categories…</option>}
+                          {!categoriesLoading && categoriesError && <option disabled>{categoriesError}</option>}
                           {categories.map(cat => (
-                            <option key={cat.id} value={cat.name}>{cat.name}</option>
+                            <option key={cat.id} value={cat.offerCategoryName}>{cat.id} ~ {cat.offerCategoryName}</option>
                           ))}
                         </select>
                         <button 
                           type="button" 
                           className="btn secondary small"
-                          onClick={() => setShowCategoryModal(true)}
+                          onClick={openCategoryModal}
                         >
                           + Create
                         </button>
@@ -1020,18 +1117,31 @@ export default function CreateOfferPage() {
       {/* Category Modal */}
       {showCategoryModal && (
         <div className="modal-overlay" onClick={() => setShowCategoryModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>Create New Category</h3>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter category name"
-              value={newCategory}
-              onChange={(e) => setNewCategory(e.target.value)}
-            />
-            <div className="modal-actions">
-              <button className="btn secondary" onClick={() => setShowCategoryModal(false)}>Cancel</button>
-              <button className="btn primary" onClick={handleAddCategory}>Create</button>
+          <div className="modal-content category-manager-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="category-manager-header">
+              <h3>☰ <span>Offer Categories</span></h3>
+              <button style={{marginLeft:"659px",marginTop:"-40px"}} type="button" onClick={() => setShowCategoryModal(false)} aria-label="Close categories">×</button>
+            </div>
+            <div className="category-manager-table" role="region" aria-label="Offer categories">
+              <div className="category-manager-table-head"><span>Category</span><span>Action</span></div>
+              {categoriesLoading && <p className="category-manager-message">Loading categories…</p>}
+              {!categoriesLoading && categories.map((category) => (
+                <div className="category-manager-row" key={category.id}>
+                  <input value={category.offerCategoryName} readOnly aria-label={`Category ${category.offerCategoryName}`} />
+                  <button type="button" className="category-delete-button" onClick={() => deleteCategory(category)} aria-label={`Delete ${category.offerCategoryName}`}>▣</button>
+                </div>
+              ))}
+              {!categoriesLoading && !categories.length && <p className="category-manager-message">No categories found.</p>}
+              {newCategoryRows.map((name, index) => (
+                <div className="category-manager-row category-manager-new-row" key={`new-${index}`}>
+                  <button type="button" className="category-add-button" onClick={() => index === newCategoryRows.length - 1 && setNewCategoryRows((rows) => [...rows, ""])} aria-label="Add category row">+</button>
+                  <input value={name} onChange={(event) => updateNewCategoryRow(index, event.target.value)} placeholder="Enter category name" aria-label={`New category ${index + 1}`} />
+                </div>
+              ))}
+            </div>
+            {(categoriesError || categoryActionError) && <p className="category-manager-error">{categoryActionError || categoriesError}</p>}
+            <div className="category-manager-actions">
+              <button type="button" style={{width:"77px"}} className="category-submit-button" disabled={categorySaving} onClick={saveNewCategories}>{categorySaving ? "Saving…" : "◉ Submit"}</button>
             </div>
           </div>
         </div>
