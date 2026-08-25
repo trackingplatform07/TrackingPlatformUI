@@ -878,7 +878,7 @@ export default function CreateOfferPage() {
                         <input type="checkbox" name="dailyScheduleEnabled" checked={formData.dailyScheduleEnabled} onChange={handleChange} />
                         <span className="slider round"></span>
                       </label>
-                      <div className="time-group">
+                      <div className="time-group" style={{marginTop:"-39px", marginLeft:"57px"}}>
                         <input
                           type="time"
                           name="dailyStartTime"
@@ -913,8 +913,8 @@ export default function CreateOfferPage() {
                         className="form-control"
                       >
                         <option>Public</option>
+                        <option>Public + Require Approvel </option>
                         <option>Private</option>
-                        <option>Unlisted</option>
                       </select>
                     </div>
                     <div className="form-group">
@@ -927,8 +927,7 @@ export default function CreateOfferPage() {
                       >
                         <option>Approve</option>
                         <option>Pending</option>
-                        <option>Rejected</option>
-                        <option>Draft</option>
+                        <option>Ended</option>
                       </select>
                     </div>
                     <div className="form-group setting-toggle">
@@ -936,10 +935,9 @@ export default function CreateOfferPage() {
                         <input type="checkbox" name="alertToAffiliates" checked={formData.alertToAffiliates} onChange={handleChange} />
                         <span className="slider round"></span>
                       </label>
-                      <label>Alert to Affiliates</label>
+                      <label style={{marginTop:"-30px", marginLeft:"52px"}}>Alert to Affiliates</label>
                     </div>
                      <div className="form-group deep-links-toggle">
-                      <label>Deep Links</label>
                       <label className="switch">
                         <input
                           type="checkbox"
@@ -949,7 +947,7 @@ export default function CreateOfferPage() {
                         />
                         <span className="slider round"></span>
                       </label>
-                      <label>Enable</label>
+                      <label style={{marginTop:"-30px", marginLeft:"52px"}}>Enable</label>
                     </div>
                   </div>
                 </div>
