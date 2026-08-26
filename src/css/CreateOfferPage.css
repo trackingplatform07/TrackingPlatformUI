@@ -1852,13 +1852,41 @@ input:checked + .slider:before {
 .affiliates-v2-finish { display: flex; justify-content: flex-end; margin-top: 32px; padding-right: 8px; }
 .affiliates-v2-finish button { border: 1px solid #00a9f4; color: #008de0; padding: 5px 9px; }
 .affiliates-v2-summary { box-shadow: 0 8px 20px rgba(0, 0, 0, .05); }
-.affiliates-v2-share { display: flex; flex-direction: column; min-height: 67px; padding: 14px 22px; box-sizing: border-box; border-radius: 6px 6px 0 0; background: #949ddd; color: #fff; font: 14px Arial, sans-serif; }
+.affiliates-v2-share { display: flex; width: 100%; flex-direction: column; min-height: 67px; padding: 14px 22px; box-sizing: border-box; border: 0; border-radius: 6px 6px 0 0; background: #949ddd; color: #fff; font: 14px Arial, sans-serif; text-align: left; cursor: pointer; }
 .affiliates-v2-share strong { margin-left: 21px; margin-top: -14px; font-weight: 400; }
 .affiliates-v2-share small { margin: 8px 0 0 16px; font: 10px Arial, sans-serif; }
 .affiliates-v2-stat { display: flex; align-items: center; gap: 26px; height: 78px; padding: 0 22px; border-bottom: 1px solid #d7dde0; background: #f2f2f2; }
 .affiliates-v2-stat > i { width: 22px; font-size: 21px; font-style: normal; text-align: center; }
 .affiliates-v2-stat div { display: flex; flex-direction: column; gap: 8px; color: #000; font: 10px Arial, sans-serif; }
 .affiliates-v2-stat b { font-weight: 400; }
+
+.tracking-url-modal { width: min(670px, calc(100vw - 20px)); max-height: calc(100vh - 12px); overflow-y: auto; box-sizing: border-box; padding: 28px 29px 34px; border-radius: 7px; background: #fff; color: #0d0d0d; font: 11px Arial, sans-serif; }
+.tracking-url-header { position: relative; display: grid; grid-template-columns: 1fr auto 16px; align-items: center; min-height: 33px; padding: 0 0 4px 3px; }
+.tracking-url-header h2 { display: flex; align-items: center; gap: 10px; margin: 0; color: #111; font: 13px Arial, sans-serif; }
+.tracking-url-header h2 span { font-size: 12px; }
+.tracking-integration { justify-self: end; padding: 5px 8px; border: 0; border-radius: 5px; background: #526d78; color: #fff; font: 700 9px Arial, sans-serif; cursor: pointer; }
+.tracking-close { justify-self: end; width: 16px; margin: 0 0 0 13px; padding: 0; border: 0; background: transparent; color: #777; font: 700 19px/1 Arial, sans-serif; cursor: pointer; }
+.tracking-url-fields { position: relative; display: grid; gap: 17px; padding-top: 13px; }
+.tracking-url-fields label { display: grid; gap: 5px; }
+.tracking-url-fields select, .tracking-offer-chip, .tracking-url-fields textarea { box-sizing: border-box; border: 1px solid #cbd3db; border-radius: 7px; background: #f7f7f7; font: 11px Arial, sans-serif; }
+.tracking-url-fields select { height: 27px; padding: 4px 8px; }
+.tracking-offer-chip { display: inline-flex; width: 100%; height: 29px; align-items: center; padding: 3px 8px; }
+.tracking-offer-chip::first-letter { color: #000; }
+.tracking-url-fields textarea { width: 504px; height: 224px; padding: 8px; resize: none; }
+.tracking-email { position: absolute; top: 178px; left: 528px; padding: 4px 8px; border: 1px solid #526d78; border-radius: 5px; background: #fff; color: #526d78; font: 10px Arial, sans-serif; cursor: pointer; }
+.tracking-option-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px 35px; padding: 34px 0 23px; }
+.tracking-toggle { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.tracking-toggle .switch { width: 29px; height: 17px; flex: 0 0 29px; }
+.tracking-toggle .slider:before { width: 15px; height: 15px; left: 1px; bottom: 1px; }
+.tracking-toggle input:checked + .slider { background: #181818; }
+.tracking-toggle input:checked + .slider:before { transform: translateX(12px); }
+.tracking-token-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 23px; }
+.tracking-token-grid label { display: grid; grid-template-columns: 36px 110px 1fr; align-items: center; min-height: 23px; border: 1px solid #cbd3db; border-radius: 6px; background: #f7f7f7; }
+.tracking-token-grid label > input:first-child { justify-self: center; margin: 0; }
+.tracking-token-grid span { height: 21px; box-sizing: border-box; padding: 4px 10px; border-right: 1px solid #cbd3db; border-left: 1px solid #cbd3db; color: #135275; }
+.tracking-token-grid label > input:last-child { width: 100%; height: 21px; box-sizing: border-box; padding: 3px 8px; border: 0; background: transparent; font: 10px Arial, sans-serif; }
+
+@media (max-width: 600px) { .tracking-url-fields textarea { width: 100%; } .tracking-email { position: static; width: max-content; } .tracking-option-grid, .tracking-token-grid { grid-template-columns: 1fr; } }
 
 
 @media (max-width: 900px) {

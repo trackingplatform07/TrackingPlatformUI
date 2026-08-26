@@ -160,6 +160,9 @@ export default function CreateOfferPage() {
   const navigate = useNavigate();
   const [affiliateRandomUrl, setAffiliateRandomUrl] = useState(false);
   const [showLandingPageModal, setShowLandingPageModal] = useState(false);
+  const [showTrackingUrlModal, setShowTrackingUrlModal] = useState(false);
+  const [trackingAffiliate, setTrackingAffiliate] = useState("");
+  const [trackingOptions, setTrackingOptions] = useState({ impression: false, description: true, qrCode: false, additionalTokens: true, landingPages: false, preLandingPages: false, defaultTokens: false, googleAds: false, shortUrl: false, shortUrlParams: false });
   const [landingPageForm, setLandingPageForm] = useState({
     name: "", type: "Landing", targeting: "", url: "", affiliateMode: "Allow", affiliate: "", weight: "10", visibility: "Show", description: "", fallback: false,
     subUrls: [{ name: "", url: "", weight: "" }], enabled: true,
@@ -276,7 +279,7 @@ export default function CreateOfferPage() {
   }, []);
 
   useEffect(() => {
-    if (!showLandingPageModal) return;
+    if (!showLandingPageModal && !showTrackingUrlModal) return;
     const controller = new AbortController();
 
     const loadAffiliates = async () => {
@@ -299,7 +302,7 @@ export default function CreateOfferPage() {
 
     loadAffiliates();
     return () => controller.abort();
-  }, [showLandingPageModal]);
+  }, [showLandingPageModal, showTrackingUrlModal]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -1202,7 +1205,7 @@ export default function CreateOfferPage() {
                   </div>
 
                   <aside className="affiliates-v2-summary">
-                    <div className="affiliates-v2-share">♧ <strong>Affiliate Tracking URL</strong><small>Share Affiliate Tracking URL</small></div>
+                    <button type="button" className="affiliates-v2-share" onClick={() => setShowTrackingUrlModal(true)}>♧ <strong>Affiliate Tracking URL</strong><small>Share Affiliate Tracking URL</small></button>
                     {[['▤', '3', 'ALL AFFILIATES', '#00a9f4'], ['◷', '0', 'PENDING', '#f4b900'], ['☑', '0', 'APPROVED', '#20b855'], ['⊗', '0', 'REJECTED', '#ff4a42']].map(([icon, count, label, color]) => (
                       <div className="affiliates-v2-stat" key={label}><i style={{ color }}>{icon}</i><div><b>{count}</b><span>↗&nbsp; {label}</span></div></div>
                     ))}
@@ -1312,6 +1315,26 @@ export default function CreateOfferPage() {
             <div className="landing-fallback"><span>Fallback</span><label className="switch"><input type="checkbox" checked={landingPageForm.fallback} onChange={(event) => updateLandingPageForm("fallback", event.target.checked)} /><span className="slider round" /></label><b>Enable</b></div>
             {landingPageForm.fallback && <fieldset className="sub-landing-urls"><legend>Sub Landing URLs</legend>{landingPageForm.subUrls.map((subUrl, index) => <div className="sub-landing-row" key={index}><input value={subUrl.name} onChange={(event) => updateSubLandingUrl(index, "name", event.target.value)} placeholder="Name" /><input value={subUrl.url} onChange={(event) => updateSubLandingUrl(index, "url", event.target.value)} placeholder="URL" /><input value={subUrl.weight} onChange={(event) => updateSubLandingUrl(index, "weight", event.target.value)} placeholder="Weight" /><button type="button" onClick={() => setLandingPageForm((current) => ({ ...current, subUrls: current.subUrls.filter((_, subIndex) => subIndex !== index) }))}>×</button></div>)}<button type="button" className="add-more-sub-url" onClick={() => setLandingPageForm((current) => ({ ...current, subUrls: [...current.subUrls, { name: "", url: "", weight: "" }] }))}>＋ Add more</button></fieldset>}
             <footer className="landing-page-modal-footer"><label className="switch"><input type="checkbox" checked={landingPageForm.enabled} onChange={(event) => updateLandingPageForm("enabled", event.target.checked)} /><span className="slider round" /></label><span>Enable</span><button style={{width:"10%"}} type="button" onClick={submitLandingPage}>◉ Submit</button></footer>
+          </section>
+        </div>
+      )}
+
+      {showTrackingUrlModal && (
+        <div className="modal-overlay" onClick={() => setShowTrackingUrlModal(false)}>
+          <section className="tracking-url-modal" onClick={(event) => event.stopPropagation()} aria-label="Affiliate tracking URL">
+            <header className="tracking-url-header"><h2><span aria-hidden="true">▣</span> Affiliates Tracking URL</h2><button type="button" className="tracking-integration">⚙ Integration</button><button type="button" className="tracking-close" onClick={() => setShowTrackingUrlModal(false)} aria-label="Close">×</button></header>
+            <div className="tracking-url-fields">
+              <label>Select Offer<div className="tracking-offer-chip">× {formData.offerName || "22016243 ~ testd"}</div></label>
+              <label>Select Affiliate<select value={trackingAffiliate} onChange={(event) => setTrackingAffiliate(event.target.value)} disabled={affiliatesLoading}><option value="">{affiliatesLoading ? "Loading affiliates…" : "Select Affiliate"}</option>{affiliates.map((affiliate) => <option key={affiliate.id} value={affiliate.id}>{affiliate.id} ~ {affiliateName(affiliate)}</option>)}</select></label>
+              <label>Tracking URL<textarea readOnly value={trackingAffiliate ? `https://tracking.example.com/click?offer=${encodeURIComponent(formData.offerName || "offer")}&affiliate=${trackingAffiliate}` : ""} /></label>
+              <button type="button" style={{width:"61px"}} className="tracking-email">✉ Email</button>
+            </div>
+            <div className="tracking-option-grid">
+              {[['impression', '♙ Impression URL'], ['description', '▣ Description'], ['qrCode', '▦ QR Code'], ['additionalTokens', '♧ Additional Tokens'], ['landingPages', '▣ Landing Pages'], ['preLandingPages', '▤ Pre-Landing Pages'], ['defaultTokens', '♧ Affiliate Default Tokens'], ['googleAds', 'G Google Ads'], ['shortUrl', '⊗ Short URL NEW'], ['shortUrlParams', '⊗ Short URL with Params']].map(([key, label]) => <label key={key} className="tracking-toggle"><span className="switch"><input type="checkbox" checked={trackingOptions[key]} onChange={(event) => setTrackingOptions((current) => ({ ...current, [key]: event.target.checked }))} /><span className="slider round" /></span>{label}</label>)}
+            </div>
+            <div className="tracking-token-grid">
+              {["aff_click_id", "aff_sub1", "aff_sub3", "aff_sub5", "aff_sub7", "aff_sub9", "source", "googleaid", "androidid", "DeepLink", "sub_aff_id", "aff_sub2", "aff_sub4", "aff_sub6", "aff_sub8", "aff_sub10", "deviceid", "iosidfa", "creativeid"].map((token, index) => <label key={token}><input type="checkbox" defaultChecked={index === 0} /><span>{token}</span><input defaultValue={token === "DeepLink" ? "http://example.com/" : "{replace_it}"} /></label>)}
+            </div>
           </section>
         </div>
       )}
