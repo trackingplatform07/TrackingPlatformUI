@@ -1556,6 +1556,14 @@ input:checked + .slider:before {
 .landing-v2-table th:nth-child(7), .landing-v2-table td:nth-child(7) { width: 9.8%; }
 .landing-v2-table th:nth-child(8), .landing-v2-table td:nth-child(8) { width: 14.2%; }
 .landing-v2-table th:nth-child(9), .landing-v2-table td:nth-child(9) { width: 9.2%; }
+.landing-action-cell { position: relative; overflow: visible; }
+.landing-status { display: inline-block; padding: 4px 9px; border: 1px solid; border-radius: 5px; font: 10px Arial, sans-serif; white-space: nowrap; }
+.landing-status.enabled { border-color: #70ddc0; color: #00a977; }
+.landing-status.disabled { border-color: #ff8585; color: #ec2e2e; }
+.landing-action-button { width: 23px; height: 23px; padding: 0; border: 0; border-radius: 7px; background: #81949c; color: #fff; font: 700 16px/1 Arial, sans-serif; cursor: pointer; }
+.landing-action-menu { position: absolute; z-index: 10; top: 29px; right: 0; display: grid; min-width: 105px; padding: 9px 0; border-radius: 8px; background: #fff; box-shadow: 0 3px 12px rgba(0,0,0,.16); }
+.landing-action-menu button { padding: 6px 14px; border: 0; background: #fff; color: #222; font: 11px Arial, sans-serif; text-align: left; cursor: pointer; }
+.landing-action-menu button:hover { background: #f1f5f6; }
 
 /* Targeting - Step 3 */
 .targeting-v2-form {

@@ -173,6 +173,10 @@ export default function CreateOfferPage() {
   const [landingPages, setLandingPages] = useState([
     { id: "", name: "default_url", type: "default", url: "test", targeting: "", affiliate: "", weight: "", updatedAt: "", status: "" },
   ]);
+  const [editingLandingPageId, setEditingLandingPageId] = useState(null);
+  const [landingPagesLoading, setLandingPagesLoading] = useState(false);
+  const [landingPageActionId, setLandingPageActionId] = useState(null);
+  const [landingPageSaving, setLandingPageSaving] = useState(false);
   const [targetingRules, setTargetingRules] = useState([]);
   const [creativeUploadType, setCreativeUploadType] = useState("");
   const [creativeFileName, setCreativeFileName] = useState("");
@@ -437,6 +441,22 @@ export default function CreateOfferPage() {
 
   const toUtcIsoString = (value) => value ? new Date(value).toISOString() : null;
 
+  const loadLandingPages = async () => {
+    try {
+      setLandingPagesLoading(true);
+      const response = await fetch("https://localhost:7150/api/LandingPages", { headers: { accept: "*/*" } });
+      if (!response.ok) throw new Error("Unable to load landing pages");
+      const data = await response.json();
+      setLandingPages(Array.isArray(data) ? data : data.items || data.data || []);
+    } finally {
+      setLandingPagesLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeStep === 2) loadLandingPages();
+  }, [activeStep]);
+
   const updateLandingPageForm = (field, value) => {
     setLandingPageForm((current) => ({ ...current, [field]: value }));
   };
@@ -448,13 +468,37 @@ export default function CreateOfferPage() {
     }));
   };
 
-  const submitLandingPage = () => {
+  const submitLandingPage = async () => {
     if (!landingPageForm.name.trim() || !landingPageForm.url.trim()) return;
-    setLandingPages((pages) => [...pages, {
-      id: "", name: landingPageForm.name, type: landingPageForm.type, url: landingPageForm.url, targeting: landingPageForm.targeting,
-      affiliate: landingPageForm.affiliate, weight: landingPageForm.weight, updatedAt: "", status: landingPageForm.enabled ? "Enabled" : "Disabled",
-    }]);
-    setShowLandingPageModal(false);
+    try {
+      setLandingPageSaving(true);
+      const now = new Date().toISOString();
+      const subUrl = landingPageForm.subUrls[0] || {};
+      const payload = { id: editingLandingPageId || 0, offerId: 0, name: landingPageForm.name, type: landingPageForm.type, url: landingPageForm.url, targeting: landingPageForm.targeting, affiliateMode: landingPageForm.affiliateMode, affiliateId: Number(landingPageForm.affiliate) || 0, weight: Number(landingPageForm.weight) || 0, visibility: landingPageForm.visibility, description: landingPageForm.description, fallback: landingPageForm.fallback, fallbackName: subUrl.name || "", fallbackUrl: subUrl.url || "", fallbackWeight: Number(subUrl.weight) || 0, enabled: landingPageForm.enabled, createdOn: now, createdBy: "Admin", modifiedOn: now, modifiedBy: "Admin", isActive: true };
+      const response = await fetch(editingLandingPageId ? `https://localhost:7150/api/LandingPages/${editingLandingPageId}` : "https://localhost:7150/api/LandingPages", { method: editingLandingPageId ? "PUT" : "POST", headers: { accept: "*/*", "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      if (!response.ok) throw new Error("Unable to save landing page");
+      setShowLandingPageModal(false); setEditingLandingPageId(null); await loadLandingPages();
+    } finally { setLandingPageSaving(false); }
+  };
+
+  const editLandingPage = async (id) => {
+    const response = await fetch(`https://localhost:7150/api/LandingPages/${id}`, { headers: { accept: "*/*" } });
+    if (!response.ok) return;
+    const page = await response.json();
+    setLandingPageForm({ name: page.name || "", type: page.type || "Landing", targeting: page.targeting || "", url: page.url || "", affiliateMode: page.affiliateMode || "Allow", affiliate: String(page.affiliateId || ""), weight: String(page.weight ?? "10"), visibility: page.visibility || "Show", description: page.description || "", fallback: page.fallback, subUrls: [{ name: page.fallbackName || "", url: page.fallbackUrl || "", weight: String(page.fallbackWeight || "") }], enabled: page.enabled });
+    setEditingLandingPageId(id); setLandingPageActionId(null); setShowLandingPageModal(true);
+  };
+
+  const updateLandingPageEnabled = async (page) => {
+    const now = new Date().toISOString();
+    await fetch(`https://localhost:7150/api/LandingPages/${page.id}`, { method: "PUT", headers: { accept: "*/*", "Content-Type": "application/json" }, body: JSON.stringify({ ...page, enabled: !page.enabled, modifiedOn: now, modifiedBy: "Admin" }) });
+    setLandingPageActionId(null); loadLandingPages();
+  };
+
+  const deleteLandingPage = async (id) => {
+    if (!window.confirm("Delete this landing page?")) return;
+    await fetch(`https://localhost:7150/api/LandingPages/${id}`, { method: "DELETE", headers: { accept: "*/*" } });
+    setLandingPageActionId(null); loadLandingPages();
   };
 
   const handleAddAdvertiser = () => {
@@ -1106,7 +1150,7 @@ export default function CreateOfferPage() {
                           <span className="slider round" />
                         </span>
                       </label>
-                      <button type="button" onClick={() => setShowLandingPageModal(true)}>+ Add Landing Page</button>
+                      <button type="button" onClick={() => { setEditingLandingPageId(null); setLandingPageForm({ name: "", type: "Landing", targeting: "", url: "", affiliateMode: "Allow", affiliate: "", weight: "10", visibility: "Show", description: "", fallback: false, subUrls: [{ name: "", url: "", weight: "" }], enabled: true }); setShowLandingPageModal(true); }}>+ Add Landing Page</button>
                       <button type="button">Manage Weight</button>
                       <button type="button">☁ Import Landing Page (.csv)</button>
                     </div>
@@ -1120,9 +1164,10 @@ export default function CreateOfferPage() {
                         </tr>
                       </thead>
                       <tbody>
-                        {landingPages.map((page, index) => (
-                          <tr key={`${page.name}-${index}`}>
-                            <td>{page.id}</td><td>{page.name}</td><td>{page.type}</td><td>{page.url}</td><td>{page.targeting}</td><td>{page.affiliate}</td><td>{page.weight}</td><td>{page.updatedAt}</td><td>{page.status}</td><td />
+                        {landingPagesLoading && <tr><td colSpan="10">Loading landing pages…</td></tr>}
+                        {!landingPagesLoading && landingPages.map((page, index) => (
+                          <tr key={page.id || `${page.name}-${index}`}>
+                            <td>{page.id ? `#${page.id}` : ""}</td><td>{page.name}</td><td>{page.type}</td><td>{page.url}</td><td>{page.targeting}</td><td>{page.affiliateId || page.affiliate}</td><td>{page.weight}</td><td>{page.modifiedOn || page.updatedAt}</td><td><span className={`landing-status ${page.enabled ? "enabled" : "disabled"}`}>{page.enabled ? "◉ Enabled" : "◉ Disabled"}</span></td><td className="landing-action-cell"><button type="button" className="landing-action-button" onClick={() => setLandingPageActionId((current) => current === page.id ? null : page.id)}>⋮</button>{landingPageActionId === page.id && <div className="landing-action-menu"><button type="button" onClick={() => updateLandingPageEnabled(page)}>{page.enabled ? "⊘ Disable" : "✓ Enable"}</button><button type="button" onClick={() => editLandingPage(page.id)}>✎ Edit</button><button type="button" onClick={() => deleteLandingPage(page.id)}>♜ Delete</button></div>}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -1353,7 +1398,7 @@ export default function CreateOfferPage() {
       {showLandingPageModal && (
         <div className="modal-overlay" onClick={() => setShowLandingPageModal(false)}>
           <section className="landing-page-modal" onClick={(event) => event.stopPropagation()} aria-label="Add landing page">
-            <header className="landing-page-modal-header"><h2>Landing Page</h2><button style={{marginTop:"-30px", marginLeft:"550px"}} type="button" onClick={() => setShowLandingPageModal(false)} aria-label="Close">×</button></header>
+            <header className="landing-page-modal-header"><h2>{editingLandingPageId ? "Edit Landing Page" : "Landing Page"}</h2><button style={{marginTop:"-30px", marginLeft:"550px"}} type="button" onClick={() => setShowLandingPageModal(false)} aria-label="Close">×</button></header>
             <div className="landing-page-fields">
               <label>Name<input value={landingPageForm.name} onChange={(event) => updateLandingPageForm("name", event.target.value)} placeholder="Landing Page Name" /></label>
               </div>
@@ -1386,7 +1431,7 @@ export default function CreateOfferPage() {
             </div>
             <div className="landing-fallback"><span>Fallback</span><label className="switch"><input type="checkbox" checked={landingPageForm.fallback} onChange={(event) => updateLandingPageForm("fallback", event.target.checked)} /><span className="slider round" /></label><b>Enable</b></div>
             {landingPageForm.fallback && <fieldset className="sub-landing-urls"><legend>Sub Landing URLs</legend>{landingPageForm.subUrls.map((subUrl, index) => <div className="sub-landing-row" key={index}><input value={subUrl.name} onChange={(event) => updateSubLandingUrl(index, "name", event.target.value)} placeholder="Name" /><input value={subUrl.url} onChange={(event) => updateSubLandingUrl(index, "url", event.target.value)} placeholder="URL" /><input value={subUrl.weight} onChange={(event) => updateSubLandingUrl(index, "weight", event.target.value)} placeholder="Weight" /><button type="button" onClick={() => setLandingPageForm((current) => ({ ...current, subUrls: current.subUrls.filter((_, subIndex) => subIndex !== index) }))}>×</button></div>)}<button type="button" className="add-more-sub-url" onClick={() => setLandingPageForm((current) => ({ ...current, subUrls: [...current.subUrls, { name: "", url: "", weight: "" }] }))}>＋ Add more</button></fieldset>}
-            <footer className="landing-page-modal-footer"><label className="switch"><input type="checkbox" checked={landingPageForm.enabled} onChange={(event) => updateLandingPageForm("enabled", event.target.checked)} /><span className="slider round" /></label><span>Enable</span><button style={{width:"10%"}} type="button" onClick={submitLandingPage}>◉ Submit</button></footer>
+            <footer className="landing-page-modal-footer"><label className="switch"><input type="checkbox" checked={landingPageForm.enabled} onChange={(event) => updateLandingPageForm("enabled", event.target.checked)} /><span className="slider round" /></label><span>Enable</span><button style={{width:"10%"}} type="button" disabled={landingPageSaving} onClick={submitLandingPage}>{landingPageSaving ? "Saving…" : "◉ Submit"}</button></footer>
           </section>
         </div>
       )}
