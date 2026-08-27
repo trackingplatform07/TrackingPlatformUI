@@ -161,6 +161,9 @@ export default function CreateOfferPage() {
   const [affiliateRandomUrl, setAffiliateRandomUrl] = useState(false);
   const [showLandingPageModal, setShowLandingPageModal] = useState(false);
   const [showTrackingUrlModal, setShowTrackingUrlModal] = useState(false);
+  const [offers, setOffers] = useState([]);
+  const [offersLoading, setOffersLoading] = useState(false);
+  const [trackingOffer, setTrackingOffer] = useState("");
   const [trackingAffiliate, setTrackingAffiliate] = useState("");
   const [trackingOptions, setTrackingOptions] = useState({ impression: false, description: true, qrCode: false, additionalTokens: true, landingPages: false, preLandingPages: false, defaultTokens: false, googleAds: false, shortUrl: false, shortUrlParams: false });
   const [landingPageForm, setLandingPageForm] = useState({
@@ -247,6 +250,8 @@ export default function CreateOfferPage() {
   const [editedCategoryIds, setEditedCategoryIds] = useState([]);
   const [categorySaving, setCategorySaving] = useState(false);
   const [categoryActionError, setCategoryActionError] = useState("");
+  const [offerSaving, setOfferSaving] = useState(false);
+  const [offerSaveError, setOfferSaveError] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -303,6 +308,33 @@ export default function CreateOfferPage() {
     loadAffiliates();
     return () => controller.abort();
   }, [showLandingPageModal, showTrackingUrlModal]);
+
+  useEffect(() => {
+    if (!showTrackingUrlModal) return;
+    const controller = new AbortController();
+
+    const loadOffers = async () => {
+      try {
+        setOffersLoading(true);
+        const response = await fetch("https://localhost:7150/api/Offers", {
+          headers: { accept: "*/*" },
+          signal: controller.signal,
+        });
+        if (!response.ok) throw new Error("Unable to load offers");
+        const data = await response.json();
+        const offerItems = Array.isArray(data) ? data : data.items || data.data || [];
+        setOffers(offerItems);
+        setTrackingOffer((current) => current || String(offerItems[0]?.id || ""));
+      } catch (error) {
+        if (error.name !== "AbortError") setOffers([]);
+      } finally {
+        if (!controller.signal.aborted) setOffersLoading(false);
+      }
+    };
+
+    loadOffers();
+    return () => controller.abort();
+  }, [showTrackingUrlModal]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -374,6 +406,8 @@ export default function CreateOfferPage() {
   const affiliateName = (affiliate) =>
     [affiliate.firstName, affiliate.lastName].filter(Boolean).join(" ") || affiliate.companyName || affiliate.email || "Unnamed Affiliate";
 
+  const selectedTrackingOffer = offers.find((offer) => String(offer.id) === String(trackingOffer));
+
   const selectedAdvertiser = advertisers.find((advertiser) => String(advertiser.id) === String(formData.advertiser));
   const filteredAdvertisers = advertisers.filter((advertiser) => {
     const searchText = `${advertiser.id} ${advertiserName(advertiser)} ${advertiser.companyName || ""}`.toLowerCase();
@@ -400,6 +434,8 @@ export default function CreateOfferPage() {
       uploadLogo: e.target.files[0],
     }));
   };
+
+  const toUtcIsoString = (value) => value ? new Date(value).toISOString() : null;
 
   const updateLandingPageForm = (field, value) => {
     setLandingPageForm((current) => ({ ...current, [field]: value }));
@@ -538,7 +574,7 @@ export default function CreateOfferPage() {
     navigate("/offers");
   };
 
-  const nextStep = () => {
+  const nextStep = async () => {
     if (activeStep === 1) {
       // Validate required fields for step 1
       if (!formData.offerName) {
@@ -552,6 +588,41 @@ export default function CreateOfferPage() {
       if (!formData.offerUrl) {
         alert("Please enter Offer URL");
         return;
+      }
+
+      try {
+        setOfferSaving(true);
+        setOfferSaveError("");
+        const now = new Date().toISOString();
+        const user = JSON.parse(localStorage.getItem("user"));
+        const selectedCategory = categories.find((category) => category.offerCategoryName === formData.offerCategory);
+        const response = await fetch("https://localhost:7150/api/Offers", {
+          method: "POST",
+          headers: { accept: "*/*", "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id: 0,
+            ...formData,
+            uploadLogo: formData.uploadLogo?.name || "",
+            advertiserId: Number(formData.advertiser),
+            offerCategoryId: selectedCategory?.id || 0,
+            advertiserPrice: Number(formData.advertiserPrice) || 0,
+            affiliatePrice: Number(formData.affiliatePrice) || 0,
+            startDate: toUtcIsoString(formData.startDate),
+            endDate: toUtcIsoString(formData.endDate),
+            createdOn: now,
+            createdBy: user?.email || user?.name || "Admin",
+            modifiedOn: now,
+            modifiedBy: user?.email || user?.name || "Admin",
+            isActive: true,
+          }),
+        });
+
+        if (!response.ok) throw new Error("Unable to save offer");
+      } catch {
+        setOfferSaveError("Unable to save the offer. Please check the API and try again.");
+        return;
+      } finally {
+        setOfferSaving(false);
       }
     }
     if (activeStep < 5) {
@@ -1218,7 +1289,8 @@ export default function CreateOfferPage() {
             {activeStep === 1 && (
               <div className="form-actions">
                 <button type="button" className="btn secondary" onClick={() => navigate("/offers")}>Cancel</button>
-                <button type="button" className="btn primary" onClick={nextStep}>Submit & Next Set Targeting</button>
+                <button type="button" className="btn primary" onClick={nextStep} disabled={offerSaving}>{offerSaving ? "Saving..." : "Submit & Next Set Targeting"}</button>
+                {offerSaveError && <span className="offer-save-error">{offerSaveError}</span>}
               </div>
             )}
           </form>
@@ -1324,9 +1396,9 @@ export default function CreateOfferPage() {
           <section className="tracking-url-modal" onClick={(event) => event.stopPropagation()} aria-label="Affiliate tracking URL">
             <header className="tracking-url-header"><h2><span aria-hidden="true">▣</span> Affiliates Tracking URL</h2><button type="button" className="tracking-integration">⚙ Integration</button><button type="button" className="tracking-close" onClick={() => setShowTrackingUrlModal(false)} aria-label="Close">×</button></header>
             <div className="tracking-url-fields">
-              <label>Select Offer<div className="tracking-offer-chip">× {formData.offerName || "22016243 ~ testd"}</div></label>
+              <label>Select Offer<select value={trackingOffer} onChange={(event) => setTrackingOffer(event.target.value)} disabled={offersLoading}><option value="">{offersLoading ? "Loading offers…" : "Select Offer"}</option>{offers.map((offer) => <option key={offer.id} value={offer.id}>{offer.id} ~ {offer.offerName}</option>)}</select></label>
               <label>Select Affiliate<select value={trackingAffiliate} onChange={(event) => setTrackingAffiliate(event.target.value)} disabled={affiliatesLoading}><option value="">{affiliatesLoading ? "Loading affiliates…" : "Select Affiliate"}</option>{affiliates.map((affiliate) => <option key={affiliate.id} value={affiliate.id}>{affiliate.id} ~ {affiliateName(affiliate)}</option>)}</select></label>
-              <label>Tracking URL<textarea readOnly value={trackingAffiliate ? `https://tracking.example.com/click?offer=${encodeURIComponent(formData.offerName || "offer")}&affiliate=${trackingAffiliate}` : ""} /></label>
+              <label>Tracking URL<textarea readOnly value={trackingAffiliate && selectedTrackingOffer ? `https://tracking.example.com/click?offer=${selectedTrackingOffer.id}&affiliate=${trackingAffiliate}` : ""} /></label>
               <button type="button" style={{width:"61px"}} className="tracking-email">✉ Email</button>
             </div>
             <div className="tracking-option-grid">

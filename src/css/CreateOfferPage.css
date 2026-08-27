@@ -527,6 +527,18 @@ input[type="file"].form-control::file-selector-button:hover {
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
+.btn.primary:disabled {
+  cursor: wait;
+  opacity: .7;
+  transform: none;
+}
+
+.offer-save-error {
+  align-self: center;
+  color: #d53d3d;
+  font-size: 12px;
+}
+
 .btn.secondary {
   background: #ffffff;
   color: #374151;
