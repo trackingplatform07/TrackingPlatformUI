@@ -33,6 +33,25 @@ const editorTabs = [
   { id: "paOfferTerms", label: "Offer Terms/KPI", icon: FaUserTie },
 ];
 
+const targetingOptions = {
+  Country: ["Australia", "Brazil", "Canada", "France", "Germany", "India", "Japan", "United Kingdom", "United States"],
+  OS: ["Android", "Chrome OS", "iOS", "Linux", "macOS", "Windows"],
+  Browser: ["Chrome", "Edge", "Firefox", "Opera", "Safari", "Samsung Internet"],
+  "Device Type": ["Desktop", "Mobile", "Smart TV", "Tablet"],
+  ISP: ["Airtel", "AT&T", "Comcast", "Jio", "T-Mobile", "Verizon", "Vodafone"],
+};
+
+const targetingConditionTypes = Object.keys(targetingOptions);
+
+const createTargetingRule = (id) => ({
+  id,
+  name: "",
+  enabled: true,
+  actions: { clicks: "none", conversions: "none", impressions: "none" },
+  conditions: targetingConditionTypes.map((type) => ({ type, operator: "equal", value: "" })),
+  affiliateVisibility: "show",
+});
+
 function RichTextOfferEditor({ formData, setFormData }) {
   const [activeTab, setActiveTab] = useState("offerDescription");
   const editor = useEditor({
@@ -178,6 +197,8 @@ export default function CreateOfferPage() {
   const [landingPageActionId, setLandingPageActionId] = useState(null);
   const [landingPageSaving, setLandingPageSaving] = useState(false);
   const [targetingRules, setTargetingRules] = useState([]);
+  const [countryOptions, setCountryOptions] = useState(targetingOptions.Country);
+  const [countriesLoading, setCountriesLoading] = useState(false);
   const [creativeUploadType, setCreativeUploadType] = useState("");
   const [creativeFileName, setCreativeFileName] = useState("");
   const [affiliateSearch, setAffiliateSearch] = useState("");
@@ -439,6 +460,24 @@ export default function CreateOfferPage() {
     }));
   };
 
+  const updateTargetingRule = (ruleId, update) => {
+    setTargetingRules((rules) => rules.map((rule) =>
+      rule.id === ruleId ? { ...rule, ...update } : rule
+    ));
+  };
+
+  const updateTargetingCondition = (ruleId, conditionIndex, update) => {
+    setTargetingRules((rules) => rules.map((rule) => {
+      if (rule.id !== ruleId) return rule;
+      return {
+        ...rule,
+        conditions: rule.conditions.map((condition, index) =>
+          index === conditionIndex ? { ...condition, ...update } : condition
+        ),
+      };
+    }));
+  };
+
   const toUtcIsoString = (value) => value ? new Date(value).toISOString() : null;
 
   const loadLandingPages = async () => {
@@ -455,6 +494,33 @@ export default function CreateOfferPage() {
 
   useEffect(() => {
     if (activeStep === 2) loadLandingPages();
+  }, [activeStep]);
+
+  useEffect(() => {
+    if (activeStep !== 3) return undefined;
+    const controller = new AbortController();
+
+    const loadCountries = async () => {
+      try {
+        setCountriesLoading(true);
+        const response = await fetch("https://restcountries.com/v3.1/all?fields=name,cca2", { signal: controller.signal });
+        if (!response.ok) throw new Error("Unable to load countries");
+        const countries = await response.json();
+        const names = countries
+          .map((country) => country.name?.common)
+          .filter(Boolean)
+          .sort((first, second) => first.localeCompare(second));
+        if (names.length) setCountryOptions([...new Set(names)]);
+      } catch (error) {
+        // Keep the built-in country options available if the public API is unavailable.
+        if (error.name !== "AbortError") setCountryOptions(targetingOptions.Country);
+      } finally {
+        if (!controller.signal.aborted) setCountriesLoading(false);
+      }
+    };
+
+    loadCountries();
+    return () => controller.abort();
   }, [activeStep]);
 
   const updateLandingPageForm = (field, value) => {
@@ -1188,7 +1254,7 @@ export default function CreateOfferPage() {
                   <div className="targeting-v2-toolbar">
                     <div className="targeting-v2-heading">
                       <h2>▧&nbsp; Targeting Rules</h2>
-                      <button type="button" onClick={() => setTargetingRules((rules) => [...rules, { id: rules.length + 1, enabled: true }])}>+ Add Rule</button>
+                      <button type="button" onClick={() => setTargetingRules((rules) => [...rules, createTargetingRule(Date.now())])}>+ Add Rule</button>
                     </div>
                     <div className="targeting-v2-actions">
                       <button type="button" onClick={nextStep}>◉ Next Upload Creative</button>
@@ -1201,16 +1267,16 @@ export default function CreateOfferPage() {
                       <div className="target-rule-card-body">
                         <div className="target-rule-name">
                           <label>Rule Name</label>
-                          <input type="text" placeholder="Rule name" aria-label="Rule name" />
+                          <input type="text" value={rule.name} onChange={(event) => updateTargetingRule(rule.id, { name: event.target.value })} placeholder="Rule name" aria-label="Rule name" />
                         </div>
 
                         <div className="target-rule-divider" />
 
                         <div className="target-rule-actions-row">
-                          {['Action On Clicks', 'Action On Conversions', 'Action On Impressions'].map((label) => (
-                            <label key={label}>
+                          {[['clicks', 'Action On Clicks'], ['conversions', 'Action On Conversions'], ['impressions', 'Action On Impressions']].map(([key, label]) => (
+                            <label key={key}>
                               <span>{label}</span>
-                              <select defaultValue="none"><option value="none">No Action</option><option>Redirect</option><option>Block</option></select>
+                              <select value={rule.actions[key]} onChange={(event) => updateTargetingRule(rule.id, { actions: { ...rule.actions, [key]: event.target.value } })}><option value="none">No Action</option><option value="redirect">Redirect</option><option value="block">Block</option></select>
                             </label>
                           ))}
                         </div>
@@ -1218,25 +1284,26 @@ export default function CreateOfferPage() {
                         <div className="target-rule-divider" />
 
                         <div className="target-rule-conditions">
-                          {[
-                            ['Country', 'Select Country'], ['OS', 'Select OS'], ['Browser', 'Select Browser'], ['Device Type', 'Select Device Type'], ['ISP', 'Select ISP'],
-                          ].map(([label, placeholder]) => (
-                            <div className="target-rule-condition" key={label}>
-                              <label>{label}</label>
-                              <select defaultValue="equal"><option value="equal">is equal</option><option>is not equal</option></select>
-                              <input type="text" placeholder={placeholder} aria-label={placeholder} />
+                          {rule.conditions.map((condition, index) => (
+                            <div className="target-rule-condition" key={`${condition.type}-${index}`}>
+                              <label>{condition.type}</label>
+                              <select value={condition.operator} onChange={(event) => updateTargetingCondition(rule.id, index, { operator: event.target.value })}><option value="equal">is equal</option><option value="notEqual">is not equal</option></select>
+                              <select className="target-rule-value-select" value={condition.value} onChange={(event) => updateTargetingCondition(rule.id, index, { value: event.target.value })} aria-label={`Select ${condition.type}`} disabled={condition.type === "Country" && countriesLoading}>
+                                <option value="">{condition.type === "Country" && countriesLoading ? "Loading countries..." : `Select ${condition.type}`}</option>
+                                {(condition.type === "Country" ? countryOptions : targetingOptions[condition.type]).map((option) => <option key={option} value={option}>{option}</option>)}
+                              </select>
                             </div>
                           ))}
-                          <button style={{width:"80px"}} type="button" className="target-rule-add-more">＋ Add More</button>
+                          <button style={{width:"80px"}} type="button" className="target-rule-add-more" onClick={() => updateTargetingRule(rule.id, { conditions: [...rule.conditions, { type: "Country", operator: "equal", value: "" }] })}>＋ Add More</button>
                         </div>
 
                         <div className="target-rule-divider" />
 
                         <div className="target-rule-footer-row">
                           <label>Affiliate Visibility</label>
-                          <select defaultValue="show"><option value="show">Show</option><option>Hide</option></select>
+                          <select value={rule.affiliateVisibility} onChange={(event) => updateTargetingRule(rule.id, { affiliateVisibility: event.target.value })}><option value="show">Show</option><option value="hide">Hide</option></select>
                           <label className="switch target-rule-switch">
-                            <input type="checkbox" checked={rule.enabled} onChange={(event) => setTargetingRules((rules) => rules.map((item) => item.id === rule.id ? { ...item, enabled: event.target.checked } : item))} />
+                            <input type="checkbox" checked={rule.enabled} onChange={(event) => updateTargetingRule(rule.id, { enabled: event.target.checked })} />
                             <span className="slider round" />
                           </label>
                           <span>Enable Rule</span>

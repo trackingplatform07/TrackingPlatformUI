@@ -1719,7 +1719,8 @@ input:checked + .slider:before {
 .target-rule-conditions { width: 793px; }
 .target-rule-condition { height: 34px; }
 .target-rule-condition select { width: 169px; margin-right: 10px; }
-.target-rule-condition input { width: 437px; }
+.target-rule-condition input,
+.target-rule-condition .target-rule-value-select { width: 437px; }
 
 .target-rule-add-more,
 .target-rule-submit-row button {
