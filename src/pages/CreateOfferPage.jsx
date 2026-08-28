@@ -694,6 +694,40 @@ export default function CreateOfferPage() {
     }
   };
 
+  const creativePreviewSource = (preview) => {
+    if (!preview) return "";
+    if (preview.startsWith("data:") || preview.startsWith("http://") || preview.startsWith("https://") || preview.startsWith("/")) return preview;
+    return `data:image/jpeg;base64,${preview}`;
+  };
+
+  const openCreativePreview = (creative) => {
+    const source = creativePreviewSource(creative.preview);
+    if (!source) {
+      setCreativeError("No preview image is available for this creative.");
+      return;
+    }
+
+    const previewWindow = window.open("", "_blank");
+    if (!previewWindow) {
+      setCreativeError("The browser blocked the preview window. Please allow pop-ups and try again.");
+      return;
+    }
+
+    previewWindow.document.title = creative.title || "Creative Preview";
+    previewWindow.document.body.style.margin = "0";
+    previewWindow.document.body.style.minHeight = "100vh";
+    previewWindow.document.body.style.display = "grid";
+    previewWindow.document.body.style.placeItems = "center";
+    previewWindow.document.body.style.background = "#111";
+    const image = previewWindow.document.createElement("img");
+    image.src = source;
+    image.alt = creative.title || "Creative preview";
+    image.style.maxWidth = "100vw";
+    image.style.maxHeight = "100vh";
+    image.style.objectFit = "contain";
+    previewWindow.document.body.append(image);
+  };
+
   const loadLandingPages = async () => {
     try {
       setLandingPagesLoading(true);
@@ -1631,9 +1665,9 @@ export default function CreateOfferPage() {
                             <td>{creative.title}</td>
                             <td>{creative.dimensions}</td>
                             <td>{creative.size ? `${(creative.size / (1024 * 1024)).toFixed(2)} MB` : "0 MB"}</td>
-                            <td>{creative.preview ? <img className="creative-preview-image" src={creative.preview} alt={creative.title || "Creative preview"} /> : "-"}</td>
+                            <td>{creative.preview ? <img className="creative-preview-image" src={creativePreviewSource(creative.preview)} alt={creative.title || "Creative preview"} /> : "-"}</td>
                             <td className="creative-action-cell">
-                              <button style={{width:"50px"}} type="button" className="creative-preview-button" onClick={() => creative.preview && window.open(creative.preview, "_blank", "noopener,noreferrer")}>Preview</button>
+                              <button style={{width:"50px"}} type="button" className="creative-preview-button" onClick={() => openCreativePreview(creative)}>Preview</button>
                               <button style={{width:"43px"}} type="button" className="creative-delete-button" onClick={() => deleteCreative(creative.creativeID)} disabled={creativeDeletingId === creative.creativeID}>{creativeDeletingId === creative.creativeID ? "..." : "Delete"}</button>
                             </td>
                             <td><button style={{width:"98px"}} type="button" className="creative-share-button" onClick={() => shareCreative(creative)}>Share</button></td>
