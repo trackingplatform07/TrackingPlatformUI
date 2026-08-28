@@ -43,13 +43,36 @@ const targetingOptions = {
 
 const targetingConditionTypes = Object.keys(targetingOptions);
 
-const createTargetingRule = (id) => ({
+const createTargetingRule = (id, name = "") => ({
   id,
-  name: "",
+  name,
   enabled: true,
   actions: { clicks: "none", conversions: "none", impressions: "none" },
   conditions: targetingConditionTypes.map((type) => ({ type, operator: "equal", value: "" })),
   affiliateVisibility: "show",
+});
+
+const targetingRuleFromApi = (rule) => ({
+  id: Date.now(),
+  serverId: rule.id,
+  name: rule.ruleName || "",
+  enabled: rule.enabled !== false,
+  actions: {
+    clicks: rule.actionOnClicks || "none",
+    conversions: rule.actionOnConversions || "none",
+    impressions: rule.actionOnImpressions || "none",
+  },
+  conditions: [
+    { type: "Country", operator: "equal", value: rule.country || "" },
+    { type: "OS", operator: "equal", value: rule.os || "" },
+    { type: "Browser", operator: "equal", value: rule.browser || "" },
+    { type: "Device Type", operator: "equal", value: rule.deviceType || "" },
+    { type: "ISP", operator: "equal", value: rule.isp || "" },
+  ],
+  affiliateVisibility: rule.affiliateVisibility || "show",
+  createdOn: rule.createdOn,
+  createdBy: rule.createdBy,
+  isActive: rule.isActive !== false,
 });
 
 function RichTextOfferEditor({ formData, setFormData }) {
@@ -197,10 +220,22 @@ export default function CreateOfferPage() {
   const [landingPageActionId, setLandingPageActionId] = useState(null);
   const [landingPageSaving, setLandingPageSaving] = useState(false);
   const [targetingRules, setTargetingRules] = useState([]);
+  const [targetingRuleSavingId, setTargetingRuleSavingId] = useState(null);
+  const [targetingRuleError, setTargetingRuleError] = useState("");
+  const [createdOfferId, setCreatedOfferId] = useState(0);
+  const [selectedTargetingLandingPage, setSelectedTargetingLandingPage] = useState(null);
   const [countryOptions, setCountryOptions] = useState(targetingOptions.Country);
   const [countriesLoading, setCountriesLoading] = useState(false);
   const [creativeUploadType, setCreativeUploadType] = useState("");
   const [creativeFileName, setCreativeFileName] = useState("");
+  const [creativeFile, setCreativeFile] = useState(null);
+  const [creativeTitle, setCreativeTitle] = useState("");
+  const [creatives, setCreatives] = useState([]);
+  const [creativesLoading, setCreativesLoading] = useState(false);
+  const [creativeSaving, setCreativeSaving] = useState(false);
+  const [creativeError, setCreativeError] = useState("");
+  const [creativeMessage, setCreativeMessage] = useState("");
+  const [creativeDeletingId, setCreativeDeletingId] = useState(null);
   const [affiliateSearch, setAffiliateSearch] = useState("");
   const [advertiserDropdownOpen, setAdvertiserDropdownOpen] = useState(false);
   const [advertiserSearch, setAdvertiserSearch] = useState("");
@@ -478,7 +513,186 @@ export default function CreateOfferPage() {
     }));
   };
 
+  const openTargetingRuleEditor = async (landingPage = null) => {
+    let page = landingPage || { id: null, offerId: createdOfferId, name: "" };
+    let rule = null;
+    if (landingPage?.id) {
+      try {
+        const response = await fetch(`https://localhost:7150/api/TargetingRules/${landingPage.id}`, { headers: { accept: "*/*" } });
+        if (response.ok) {
+          rule = await response.json();
+          page = { ...landingPage, offerId: rule.offerId ?? landingPage.offerId, name: rule.ruleName || landingPage.name };
+        }
+      } catch {
+        // A new rule can still be created from the selected card.
+      }
+    }
+
+    setSelectedTargetingLandingPage(page);
+    setTargetingRules([rule ? targetingRuleFromApi(rule) : createTargetingRule(Date.now(), page.name || "")]);
+    setTargetingRuleError("");
+  };
+
+  const submitTargetingRule = async (rule) => {
+    if (!rule.name.trim()) {
+      setTargetingRuleError("Enter a rule name before submitting.");
+      return;
+    }
+
+    const valuesFor = (type) => rule.conditions
+      .filter((condition) => condition.type === type && condition.value)
+      .map((condition) => condition.value)
+      .join(",");
+    const now = new Date().toISOString();
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    const payload = {
+      id: 0,
+      offerId: Number(selectedTargetingLandingPage?.offerId ?? createdOfferId) || 0,
+      ruleName: rule.name.trim(),
+      country: valuesFor("Country"),
+      os: valuesFor("OS"),
+      browser: valuesFor("Browser"),
+      deviceType: valuesFor("Device Type"),
+      isp: valuesFor("ISP"),
+      actionOnClicks: rule.actions.clicks,
+      actionOnConversions: rule.actions.conversions,
+      actionOnImpressions: rule.actions.impressions,
+      affiliateVisibility: rule.affiliateVisibility,
+      enabled: rule.enabled,
+      createdOn: rule.createdOn || now,
+      createdBy: rule.createdBy || user?.email || user?.name || "Admin",
+      modifiedOn: now,
+      modifiedBy: user?.email || user?.name || "Admin",
+      isActive: rule.isActive !== false,
+    };
+
+    try {
+      setTargetingRuleSavingId(rule.id);
+      setTargetingRuleError("");
+      const response = await fetch(rule.serverId ? `https://localhost:7150/api/TargetingRules/${rule.serverId}` : "https://localhost:7150/api/TargetingRules", {
+        method: rule.serverId ? "PUT" : "POST",
+        headers: { accept: "*/*", "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error("Unable to save targeting rule");
+      setTargetingRules((rules) => rules.map((item) =>
+        item.id === rule.id ? { ...item, saved: true } : item
+      ));
+    } catch {
+      setTargetingRuleError("Unable to save the targeting rule. Please check the API and try again.");
+    } finally {
+      setTargetingRuleSavingId(null);
+    }
+  };
+
   const toUtcIsoString = (value) => value ? new Date(value).toISOString() : null;
+
+  const loadCreatives = async () => {
+    try {
+      setCreativesLoading(true);
+      setCreativeError("");
+      const response = await fetch("https://localhost:7150/api/Creative", { headers: { accept: "*/*" } });
+      if (!response.ok) throw new Error("Unable to load creatives");
+      const data = await response.json();
+      setCreatives(Array.isArray(data) ? data : data.items || data.data || []);
+    } catch {
+      setCreativeError("Unable to load creatives. Please check the API and try again.");
+    } finally {
+      setCreativesLoading(false);
+    }
+  };
+
+  const getImageDimensions = (dataUrl) => new Promise((resolve) => {
+    const image = new Image();
+    image.onload = () => resolve(`${image.naturalWidth}x${image.naturalHeight}`);
+    image.onerror = () => resolve("");
+    image.src = dataUrl;
+  });
+
+  const submitCreative = async () => {
+    if (!creativeFile || !creativeFile.type.startsWith("image/")) {
+      setCreativeError("Select an image file before uploading.");
+      return;
+    }
+
+    try {
+      setCreativeSaving(true);
+      setCreativeError("");
+      setCreativeMessage("");
+      const preview = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(creativeFile);
+      });
+      const now = new Date().toISOString();
+      const user = JSON.parse(localStorage.getItem("user") || "null");
+      const response = await fetch("https://localhost:7150/api/Creative", {
+        method: "POST",
+        headers: { accept: "*/*", "Content-Type": "application/json" },
+        body: JSON.stringify({
+          creativeID: 0,
+          offerID: Number(createdOfferId) || 0,
+          title: creativeTitle.trim() || creativeFile.name,
+          dimensions: await getImageDimensions(preview),
+          size: creativeFile.size,
+          preview,
+          affiliateTrackingURL: "",
+          createdOn: now,
+          createdBy: user?.email || user?.name || "Admin",
+          modifiedOn: now,
+          modifiedBy: user?.email || user?.name || "Admin",
+          isActive: true,
+        }),
+      });
+      if (!response.ok) throw new Error("Unable to save creative");
+      setCreativeFile(null);
+      setCreativeFileName("");
+      setCreativeTitle("");
+      await loadCreatives();
+    } catch {
+      setCreativeError("Unable to upload the creative. Please check the API and try again.");
+    } finally {
+      setCreativeSaving(false);
+    }
+  };
+
+  const deleteCreative = async (creativeID) => {
+    if (!window.confirm("Delete this creative?")) return;
+
+    try {
+      setCreativeDeletingId(creativeID);
+      setCreativeError("");
+      setCreativeMessage("");
+      const response = await fetch(`https://localhost:7150/api/Creative/${creativeID}`, {
+        method: "DELETE",
+        headers: { accept: "*/*" },
+      });
+      if (!response.ok) throw new Error("Unable to delete creative");
+      await loadCreatives();
+    } catch {
+      setCreativeError("Unable to delete the creative. Please check the API and try again.");
+    } finally {
+      setCreativeDeletingId(null);
+    }
+  };
+
+  const shareCreative = async (creative) => {
+    const url = creative.affiliateTrackingURL || creative.preview;
+    if (!url) {
+      setCreativeError("No URL is available to share for this creative.");
+      return;
+    }
+
+    try {
+      setCreativeError("");
+      if (navigator.share) await navigator.share({ title: creative.title || "Creative", url });
+      else await navigator.clipboard.writeText(url);
+      setCreativeMessage(navigator.share ? "Share dialog opened." : "Tracking URL copied to clipboard.");
+    } catch (error) {
+      if (error.name !== "AbortError") setCreativeError("Unable to share this creative.");
+    }
+  };
 
   const loadLandingPages = async () => {
     try {
@@ -493,7 +707,11 @@ export default function CreateOfferPage() {
   };
 
   useEffect(() => {
-    if (activeStep === 2) loadLandingPages();
+    if (activeStep === 2 || activeStep === 3) loadLandingPages();
+  }, [activeStep]);
+
+  useEffect(() => {
+    if (activeStep === 4) loadCreatives();
   }, [activeStep]);
 
   useEffect(() => {
@@ -728,6 +946,8 @@ export default function CreateOfferPage() {
         });
 
         if (!response.ok) throw new Error("Unable to save offer");
+        const savedOffer = await response.json().catch(() => null);
+        setCreatedOfferId(savedOffer?.id || savedOffer?.data?.id || 0);
       } catch {
         setOfferSaveError("Unable to save the offer. Please check the API and try again.");
         return;
@@ -1254,13 +1474,27 @@ export default function CreateOfferPage() {
                   <div className="targeting-v2-toolbar">
                     <div className="targeting-v2-heading">
                       <h2>▧&nbsp; Targeting Rules</h2>
-                      <button type="button" onClick={() => setTargetingRules((rules) => [...rules, createTargetingRule(Date.now())])}>+ Add Rule</button>
+                      <button type="button" onClick={() => {
+                        if (!selectedTargetingLandingPage) {
+                          openTargetingRuleEditor();
+                          return;
+                        }
+                        setTargetingRuleError("");
+                        setTargetingRules((rules) => [...rules, createTargetingRule(Date.now())]);
+                      }}>+ Add Rule</button>
+                      {selectedTargetingLandingPage && <button type="button" className="targeting-back-button" onClick={() => {
+                        setSelectedTargetingLandingPage(null);
+                        setTargetingRules([]);
+                        setTargetingRuleError("");
+                      }}>← All Offers</button>}
                     </div>
                     <div className="targeting-v2-actions">
                       <button type="button" onClick={nextStep}>◉ Next Upload Creative</button>
                       <button type="button" className="targeting-old-version">Targeting Old Version →</button>
                     </div>
                   </div>
+                  {selectedTargetingLandingPage ? <>
+                  {targetingRuleError && <p className="offer-save-error" role="alert">{targetingRuleError}</p>}
                   {targetingRules.map((rule) => (
                     <article className="target-rule-card" key={rule.id}>
                       <div className="target-rule-card-title">＋&nbsp; Create Target Rule</div>
@@ -1310,10 +1544,39 @@ export default function CreateOfferPage() {
                         </div>
 
                         <div className="target-rule-divider target-rule-last-divider" />
-                        <div className="target-rule-submit-row"><button style={{width:"80px"}} type="button">◉ Submit</button></div>
+                        <div className="target-rule-submit-row">
+                          {rule.saved && <span role="status">Rule saved successfully.</span>}
+                          <button
+                            style={{ width: "80px" }}
+                            type="button"
+                            onClick={() => submitTargetingRule(rule)}
+                            disabled={targetingRuleSavingId === rule.id}
+                          >
+                            {targetingRuleSavingId === rule.id ? "Saving..." : "◉ Submit"}
+                          </button>
+                        </div>
                       </div>
                     </article>
                   ))}
+                  {targetingRules.length === 0 && <p className="targeting-rule-list">Click “+ Add Rule” to create a targeting rule for <strong>{selectedTargetingLandingPage.name}</strong>.</p>}
+                  </> : <div className="targeting-offer-list">
+                    <h3>Offer</h3>
+                    {targetingRuleError && <p className="offer-save-error" role="alert">{targetingRuleError}</p>}
+                    {landingPagesLoading && <p className="targeting-rule-list">Loading offers...</p>}
+                    {!landingPagesLoading && landingPages.filter((page) => page.isActive !== false).map((page) => (
+                      <button
+                        className="targeting-offer-card"
+                        key={page.id}
+                        type="button"
+                        onClick={() => openTargetingRuleEditor(page)}
+                      >
+                        <span className="targeting-offer-handle">☰</span>
+                        <span className="targeting-offer-details"><strong>{page.name}</strong><small>#{page.id}</small></span>
+                        <span className="targeting-offer-actions">◉ <em>Edit</em></span>
+                      </button>
+                    ))}
+                    {!landingPagesLoading && landingPages.length === 0 && <p className="targeting-rule-list">No offers found.</p>}
+                  </div>}
                 </section>
                 <WizardStepFooter onPrevious={prevStep} onNext={nextStep} />
                 </div>
@@ -1325,7 +1588,7 @@ export default function CreateOfferPage() {
                 <section className="creatives-v2" aria-label="Creatives">
                   <div className="creatives-v2-upload-row">
                     <label htmlFor="creative-upload-type">Upload</label>
-                    <select id="creative_type" className="form-control" name="creative_type" value={creativeUploadType} onChange={(event) => { setCreativeUploadType(event.target.value); setCreativeFileName(""); }}>
+                    <select id="creative_type" className="form-control" name="creative_type" value={creativeUploadType} onChange={(event) => { setCreativeUploadType(event.target.value); setCreativeFileName(""); setCreativeFile(null); }}>
                       <option value="">Choose Creatives</option>
                       <option value="html">HTML ( Zip File Only )</option>
                       <option value="html_file">HTML File</option>
@@ -1339,19 +1602,45 @@ export default function CreateOfferPage() {
                         ☁&nbsp; {creativeFileName || (creativeUploadType === "html" ? "Choose Zip File" : "Choose File")}
                         <input
                           type="file"
-                          accept={creativeUploadType === "html" ? ".zip,application/zip" : undefined}
-                          onChange={(event) => setCreativeFileName(event.target.files?.[0]?.name || "")}
+                          accept={creativeUploadType === "image" ? "image/png,image/jpeg,image/gif,image/x-icon,image/svg+xml,image/webp" : undefined}
+                          onChange={(event) => {
+                            const file = event.target.files?.[0] || null;
+                            setCreativeFile(file);
+                            setCreativeFileName(file?.name || "");
+                            setCreativeTitle(file?.name || "");
+                          }}
                         />
                       </label>
                     )}
-                    <button style={{width:"128px"}} type="button">◉ Next Assign Affiliate</button>
+                    <button style={{width:"100px"}} className="creative-save-button" type="button" onClick={submitCreative} disabled={creativeSaving}>{creativeSaving ? "Uploading..." : "Upload Creative"}</button>
+                    <button style={{width:"128px"}} type="button" onClick={nextStep}>◉ Next Assign Affiliate</button>
                   </div>
+                  {creativeError && <p className="offer-save-error" role="alert">{creativeError}</p>}
+                  {creativeMessage && <p className="creative-success-message" role="status">{creativeMessage}</p>}
                   <div className="creatives-v2-table-wrap">
                     <table className="creatives-v2-table">
                       <thead>
                         <tr><th>CreativeID</th><th>OfferID</th><th>Title</th><th>Dimensions</th><th>Size</th><th>Preview</th><th>Action</th><th>Affiliate Tracking URL</th></tr>
                       </thead>
-                      <tbody><tr><td colSpan="8" /></tr></tbody>
+                      <tbody>
+                        {creativesLoading && <tr><td colSpan="8" className="creatives-empty">Loading creatives...</td></tr>}
+                        {!creativesLoading && creatives.filter((creative) => creative.isActive !== false).map((creative) => (
+                          <tr key={creative.creativeID}>
+                            <td>{creative.creativeID}</td>
+                            <td>{creative.offerID}</td>
+                            <td>{creative.title}</td>
+                            <td>{creative.dimensions}</td>
+                            <td>{creative.size ? `${(creative.size / (1024 * 1024)).toFixed(2)} MB` : "0 MB"}</td>
+                            <td>{creative.preview ? <img className="creative-preview-image" src={creative.preview} alt={creative.title || "Creative preview"} /> : "-"}</td>
+                            <td className="creative-action-cell">
+                              <button style={{width:"50px"}} type="button" className="creative-preview-button" onClick={() => creative.preview && window.open(creative.preview, "_blank", "noopener,noreferrer")}>Preview</button>
+                              <button style={{width:"43px"}} type="button" className="creative-delete-button" onClick={() => deleteCreative(creative.creativeID)} disabled={creativeDeletingId === creative.creativeID}>{creativeDeletingId === creative.creativeID ? "..." : "Delete"}</button>
+                            </td>
+                            <td><button style={{width:"98px"}} type="button" className="creative-share-button" onClick={() => shareCreative(creative)}>Share</button></td>
+                          </tr>
+                        ))}
+                        {!creativesLoading && creatives.length === 0 && <tr><td colSpan="8" className="creatives-empty">No creatives uploaded.</td></tr>}
+                      </tbody>
                     </table>
                   </div>
                 </section>
