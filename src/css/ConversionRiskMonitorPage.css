@@ -1,0 +1,75 @@
+.crm-header {
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.crm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.crm-field select {
+  height: 34px;
+  min-width: 160px;
+  padding: 0 10px;
+  border: 1px solid #c9d0d6;
+  border-radius: 4px;
+  background: #fff;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+}
+
+.crm-ctit-field {
+  position: relative;
+}
+
+.crm-ctit-trigger {
+  width: auto;
+  min-width: 160px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #c9d0d6;
+  border-radius: 4px;
+  background: #fff;
+  color: #9aa4ac;
+  cursor: pointer;
+  text-align: left;
+  font: 13px Arial, sans-serif;
+}
+
+.crm-ctit-dropdown {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 220px;
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid #d5dbe0;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, .15);
+}
+
+.crm-ctit-option {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: 0;
+  background: #fff;
+  color: #1f2937;
+  text-align: left;
+  cursor: pointer;
+  font: 13px Arial, sans-serif;
+}
+
+.crm-ctit-option:hover {
+  background: #eaf6fb;
+}
+
+.crm-ctit-option.active {
+  background: #1f78d1;
+  color: #fff;
+}

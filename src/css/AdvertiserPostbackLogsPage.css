@@ -1,0 +1,31 @@
+.advertiser-postback-logs-page {
+  padding: 16px;
+}
+
+.advertiser-postback-logs-card {
+  background: #fff;
+  border: 1px solid #e6ebf0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  padding: 20px;
+}
+
+.advertiser-postback-logs-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e6ebf0;
+}
+
+@media (max-width: 900px) {
+  .advertiser-postback-logs-filters-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .advertiser-postback-logs-filters-grid {
+    grid-template-columns: 1fr;
+  }
+}

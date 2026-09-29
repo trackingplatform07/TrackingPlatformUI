@@ -1,0 +1,377 @@
+.mailer-page {
+  padding: 16px;
+}
+
+.mailer-card {
+  background: #fff;
+  border: 1px solid #e6ebf0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  padding: 18px 22px;
+}
+
+.mailer-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.mailer-toolbar h1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #1f2937;
+  font-size: 16px;
+}
+
+.mailer-toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.mailer-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 5px;
+  background: #2b3a4a;
+  color: #fff;
+  cursor: pointer;
+  font: 700 11px Arial, sans-serif;
+}
+
+.mailer-target-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 10px;
+}
+
+.mailer-target-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mailer-target-column label {
+  color: #1f2937;
+  font: 700 12px Arial, sans-serif;
+}
+
+.mailer-target-column select {
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #d7dee5;
+  border-radius: 4px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+}
+
+.mailer-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1f78d1;
+  font: 12px Arial, sans-serif;
+}
+
+.mailer-checkbox-row input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+}
+
+.mailer-divider {
+  border: 0;
+  border-top: 1px solid #e6ebf0;
+  margin: 16px 0;
+}
+
+.mailer-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  max-width: 100%;
+}
+
+.mailer-field label {
+  color: #1f2937;
+  font: 700 12px Arial, sans-serif;
+}
+
+.mailer-field input,
+.mailer-field select,
+.mailer-field textarea {
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #d7dee5;
+  border-radius: 4px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+}
+
+.mailer-schedule-input {
+  margin-top: 8px;
+  max-width: 260px;
+}
+
+.mailer-editor {
+  border: 1px solid #d7dee5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.mailer-editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-bottom: 1px solid #e6ebf0;
+  background: #f7f8fa;
+  flex-wrap: wrap;
+}
+
+.mailer-editor-toolbar button {
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: #4a5568;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.mailer-editor-toolbar button:hover {
+  background: #e9edf1;
+}
+
+.mailer-editor-toolbar select {
+  height: 26px;
+  padding: 0 6px;
+  border: 1px solid #d7dee5;
+  border-radius: 3px;
+  background: #fff;
+  color: #8a94a3;
+  font-size: 11px;
+}
+
+.mailer-editor textarea {
+  height: 160px;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  padding: 10px;
+  resize: vertical;
+  background: #fff;
+}
+
+.mailer-recipient-summary {
+  margin-bottom: 12px;
+  color: #6b7684;
+  font-size: 12px;
+}
+
+.mailer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.mailer-ai-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid #34d399;
+  border-radius: 4px;
+  background: #fff;
+  color: #059669;
+  cursor: pointer;
+  font: 700 11px Arial, sans-serif;
+}
+
+.mailer-send-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 4px;
+  background: #1f78d1;
+  color: #fff;
+  cursor: pointer;
+  font: 700 12px Arial, sans-serif;
+}
+
+.mailer-send-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.mailer-result-banner {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 5px;
+  font: 12px Arial, sans-serif;
+}
+
+.mailer-result-banner.success {
+  background: #e7f8f0;
+  color: #00a36c;
+}
+
+.mailer-result-banner.error {
+  background: #fdecea;
+  color: #c0392b;
+}
+
+.mailer-result-banner.info {
+  background: #eaf4fd;
+  color: #1f78d1;
+}
+
+.mailer-modal {
+  width: 640px;
+  max-width: 92vw;
+  max-height: 86vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, .15);
+  padding: 18px 22px;
+}
+
+.mailer-logs-modal {
+  width: 900px;
+}
+
+.mailer-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e6ebf0;
+}
+
+.mailer-modal-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #1f2937;
+  font-size: 15px;
+}
+
+.mailer-modal-close {
+  border: 0;
+  background: transparent;
+  color: #8a94a3;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.mailer-template-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.mailer-template-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid #e6ebf0;
+  border-radius: 6px;
+}
+
+.mailer-template-row strong {
+  color: #1f2937;
+  font-size: 13px;
+}
+
+.mailer-template-row p {
+  margin: 2px 0 0;
+  color: #6b7684;
+  font-size: 12px;
+}
+
+.mailer-template-row-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.mailer-template-row-actions button {
+  border: 0;
+  background: #edf1f5;
+  color: #1f2937;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.mailer-template-row-actions button.danger {
+  background: #fdecea;
+  color: #c0392b;
+}
+
+.mailer-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mailer-empty {
+  text-align: center;
+  padding: 20px 0;
+  color: #6b7684;
+  font-size: 13px;
+}
+
+.mailer-logs-table-scroll {
+  overflow-x: auto;
+}
+
+.mailer-logs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mailer-logs-table th {
+  padding: 8px 6px;
+  border-bottom: 1px solid #e6ebf0;
+  text-align: left;
+  color: #1f2937;
+  font-size: 12px;
+}
+
+.mailer-logs-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid #eef1f3;
+  color: #1f2937;
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .mailer-target-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,98 @@
+.report-sync-panel {
+  background: #fff;
+  border: 1px solid #e6ebf0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  padding: 14px 20px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.report-sync-panel h1,
+.report-sync-panel h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #1f2937;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.report-sync-select {
+  height: 30px;
+  min-width: 180px;
+  padding: 0 10px;
+  border: 1px solid #a9d3f5;
+  border-radius: 4px;
+  background: #eaf4fd;
+  color: #1f2937;
+  font: 12px Arial, sans-serif;
+}
+
+.report-sync-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.report-sync-card {
+  padding: 20px;
+  gap: 12px;
+}
+
+.report-sync-card-subname {
+  margin: 0;
+  color: #1f2937;
+  font-size: 13px;
+}
+
+.report-sync-logo-text {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font: 700 18px Arial, sans-serif;
+}
+
+.report-sync-logo-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font: 700 26px Georgia, serif;
+}
+
+.report-sync-logo-facebook {
+  background: #1877f2;
+}
+
+@media (max-width: 1100px) {
+  .report-sync-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .report-sync-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .report-sync-panel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .report-sync-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

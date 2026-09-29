@@ -1,0 +1,28 @@
+.capping-logs-page {
+  padding: 16px;
+}
+
+.capping-logs-page-card {
+  background: #fff;
+  border: 1px solid #e6ebf0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  padding: 20px;
+}
+
+.capping-logs-header .postback-logs-filters select {
+  height: 34px;
+  min-width: 160px;
+  padding: 0 10px;
+  border: 1px solid #c9d0d6;
+  border-radius: 4px;
+  background: #fff;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+}
+
+.capping-logs-divider {
+  width: 1px;
+  height: 26px;
+  background: #d5dbe0;
+}

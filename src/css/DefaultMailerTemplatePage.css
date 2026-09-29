@@ -1,0 +1,106 @@
+.default-template-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.default-template-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #1f2937;
+  font-size: 16px;
+}
+
+.default-template-tabs {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  overflow-x: auto;
+  gap: 2px;
+  background: #eef2f5;
+  border-radius: 6px 6px 0 0;
+  padding: 4px 6px 0;
+}
+
+.default-template-tab {
+  display: inline-flex !important;
+  align-items: center;
+  flex: 0 0 auto;
+  width: auto !important;
+  border: 0;
+  background: transparent;
+  padding: 10px 14px;
+  color: #6b7684;
+  cursor: pointer;
+  font: 12px Arial, sans-serif;
+  white-space: nowrap;
+  border-radius: 6px 6px 0 0;
+}
+
+.default-template-tab.active {
+  background: #fff;
+  color: #1f2937;
+  font-weight: 700;
+  box-shadow: 0 -1px 0 #fff inset;
+}
+
+.default-template-body {
+  border-radius: 0 0 8px 8px;
+}
+
+.default-template-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.default-template-field label {
+  flex: 0 0 90px;
+  padding-top: 8px;
+  color: #1f2937;
+  font: 700 12px Arial, sans-serif;
+}
+
+.default-template-field input {
+  flex: 1 1 auto;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #d7dee5;
+  border-radius: 4px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+}
+
+.default-template-editor {
+  flex: 1 1 auto;
+}
+
+.default-template-editor textarea {
+  height: 280px;
+}
+
+.default-template-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+@media (max-width: 760px) {
+  .default-template-field {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .default-template-field label {
+    padding-top: 0;
+  }
+}

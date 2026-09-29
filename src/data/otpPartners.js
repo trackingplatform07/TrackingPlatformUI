@@ -1,0 +1,15 @@
+export const OTP_PARTNERS = [
+  { key: "puretech", name: "PureTech Global", variant: "boxed", bg: "#1a2a5e", color: "#fff" },
+  { key: "hungama", name: "Hungama", variant: "boxed", bg: "#161616", color: "#fff" },
+  { key: "info2cell", name: "Info2cell", variant: "italic", color: "#e8590c" },
+  { key: "mojo-gaming", name: "Mojo Gaming", variant: "banner", bg: "#f2b705", color: "#7a1f1f" },
+  { key: "shemaroome", name: "ShemarooMe", variant: "bold", color: "#e8590c" },
+  { key: "ksa-mobily", name: "KSA Mobily Games Express", variant: "otp", bg: "#fff", color: "#1f2937" },
+  { key: "smart", name: "Smart", variant: "bold", color: "#2f9e44" },
+  { key: "asiacell", name: "Asiacell", variant: "italic", color: "#e03131" },
+  { key: "omantel", name: "Omantel", variant: "bold", color: "#1864ab" },
+  { key: "mobiforu", name: "Mobiforu", variant: "bold", color: "#1a2a5e" },
+  { key: "magzmobi", name: "Magzmobi", variant: "boxed", bg: "#12233f", color: "#fff" },
+  { key: "arshiya", name: "Arshiya Infosolutions", variant: "serif", color: "#1a1a1a" },
+  { key: "traffic-company", name: "Traffic Company", variant: "shield", bg: "#f2b705", color: "#7a1f1f" },
+];

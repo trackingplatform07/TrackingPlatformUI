@@ -1,0 +1,51 @@
+.automation-page {
+  padding: 16px;
+  background: #eef2f5;
+}
+
+.automation-page .offer-form.automation-tab {
+  background: #fff;
+  border-radius: 8px;
+  padding: 18px 22px;
+}
+
+.automation-logs-modal {
+  width: 900px;
+  max-width: 92vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, .15);
+  padding: 16px 20px;
+}
+
+.automation-logs-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e6ebf0;
+}
+
+.automation-logs-modal-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #1f2937;
+  font-size: 15px;
+}
+
+.automation-logs-modal-close {
+  border: 0;
+  background: transparent;
+  color: #8a94a3;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.automation-logs-table-scroll {
+  overflow-x: auto;
+}

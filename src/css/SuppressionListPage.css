@@ -1,0 +1,87 @@
+.suppression-page {
+  padding: 16px;
+  background: #eef2f5;
+}
+
+.suppression-page-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 18px 22px;
+}
+
+.suppression-list-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.suppression-list-toolbar select {
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid #bdc9d2;
+  border-radius: 6px;
+  background: #fff;
+  color: #263945;
+  font-size: 11px;
+  max-width: 160px;
+}
+
+.suppression-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 9px;
+  border: 1px solid #bdc9d2;
+  border-radius: 6px;
+}
+
+.suppression-search input {
+  border: 0;
+  outline: 0;
+  color: #263945;
+  font-size: 11px;
+  width: 130px;
+}
+
+.suppression-entries {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #263945;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.suppression-entries input {
+  width: 50px;
+  height: 28px;
+  padding: 0 6px;
+  border: 1px solid #bdc9d2;
+  border-radius: 5px;
+  background: #fff;
+  color: #263945;
+  font-size: 11px;
+}
+
+.suppression-link {
+  width: auto;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: #1f78d1;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.suppression-page-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background: #1f78d1;
+  color: #fff;
+}

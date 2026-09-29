@@ -1,0 +1,35 @@
+.otp-reports-page {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.otp-reports-toolbar-card,
+.otp-reports-table-card {
+  background: #fff;
+  border: 1px solid #e6ebf0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  padding: 20px;
+}
+
+.otp-reports-header {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.otp-reports-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e6ebf0;
+}
+
+@media (max-width: 560px) {
+  .otp-reports-filters-grid {
+    grid-template-columns: 1fr;
+  }
+}

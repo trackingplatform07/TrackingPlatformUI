@@ -1,0 +1,93 @@
+.fraud-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.fraud-tools-card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 24px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .06);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.fraud-tools-icon {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 42px;
+  color: #1f2937;
+}
+
+.fraud-tools-icon-chart {
+  color: #1f2937;
+}
+
+.fraud-tools-logo-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: 700 32px Arial, sans-serif;
+  color: #1f2937;
+}
+
+.fraud-tools-logo-thin {
+  font-weight: 400;
+}
+
+.fraud-tools-logo-fraudscore {
+  font-weight: 700;
+}
+
+.fraud-tools-logo-score {
+  color: #1f2937;
+}
+
+.fraud-tools-logo-dot {
+  color: #2f9e44;
+  font-size: 14px;
+}
+
+.fraud-tools-card-name {
+  margin: 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.fraud-tools-card-tag {
+  margin: 0 0 14px;
+  color: #1f78d1;
+  font-size: 12px;
+}
+
+.fraud-tools-manage-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 4px;
+  background: #1f78d1;
+  color: #fff;
+  cursor: pointer;
+  font: 700 11px Arial, sans-serif;
+}
+
+@media (max-width: 900px) {
+  .fraud-tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .fraud-tools-grid {
+    grid-template-columns: 1fr;
+  }
+}

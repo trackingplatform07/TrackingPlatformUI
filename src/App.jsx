@@ -19,6 +19,43 @@ import AffiliateDetails from "./pages/AffiliateDetails";
 import AffiliatePostback from "./pages/AffiliatePostback"; 
 import ImportAffiliates from "./pages/ImportAffiliates";
 import CreateOfferPage from "./pages/CreateOfferPage";
+import EditOfferPage from "./pages/EditOfferPage";
+import ApprovedOffersPage from "./pages/ApprovedOffersPage";
+import SmartOffersPage from "./pages/SmartOffersPage";
+import PostbackPage from "./pages/PostbackPage";
+import ApproveRequestsPage from "./pages/ApproveRequestsPage";
+import CouponsPage from "./pages/CouponsPage";
+import OfferLinkingRulesPage from "./pages/OfferLinkingRulesPage";
+import OffersLivePage from "./pages/OffersLivePage";
+import ReportsPage from "./pages/ReportsPage";
+import ReportsKpiPage from "./pages/ReportsKpiPage";
+import ConversionLogsPage from "./pages/ConversionLogsPage";
+import IGamingReportsPage from "./pages/IGamingReportsPage";
+import AffiliatePostbackLogsPage from "./pages/AffiliatePostbackLogsPage";
+import AdvertiserPostbackLogsPage from "./pages/AdvertiserPostbackLogsPage";
+import CappingLogsPage from "./pages/CappingLogsPage";
+import TestReportsPage from "./pages/TestReportsPage";
+import OtpReportsPage from "./pages/OtpReportsPage";
+import ComparisonReportPage from "./pages/ComparisonReportPage";
+import FraudFenderPage from "./pages/FraudFenderPage";
+import ConversionRiskMonitorPage from "./pages/ConversionRiskMonitorPage";
+import MobileAttributionPage from "./pages/MobileAttributionPage";
+import ECommerceIntegrationPage from "./pages/ECommerceIntegrationPage";
+import AffiliateIntegrationPage from "./pages/AffiliateIntegrationPage";
+import OfferSyncPage from "./pages/OfferSyncPage";
+import ReportSyncPage from "./pages/ReportSyncPage";
+import ProductFeedPage from "./pages/ProductFeedPage";
+import OtpIntegrationPage from "./pages/OtpIntegrationPage";
+import OtpIntegrationSetupPage from "./pages/OtpIntegrationSetupPage";
+import MailerPage from "./pages/MailerPage";
+import DefaultMailerTemplatePage from "./pages/DefaultMailerTemplatePage";
+import CustomMailerTemplatesPage from "./pages/CustomMailerTemplatesPage";
+import AutomationPage from "./pages/AutomationPage";
+import LinkTesterPage from "./pages/LinkTesterPage";
+import FraudDetectionToolsPage from "./pages/FraudDetectionToolsPage";
+import ShortUrlPage from "./pages/ShortUrlPage";
+import SuppressionListPage from "./pages/SuppressionListPage";
+import SettingsPage from "./pages/SettingsPage";
 
 import './css/App.css';
  
@@ -45,7 +82,46 @@ function App() {
         <Route path="/affiliate-signup" element={<AffiliateSignup />} />
         <Route path="/affiliate/:id" element={<AffiliateDetails />} /> 
         <Route path="/affiliate-postback" element={<AffiliatePostback />} />
-<Route path="/offers/create" element={<CreateOfferPage />} />s
+        <Route path="/offers/create" element={<CreateOfferPage />} />
+        <Route path="/offers/:id/edit" element={<EditOfferPage />} />
+        <Route path="/offers/approved" element={<ApprovedOffersPage />} />
+        <Route path="/offers/smart" element={<SmartOffersPage />} />
+        <Route path="/offers/postback" element={<PostbackPage />} />
+        <Route path="/offers/approve-requests" element={<ApproveRequestsPage />} />
+        <Route path="/offers/coupons" element={<CouponsPage />} />
+        <Route path="/offers/affiliate-links" element={<OfferLinkingRulesPage />} />
+        <Route path="/offers/live" element={<OffersLivePage />} />
+        <Route path="/reports" element={<ReportsPage />} />
+        <Route path="/reports/kpi" element={<ReportsKpiPage />} />
+        <Route path="/reports/conversion-logs" element={<ConversionLogsPage />} />
+        <Route path="/reports/igaming" element={<IGamingReportsPage />} />
+        <Route path="/reports/affiliate-postback-logs" element={<AffiliatePostbackLogsPage />} />
+        <Route path="/reports/advertiser-postback-logs" element={<AdvertiserPostbackLogsPage />} />
+        <Route path="/reports/capping-logs" element={<CappingLogsPage />} />
+        <Route path="/reports/test-reports" element={<TestReportsPage />} />
+        <Route path="/reports/otp-reports" element={<OtpReportsPage />} />
+        <Route path="/reports/comparison" element={<ComparisonReportPage />} />
+        <Route path="/fraud-detection/fraud-fender" element={<FraudFenderPage />} />
+        <Route path="/fraud-detection/conversion-risk-monitor" element={<ConversionRiskMonitorPage />} />
+        <Route path="/integration/mobile-attribution" element={<MobileAttributionPage />} />
+        <Route path="/integration/e-commerce" element={<ECommerceIntegrationPage />} />
+        <Route path="/integration/affiliate-integration" element={<AffiliateIntegrationPage />} />
+        <Route path="/integration/offer-sync" element={<OfferSyncPage />} />
+        <Route path="/integration/report-sync" element={<ReportSyncPage />} />
+        <Route path="/integration/product-feed" element={<ProductFeedPage />} />
+        <Route path="/integration/otp-integration" element={<OtpIntegrationPage />} />
+        <Route path="/integration/otp-integration/:partnerKey" element={<OtpIntegrationSetupPage />} />
+        <Route path="/tools/integration" element={<MobileAttributionPage />} />
+        <Route path="/tools/mailer" element={<MailerPage />} />
+        <Route path="/tools/mailer/templates" element={<DefaultMailerTemplatePage />} />
+        <Route path="/tools/mailer/custom-templates" element={<CustomMailerTemplatesPage />} />
+        <Route path="/tools/import-data" element={<ImportPage />} />
+        <Route path="/tools/automation" element={<AutomationPage />} />
+        <Route path="/tools/link-tester" element={<LinkTesterPage />} />
+        <Route path="/tools/fraud-detection" element={<FraudDetectionToolsPage />} />
+        <Route path="/tools/short-url" element={<ShortUrlPage />} />
+        <Route path="/tools/suppression-list" element={<SuppressionListPage />} />
+        <Route path="/account/settings" element={<SettingsPage />} />
 
       </Routes>
     </div>

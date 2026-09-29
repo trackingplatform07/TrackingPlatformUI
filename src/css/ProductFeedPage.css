@@ -1,0 +1,114 @@
+.product-feed-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product-feed-form-row {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 470px);
+  align-items: center;
+  gap: 16px;
+}
+
+.product-feed-form-row label {
+  color: #1f2937;
+  font: 700 12px Arial, sans-serif;
+}
+
+.product-feed-form-row > input,
+.product-feed-form-row > select {
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #c9d0d6;
+  border-radius: 4px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+}
+
+.product-feed-radio-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.product-feed-radio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #1f78d1;
+  font: 13px Arial, sans-serif;
+}
+
+.product-feed-radio input {
+  margin: 0;
+}
+
+.product-feed-affiliate-row {
+  display: flex;
+  gap: 8px;
+}
+
+.product-feed-affiliate-mode {
+  flex: 0 0 110px;
+  height: 34px;
+  padding: 0 8px;
+  border: 1px solid #c9d0d6;
+  border-radius: 4px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+}
+
+.product-feed-affiliate-row select:not(.product-feed-affiliate-mode) {
+  flex: 1 1 auto;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #c9d0d6;
+  border-radius: 4px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+}
+
+.product-feed-status-row {
+  align-items: start;
+}
+
+.product-feed-status-fields {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.product-feed-status-fields select {
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #c9d0d6;
+  border-radius: 4px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+}
+
+.product-feed-sync-label {
+  color: #1f2937;
+  font: 700 12px Arial, sans-serif;
+}
+
+.product-feed-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .product-feed-form-row {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+  }
+  .product-feed-status-fields {
+    flex-wrap: wrap;
+  }
+}

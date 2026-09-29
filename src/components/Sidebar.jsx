@@ -41,6 +41,78 @@ const navItems = [
       { label: 'Coupons', path: '/offers/coupons' },
       { label: 'Offer Affiliate Links', path: '/offers/affiliate-links' }
     ]
+  },
+  {
+    label: 'Reports / Logs',
+    icon: 'reports',
+    permission: 'Reports',
+    children: [
+      { label: 'Reports', path: '/reports' },
+      { label: 'Reports KPI', path: '/reports/kpi' },
+      { label: 'Conversion Logs', path: '/reports/conversion-logs' },
+      { label: 'iGaming Reports', path: '/reports/igaming' },
+      { label: 'Affiliate Postback Logs', path: '/reports/affiliate-postback-logs' },
+      { label: 'Advertiser Postback Logs', path: '/reports/advertiser-postback-logs' },
+      { label: 'Capping Logs', path: '/reports/capping-logs' },
+      { label: 'Test Reports', path: '/reports/test-reports' },
+      { label: 'OTP Reports', path: '/reports/otp-reports', badge: 'New' },
+      { label: 'Comparison', path: '/reports/comparison', badge: 'New' }
+    ]
+  },
+  {
+    label: 'Fraud Detection',
+    icon: 'shield',
+    permission: 'FraudDetection',
+    children: [
+      { label: 'Fraud Fender', path: '/fraud-detection/fraud-fender' },
+      { label: 'Conversion Risk Monitor', path: '/fraud-detection/conversion-risk-monitor' }
+    ]
+  },
+  {
+    label: 'Integration',
+    icon: 'puzzle',
+    permission: 'Integration',
+    children: [
+      { label: 'SDK', path: 'https://knowledgebase.offer18.com/network/sdk', external: true },
+      { label: 'Mobile Attribution', path: '/integration/mobile-attribution' },
+      { label: 'E-commerce', path: '/integration/e-commerce' },
+      { label: 'Affiliate Integration', path: '/integration/affiliate-integration' },
+      { label: 'Offer Sync', path: '/integration/offer-sync' },
+      { label: 'Report Sync', path: '/integration/report-sync', badge: 'New' },
+      { label: 'Product Feed', path: '/integration/product-feed', badge: 'New' },
+      { label: 'OTP Integration', path: '/integration/otp-integration', badge: 'New' }
+    ]
+  },
+  {
+    label: 'Tools',
+    icon: 'tool',
+    permission: 'Tools',
+    children: [
+      { label: 'Integration', path: '/tools/integration' },
+      { label: 'Mailer', path: '/tools/mailer' },
+      { label: 'Import Data', path: '/tools/import-data' },
+      { label: 'Automation', path: '/tools/automation' },
+      { label: 'Link Tester', path: '/tools/link-tester' },
+      { label: 'Fraud Detection', path: '/tools/fraud-detection' },
+      { label: 'Short URL', path: '/tools/short-url', badge: '◆' },
+      { label: 'Suppression List', path: '/tools/suppression-list', badge: '◆' }
+    ]
+  },
+  {
+    label: 'Account',
+    icon: 'user',
+    permission: 'Account',
+    children: [
+      { label: 'Settings', path: '/account/settings' },
+      { label: 'Billing', path: '/account/billing' },
+      { label: 'Profile', path: '/account/profile' },
+      { label: 'Employee', path: '/account/employee' },
+      { label: 'Security', path: '/account/security' },
+      { label: 'Change logs', path: '/account/change-logs' },
+      { label: 'Access logs', path: '/account/access-logs' },
+      { label: 'Referral', path: '/account/referral' },
+      { label: 'Logout', path: '/login', isLogout: true }
+    ]
   }
 ];
 
@@ -56,7 +128,7 @@ const Sidebar = ({ isCollapsed }) => {
       setUser(storedUser);
       const permissions = storedUser.permissions || [];
       const allowedMenu = navItems.filter(item => {
-        if (item.label === 'Offers') return true;
+        if (item.label === 'Offers' || item.label === 'Reports / Logs' || item.label === 'Fraud Detection' || item.label === 'Integration' || item.label === 'Tools' || item.label === 'Account') return true;
         return permissions.map(p => p.toLowerCase()).includes(item.permission.toLowerCase());
       });
       setMenu(allowedMenu);
@@ -100,9 +172,21 @@ const Sidebar = ({ isCollapsed }) => {
                     <ul className='of-submenu'>
                       {item.children.map((sub) => (
                         <li key={sub.label}>
-                          <Link to={sub.path} className={`of-submenu-item ${location.pathname === sub.path ? 'active' : ''}`}>
-                            {!isCollapsed && <span>{sub.label}</span>}
-                          </Link>
+                          {sub.external ? (
+                            <a href={sub.path} target="_blank" rel="noopener noreferrer" className="of-submenu-item">
+                              {!isCollapsed && <span>{sub.label}</span>}
+                              {!isCollapsed && sub.badge && <span className="of-submenu-badge">{sub.badge}</span>}
+                            </a>
+                          ) : (
+                            <Link
+                              to={sub.path}
+                              className={`of-submenu-item ${location.pathname === sub.path ? 'active' : ''}`}
+                              onClick={sub.isLogout ? handleLogout : undefined}
+                            >
+                              {!isCollapsed && <span>{sub.label}</span>}
+                              {!isCollapsed && sub.badge && <span className="of-submenu-badge">{sub.badge}</span>}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>

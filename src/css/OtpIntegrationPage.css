@@ -1,0 +1,36 @@
+.otp-logo-boxed {
+  font: 700 13px Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  border-radius: 4px;
+}
+
+.otp-logo-italic {
+  font-style: italic;
+  font: 700 15px Arial, sans-serif;
+}
+
+.otp-logo-bold {
+  font: 700 15px Arial, sans-serif;
+}
+
+.otp-logo-serif {
+  font: 700 14px Georgia, serif;
+}
+
+.otp-logo-banner,
+.otp-logo-shield {
+  font: 700 13px "Arial Black", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  border-radius: 4px;
+}
+
+.otp-logo-otp {
+  border: 1px solid #d7dee5;
+  font: 700 12px Arial, sans-serif;
+}
+
+.otp-logo-icon {
+  margin-right: 4px;
+}
