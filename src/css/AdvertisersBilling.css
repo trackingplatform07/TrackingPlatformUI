@@ -68,7 +68,7 @@
 }
 
 .link {
-  color: #2563eb;
+  color: #4f46e5;
   cursor: pointer;
 }
 
@@ -114,6 +114,6 @@
 }
 
 .pagination .active {
-  background: #3b82f6;
+  background: #6366f1;
   color: #fff;
 }

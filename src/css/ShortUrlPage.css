@@ -5,8 +5,8 @@
 .short-url-card {
   background: #fff;
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 16px 20px;
 }
 
@@ -43,7 +43,7 @@
   height: 30px;
   border: 0;
   border-radius: 5px;
-  background: #2b3a4a;
+  background: #3730a3;
   color: #fff;
   padding: 0 12px;
   font-size: 11px;
@@ -144,7 +144,7 @@
   border: 0;
   background: transparent;
   color: #6b7684;
-  font: 700 18px Arial, sans-serif;
+  font: 700 18px 'Inter', Arial, sans-serif;
   cursor: pointer;
 }
 
@@ -163,7 +163,7 @@
   border-bottom: 1px solid #e6ebf0;
   background: transparent;
   color: #1f2937;
-  font: 700 13px Arial, sans-serif;
+  font: 700 13px 'Inter', Arial, sans-serif;
   text-align: left;
   cursor: pointer;
 }
@@ -183,17 +183,17 @@
 
 .short-url-filters-field label {
   color: #1f2937;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .short-url-filters-field select {
   height: 34px;
   padding: 0 10px;
   border: 1px solid #d7dee5;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #f7f8fa;
   color: #1f2937;
-  font: 13px Arial, sans-serif;
+  font: 13px 'Inter', Arial, sans-serif;
 }
 
 .short-url-filters-chip-row {
@@ -212,7 +212,7 @@
   gap: 6px;
   height: 26px;
   padding: 0 8px;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #eef2f5;
   color: #1f2937;
   font-size: 12px;
@@ -269,7 +269,7 @@
 }
 
 .short-url-code {
-  color: #1f78d1;
+  color: #4f46e5;
   font-weight: 700;
 }
 
@@ -280,7 +280,7 @@
 }
 
 .short-url-cell a {
-  color: #1f78d1;
+  color: #4f46e5;
   text-decoration: none;
   max-width: 220px;
   overflow: hidden;
@@ -292,7 +292,7 @@
   width: 22px;
   height: 22px;
   border: 1px solid #d7dee5;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #f7f8fa;
   color: #4a5568;
   cursor: pointer;
@@ -392,7 +392,7 @@
   background: #fff;
   color: #334b5b;
   cursor: pointer;
-  font: 700 11px Arial, sans-serif;
+  font: 700 11px 'Inter', Arial, sans-serif;
 }
 
 .short-url-form-field {
@@ -404,17 +404,17 @@
 
 .short-url-form-field label {
   color: #1f2937;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .short-url-form-field input {
   height: 34px;
   padding: 0 10px;
   border: 1px solid #c9d0d6;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #f7f8fa;
   color: #1f2937;
-  font: 13px Arial, sans-serif;
+  font: 13px 'Inter', Arial, sans-serif;
 }
 
 .short-url-submit-btn {
@@ -425,11 +425,11 @@
   height: 32px;
   padding: 0 14px;
   border: 0;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #1f2937;
   color: #fff;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .short-url-submit-btn:disabled {

@@ -5,8 +5,8 @@
 .cs-card {
   background: #fff;
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 16px 20px;
 }
 
@@ -37,7 +37,7 @@
   align-items: center;
   gap: 12px;
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 14px;
 }
 
@@ -53,12 +53,12 @@
 
 .cs-contact-value {
   color: #1f2937;
-  font: 700 13px Arial, sans-serif;
+  font: 700 13px 'Inter', Arial, sans-serif;
   text-decoration: none;
 }
 
 a.cs-contact-value:hover {
-  color: #1f78d1;
+  color: #4f46e5;
 }
 
 .cs-section-title {
@@ -82,7 +82,7 @@ a.cs-contact-value:hover {
   display: block;
   margin-bottom: 6px;
   color: #1f2937;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .cs-field input,
@@ -91,10 +91,10 @@ a.cs-contact-value:hover {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #d7dee5;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #f7f8fa;
   color: #1f2937;
-  font: 13px Arial, sans-serif;
+  font: 13px 'Inter', Arial, sans-serif;
   box-sizing: border-box;
 }
 
@@ -109,10 +109,10 @@ a.cs-contact-value:hover {
   padding: 0 18px;
   border: 0;
   border-radius: 5px;
-  background: #1f78d1;
+  background: #4f46e5;
   color: #fff;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .cs-submit-btn:disabled {

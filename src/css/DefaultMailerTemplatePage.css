@@ -38,7 +38,7 @@
   padding: 10px 14px;
   color: #6b7684;
   cursor: pointer;
-  font: 12px Arial, sans-serif;
+  font: 12px 'Inter', Arial, sans-serif;
   white-space: nowrap;
   border-radius: 6px 6px 0 0;
 }
@@ -65,7 +65,7 @@
   flex: 0 0 90px;
   padding-top: 8px;
   color: #1f2937;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .default-template-field input {
@@ -73,10 +73,10 @@
   height: 34px;
   padding: 0 10px;
   border: 1px solid #d7dee5;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #f7f8fa;
   color: #1f2937;
-  font: 13px Arial, sans-serif;
+  font: 13px 'Inter', Arial, sans-serif;
 }
 
 .default-template-editor {

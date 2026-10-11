@@ -1,0 +1,41 @@
+/* Global visual polish layer — cosmetic only, adds no new behavior. */
+
+h1, h2, h3 {
+  letter-spacing: -0.2px;
+}
+
+button:not(:disabled),
+a {
+  transition: background-color .15s ease, border-color .15s ease,
+    box-shadow .15s ease, color .15s ease, opacity .15s ease, filter .15s ease;
+}
+
+button:not(:disabled):hover {
+  filter: brightness(1.05);
+}
+
+input,
+select,
+textarea {
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent, #4f46e5) !important;
+  box-shadow: 0 0 0 3px var(--accent-light, #eef2ff);
+}
+
+[class*="-card"] {
+  transition: box-shadow .2s ease;
+}
+
+[class*="-card"]:hover {
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+}
+
+table tr:hover td {
+  background: rgba(79, 70, 229, 0.035);
+}

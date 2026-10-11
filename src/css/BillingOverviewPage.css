@@ -47,7 +47,7 @@
   background: #fff;
   color: #1f2937;
   cursor: pointer;
-  font: 700 11px Arial, sans-serif;
+  font: 700 11px 'Inter', Arial, sans-serif;
   white-space: nowrap;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .bo-tab-btn.active {
-  background: #2b3a4a;
+  background: #3730a3;
   color: #fff;
 }
 
@@ -72,7 +72,7 @@
 
 .bo-card {
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 14px;
   position: relative;
 }
@@ -91,7 +91,7 @@
   margin-left: auto;
   background: #16a34a;
   color: #fff;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 2px 8px;
   font-size: 10px;
   font-weight: 700;
@@ -103,7 +103,7 @@
 
 .bo-card-value {
   color: #1f2937;
-  font: 700 18px Arial, sans-serif;
+  font: 700 18px 'Inter', Arial, sans-serif;
   margin-bottom: 4px;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .bo-card-addon-item {
-  color: #1f78d1;
+  color: #4f46e5;
   font-size: 12px;
   margin-bottom: 2px;
 }
@@ -128,16 +128,16 @@
   padding: 0 14px;
   border: 0;
   border-radius: 5px;
-  background: #1f78d1;
+  background: #4f46e5;
   color: #fff;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .bo-card-btn.outline {
   background: #fff;
-  border: 1px solid #1f78d1;
-  color: #1f78d1;
+  border: 1px solid #4f46e5;
+  color: #4f46e5;
 }
 
 .bo-section {
@@ -162,7 +162,7 @@
 
 .bo-usage-card {
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 12px 14px;
 }
 
@@ -191,7 +191,7 @@
 
 .bo-usage-bar div {
   height: 100%;
-  background: #1f78d1;
+  background: #4f46e5;
 }
 
 .bo-bottom-grid {
@@ -207,7 +207,7 @@
 
 .bo-panel {
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 14px 16px;
 }
 
@@ -222,7 +222,7 @@
 
 .bo-empty-title {
   color: #1f2937;
-  font: 700 13px Arial, sans-serif;
+  font: 700 13px 'Inter', Arial, sans-serif;
   margin-top: 8px;
 }
 

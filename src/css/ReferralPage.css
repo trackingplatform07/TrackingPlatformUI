@@ -5,8 +5,8 @@
 .ref-card {
   background: #fff;
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 16px 20px;
 }
 
@@ -51,11 +51,11 @@
   background: #fff;
   color: #1f2937;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .ref-tab-btn.active {
-  background: #2b3a4a;
+  background: #3730a3;
   color: #fff;
 }
 
@@ -77,7 +77,7 @@
   align-items: center;
   gap: 12px;
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 12px 14px;
 }
 
@@ -86,7 +86,7 @@
   place-items: center;
   width: 34px;
   height: 34px;
-  border-radius: 8px;
+  border-radius: 14px;
   background: #eef1f6;
   font-size: 15px;
 }
@@ -99,7 +99,7 @@
 
 .ref-stat-value {
   color: #1f2937;
-  font: 700 15px Arial, sans-serif;
+  font: 700 15px 'Inter', Arial, sans-serif;
 }
 
 .ref-link-section {
@@ -108,7 +108,7 @@
 
 .ref-link-label {
   color: #1f2937;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
   margin-bottom: 8px;
 }
 
@@ -125,7 +125,7 @@
   border-radius: 5px;
   background: #f7f8fa;
   color: #1f2937;
-  font: 12px Arial, sans-serif;
+  font: 12px 'Inter', Arial, sans-serif;
 }
 
 .ref-copy-btn {
@@ -136,10 +136,10 @@
   padding: 0 14px;
   border: 0;
   border-radius: 5px;
-  background: #1f78d1;
+  background: #4f46e5;
   color: #fff;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .ref-bottom-grid {
@@ -152,7 +152,7 @@
 .ref-visibility-card,
 .ref-info-banner {
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 14px 16px;
 }
 
@@ -192,7 +192,7 @@
 }
 
 .ref-account-name {
-  color: #1f78d1;
+  color: #4f46e5;
 }
 
 .ref-account-email {
@@ -215,7 +215,7 @@
 
 .ref-visibility-title {
   color: #1f2937;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
   margin-bottom: 2px;
 }
 
@@ -237,7 +237,7 @@
 }
 
 .ref-toggle.on {
-  background: #1f78d1;
+  background: #4f46e5;
 }
 
 .ref-toggle-knob {
@@ -263,13 +263,13 @@
 .ref-info-banner {
   display: flex;
   gap: 10px;
-  background: #eaf4fd;
-  border-color: #a9d3f5;
-  color: #1f78d1;
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #4f46e5;
 }
 
 .ref-info-title {
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
   margin-bottom: 4px;
 }
 

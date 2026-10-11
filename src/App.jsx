@@ -7,6 +7,7 @@ import CreateUser from "./CreateUser";
 import UserManager from "./pages/UserManager";
 import EditUserPage from "./pages/EditUserPage";
 import AffiliatePage from "./pages/AffiliatesPage";
+import PendingAffiliatesPage from "./pages/PendingAffiliatesPage";
 import AdvertisersPage from "./pages/AdvertisersPage";
 import AdvertisersBilling from "./pages/AdvertisersBilling";
 import ImportPage from "./pages/ImportPage";
@@ -16,7 +17,13 @@ import CreateInvoiceRule from "./pages/CreateInvoiceRule";
 import AdvertiserDetails from "./pages/AdvertiserDetails";
 import AffiliateSignup from "./AffiliateSignup";
 import AffiliateDetails from "./pages/AffiliateDetails"; 
-import AffiliatePostback from "./pages/AffiliatePostback"; 
+import AffiliatePostback from "./pages/AffiliatePostback";
+import AffiliatePostbackListPage from "./pages/AffiliatePostbackListPage";
+import AffiliateBillingPage from "./pages/AffiliateBillingPage";
+import CreateAffiliateInvoicePage from "./pages/CreateAffiliateInvoicePage";
+import AffiliateReferralPage from "./pages/AffiliateReferralPage";
+import AffiliatePostbackTestPage from "./pages/AffiliatePostbackTestPage";
+import AffiliatePostbackTestLogsPage from "./pages/AffiliatePostbackTestLogsPage";
 import ImportAffiliates from "./pages/ImportAffiliates";
 import CreateOfferPage from "./pages/CreateOfferPage";
 import EditOfferPage from "./pages/EditOfferPage";
@@ -82,6 +89,7 @@ function App() {
         <Route path="/user-manager" element={<UserManager />} />
         <Route path="/edit-user/:id" element={<EditUserPage />} />
         <Route path="/affiliates" element={<AffiliatePage />} />
+        <Route path="/affiliates/pending" element={<PendingAffiliatesPage />} />
         <Route path="/advertisers" element={<AdvertisersPage />} />
         <Route path="/advertisers-billing" element={<AdvertisersBilling />} />
         <Route path="/import" element={<ImportPage />} />
@@ -93,6 +101,12 @@ function App() {
         <Route path="/affiliate-signup" element={<AffiliateSignup />} />
         <Route path="/affiliate/:id" element={<AffiliateDetails />} /> 
         <Route path="/affiliate-postback" element={<AffiliatePostback />} />
+        <Route path="/affiliates/postback" element={<AffiliatePostbackListPage />} />
+        <Route path="/affiliates/billing" element={<AffiliateBillingPage />} />
+        <Route path="/affiliates/billing/create" element={<CreateAffiliateInvoicePage />} />
+        <Route path="/affiliates/referral" element={<AffiliateReferralPage />} />
+        <Route path="/affiliates/postback-test" element={<AffiliatePostbackTestPage />} />
+        <Route path="/affiliates/postback-test/logs" element={<AffiliatePostbackTestLogsPage />} />
         <Route path="/offers/create" element={<CreateOfferPage />} />
         <Route path="/offers/:id/edit" element={<EditOfferPage />} />
         <Route path="/offers/approved" element={<ApprovedOffersPage />} />

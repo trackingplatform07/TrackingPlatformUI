@@ -1,5 +1,5 @@
 .live-offers-page { padding: 18px; min-width: 0; background: #f6f9fc; flex: 1; }
-.live-offers-card { background: #fff; border: 1px solid #e6ebf0; border-radius: 8px; box-shadow: 0 1px 2px rgba(15, 23, 42, .04); overflow: hidden; }
+.live-offers-card { background: #fff; border: 1px solid #e6ebf0; border-radius: 14px; box-shadow: 0 2px 12px rgba(15, 23, 42, .06); overflow: hidden; }
 .live-offers-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 14px 24px; border-bottom: 1px solid #e6ebf0; flex-wrap: wrap; }
 .live-offers-toolbar h1 { display: flex; align-items: center; gap: 9px; margin: 0; color: #192436; font-size: 17px; font-weight: 600; white-space: nowrap; }
 .live-offers-toolbar h1 svg { color: #f5a623; font-size: 19px; }
@@ -44,7 +44,7 @@
 .live-offers-message.error { color: #c24141; }
 .live-offers-pagination { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; color: #657481; font-size: 12px; }
 .live-offers-pagination > div { display: flex; align-items: center; gap: 9px; }
-.live-offers-pagination button { width: auto; border: 1px solid #ccd6dd; border-radius: 4px; background: #fff; color: #334b5b; padding: 5px 9px; cursor: pointer; font-size: 12px; }
+.live-offers-pagination button { width: auto; border: 1px solid #ccd6dd; border-radius: 8px; background: #fff; color: #334b5b; padding: 5px 9px; cursor: pointer; font-size: 12px; }
 .live-offers-pagination button:disabled { opacity: .45; cursor: not-allowed; }
 @media (max-width: 640px) { .live-offers-page { padding: 10px; } .live-offers-actions { gap: 6px; } .live-offers-button { padding: 0 7px; } .live-offers-pagination { align-items: flex-start; flex-direction: column; } }
 
@@ -93,7 +93,7 @@
   gap: 10px;
   margin: 0;
   color: #131313;
-  font: 13px Arial, sans-serif;
+  font: 13px 'Inter', Arial, sans-serif;
 }
 
 .category-manager-header h3 span { font-weight: 400; }
@@ -103,7 +103,7 @@
   border: 0;
   background: transparent;
   color: #777;
-  font: 700 19px Arial, sans-serif;
+  font: 700 19px 'Inter', Arial, sans-serif;
   cursor: pointer;
 }
 
@@ -126,7 +126,7 @@
 .category-manager-table-head {
   min-height: 23px;
   color: #151515;
-  font: 700 10px Arial, sans-serif;
+  font: 700 10px 'Inter', Arial, sans-serif;
 }
 
 .category-manager-table-head span { padding-left: 51px; }
@@ -141,7 +141,7 @@
   border-radius: 7px;
   background: #f7f8f9;
   color: #111;
-  font: 11px Arial, sans-serif;
+  font: 11px 'Inter', Arial, sans-serif;
 }
 
 .category-manager-row input:focus {
@@ -158,7 +158,7 @@
   border: 0;
   border-radius: 5px;
   color: #fff;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
   cursor: pointer;
 }
 
@@ -179,7 +179,7 @@
   margin: 0;
   padding: 12px 51px;
   color: #64727f;
-  font: 11px Arial, sans-serif;
+  font: 11px 'Inter', Arial, sans-serif;
 }
 
 .category-manager-error { color: #d84949; }
@@ -193,7 +193,7 @@
   border-radius: 5px;
   background: #078bd1;
   color: #fff;
-  font: 700 10px Arial, sans-serif;
+  font: 700 10px 'Inter', Arial, sans-serif;
   cursor: pointer;
 }
 
@@ -224,7 +224,7 @@
 .events-manager-table-head {
   min-height: 23px;
   color: #151515;
-  font: 700 10px Arial, sans-serif;
+  font: 700 10px 'Inter', Arial, sans-serif;
 }
 
 .events-manager-table-head span:first-child { padding-left: 51px; }
@@ -237,7 +237,7 @@
   border-radius: 7px;
   background: #f7f8f9;
   color: #111;
-  font: 11px Arial, sans-serif;
+  font: 11px 'Inter', Arial, sans-serif;
 }
 
 .events-manager-row input:focus {
@@ -257,7 +257,7 @@
   border-radius: 5px;
   background: #078bd1;
   color: #fff;
-  font: 700 10px Arial, sans-serif;
+  font: 700 10px 'Inter', Arial, sans-serif;
   cursor: pointer;
 }
 
@@ -292,7 +292,7 @@
   gap: 8px;
   margin: 0;
   color: #131313;
-  font: 700 14px Arial, sans-serif;
+  font: 700 14px 'Inter', Arial, sans-serif;
 }
 
 .top-offers-refresh {
@@ -315,7 +315,7 @@
   border: 0;
   background: transparent;
   color: #777;
-  font: 700 20px Arial, sans-serif;
+  font: 700 20px 'Inter', Arial, sans-serif;
   cursor: pointer;
 }
 
@@ -344,7 +344,7 @@
 .top-offer-card-logo-placeholder {
   width: 100%;
   height: 90px;
-  border-radius: 4px;
+  border-radius: 8px;
   object-fit: cover;
 }
 
@@ -363,7 +363,7 @@
   padding: 0;
   color: #1e65df;
   cursor: pointer;
-  font: 13px Arial, sans-serif;
+  font: 13px 'Inter', Arial, sans-serif;
   text-align: left;
 }
 
@@ -384,9 +384,9 @@
   width: auto;
   height: 26px;
   padding: 0 8px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  font: 700 11px Arial, sans-serif;
+  font: 700 11px 'Inter', Arial, sans-serif;
 }
 
 .top-offer-card-edit {
@@ -414,7 +414,7 @@
   padding-bottom: 8px;
   border-bottom: 1px solid #e2e5e7;
   color: #131313;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .top-offers-add-body select {
@@ -422,10 +422,10 @@
   height: 34px;
   padding: 0 10px;
   border: 1px solid #c9d0d6;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #f7f8f9;
   color: #1f2937;
-  font: 13px Arial, sans-serif;
+  font: 13px 'Inter', Arial, sans-serif;
   margin-bottom: 12px;
 }
 
@@ -437,11 +437,11 @@
   height: 30px;
   padding: 0 14px;
   border: 0;
-  border-radius: 4px;
-  background: #1f78d1;
+  border-radius: 8px;
+  background: #4f46e5;
   color: #fff;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 /* Top Offers Mailer popup */
@@ -466,7 +466,7 @@
 
 .mailer-field label {
   color: #1f2937;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .mailer-field select,
@@ -474,10 +474,10 @@
   height: 34px;
   padding: 0 10px;
   border: 1px solid #c9d0d6;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #f7f8f9;
   color: #1f2937;
-  font: 13px Arial, sans-serif;
+  font: 13px 'Inter', Arial, sans-serif;
 }
 
 .ctit-chip {
@@ -488,10 +488,10 @@
   height: 34px;
   padding: 0 10px;
   border: 1px solid #c9d0d6;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #eef1f3;
   color: #1f2937;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .ctit-chip button {
@@ -508,8 +508,8 @@
   gap: 8px;
   padding-bottom: 12px;
   border-bottom: 1px solid #e2e5e7;
-  color: #1f78d1;
-  font: 700 12px Arial, sans-serif;
+  color: #4f46e5;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .mailer-email-box {
@@ -518,7 +518,7 @@
   gap: 6px;
   padding: 8px;
   border: 1px solid #c9d0d6;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #fff;
 }
 
@@ -538,7 +538,7 @@
 
 .mailer-editor {
   border: 1px solid #c9d0d6;
-  border-radius: 4px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -588,7 +588,7 @@
 }
 
 .mailer-editor-geo {
-  color: #1f78d1;
+  color: #4f46e5;
 }
 
 .mailer-send-btn {
@@ -600,11 +600,11 @@
   height: 32px;
   padding: 0 14px;
   border: 0;
-  border-radius: 4px;
-  background: #1f78d1;
+  border-radius: 8px;
+  background: #4f46e5;
   color: #fff;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .mailer-send-btn:disabled {

@@ -4,7 +4,11 @@
   --text-main: #0d2750;
   --text-sub: #6b7280;
   --line: #d7dde5;
-  --accent: #2f80ed;
+  --accent: #4f46e5;
+  --accent-dark: #3730a3;
+  --accent-light: #eef2ff;
+  --accent-light-border: #c7d2fe;
+  --font-sans: 'Inter', Arial, sans-serif;
 }
 
 .of-layout {

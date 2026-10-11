@@ -5,8 +5,8 @@
 .emp-card {
   background: #fff;
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 16px 20px;
 }
 
@@ -36,10 +36,10 @@
   padding: 0 12px;
   border: 0;
   border-radius: 5px;
-  background: #2b3a4a;
+  background: #3730a3;
   color: #fff;
   cursor: pointer;
-  font: 700 11px Arial, sans-serif;
+  font: 700 11px 'Inter', Arial, sans-serif;
 }
 
 .emp-table-scroll {
@@ -74,7 +74,7 @@
 }
 
 .emp-link {
-  color: #1f78d1;
+  color: #4f46e5;
 }
 
 .emp-account-cell {
@@ -91,12 +91,12 @@
   align-items: center;
   justify-content: center;
   color: #fff;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
   flex: 0 0 auto;
 }
 
 .emp-account-name {
-  color: #1f78d1;
+  color: #4f46e5;
   font-size: 13px;
 }
 
@@ -110,10 +110,10 @@
   align-items: center;
   height: 22px;
   padding: 0 10px;
-  border: 1px solid #a9d3f5;
-  border-radius: 4px;
-  background: #eaf4fd;
-  color: #1f78d1;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  background: #eef2ff;
+  color: #4f46e5;
   font-size: 11px;
 }
 
@@ -129,7 +129,7 @@
   height: 22px;
   padding: 0 10px;
   border: 1px solid #82e0bf;
-  border-radius: 4px;
+  border-radius: 8px;
   color: #00a36c;
   font-size: 11px;
 }
@@ -227,7 +227,7 @@
   display: block;
   margin-bottom: 6px;
   color: #1f2937;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .emp-modal-body input {
@@ -235,10 +235,10 @@
   height: 34px;
   padding: 0 10px;
   border: 1px solid #d7dee5;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #f7f8fa;
   color: #1f2937;
-  font: 13px Arial, sans-serif;
+  font: 13px 'Inter', Arial, sans-serif;
   box-sizing: border-box;
 }
 
@@ -255,11 +255,11 @@
   height: 32px;
   padding: 0 16px;
   border: 0;
-  border-radius: 4px;
-  background: #1f78d1;
+  border-radius: 8px;
+  background: #4f46e5;
   color: #fff;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .emp-submit-btn:disabled {

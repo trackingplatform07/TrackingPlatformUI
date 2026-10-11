@@ -9,8 +9,8 @@
 .smart-offer-detail-card {
   background: #fff;
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
 }
 
 .smart-offers-list-card {
@@ -54,7 +54,7 @@
   border-radius: 999px;
   background: #ede9fe;
   color: #7c3aed;
-  font: 700 11px Arial, sans-serif;
+  font: 700 11px 'Inter', Arial, sans-serif;
 }
 
 .smart-offers-new-btn {
@@ -105,11 +105,11 @@
   flex: 1 1 auto;
   height: 28px;
   border: 0;
-  border-radius: 4px;
+  border-radius: 8px;
   background: transparent;
   color: #6b7684;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .smart-offers-tabs button.active {
@@ -136,7 +136,7 @@
   width: 100%;
   padding: 10px;
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
+  border-radius: 14px;
   background: #fff;
   cursor: pointer;
   text-align: left;
@@ -169,7 +169,7 @@
 
 .smart-offer-item-title {
   color: #1f2937;
-  font: 700 13px Arial, sans-serif;
+  font: 700 13px 'Inter', Arial, sans-serif;
 }
 
 .smart-offer-item-tags {
@@ -184,7 +184,7 @@
   align-items: center;
   gap: 4px;
   color: #6b7684;
-  font: 11px Arial, sans-serif;
+  font: 11px 'Inter', Arial, sans-serif;
 }
 
 .smart-offer-badge {
@@ -192,10 +192,10 @@
   align-items: center;
   height: 18px;
   padding: 0 6px;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #fef3c7;
   color: #92400e;
-  font: 700 10px Arial, sans-serif;
+  font: 700 10px 'Inter', Arial, sans-serif;
 }
 
 .smart-offer-detail-header {
@@ -229,7 +229,7 @@
   background: #fff;
   color: #1f2937;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .smart-offer-metrics {
@@ -238,7 +238,7 @@
   gap: 24px;
   padding: 14px 0;
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
+  border-radius: 14px;
   margin-bottom: 16px;
   padding-left: 20px;
 }
@@ -252,18 +252,18 @@
 
 .smart-offer-metric-label {
   color: #e07b39;
-  font: 700 10px Arial, sans-serif;
+  font: 700 10px 'Inter', Arial, sans-serif;
   letter-spacing: 0.4px;
 }
 
 .smart-offer-metric-value {
   color: #1f2937;
-  font: 700 15px Arial, sans-serif;
+  font: 700 15px 'Inter', Arial, sans-serif;
 }
 
 .smart-offer-routing-card {
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
+  border-radius: 14px;
   overflow: hidden;
 }
 
@@ -298,7 +298,7 @@
   background: #fff;
   color: #1f2937;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
   white-space: nowrap;
 }
 
@@ -349,7 +349,7 @@
 }
 
 .smart-offer-routing-total {
-  color: #1f78d1;
+  color: #4f46e5;
   font-weight: 700;
 }
 

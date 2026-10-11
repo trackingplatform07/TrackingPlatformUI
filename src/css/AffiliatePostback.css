@@ -73,7 +73,7 @@
 /* ===== TABLE ===== */
 .table-container {
   background: #fff;
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 10px;
 }
 
@@ -161,7 +161,7 @@
 .shortcut {
   background: #e9ecef;
   padding: 6px 12px;
-  border-radius: 8px;
+  border-radius: 14px;
   font-weight: 500;
 }
 

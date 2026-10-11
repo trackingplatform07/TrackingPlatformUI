@@ -1,0 +1,152 @@
+.apb-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.apb-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+}
+
+.apb-subtitle {
+  margin: 0;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.apb-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.apb-add-wrap {
+  position: relative;
+}
+
+.apb-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 8px;
+  background: #1f2937;
+  color: #fff;
+  cursor: pointer;
+  font: 700 12px 'Inter', Arial, sans-serif;
+}
+
+.apb-add-menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 170px;
+  padding: 6px 0;
+  border: 1px solid #edf0f3;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 3px 14px rgba(15, 23, 42, .14);
+}
+
+.apb-add-menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 14px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: #1f2937;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.apb-add-menu button:hover {
+  background: #f5f7f9;
+}
+
+.apb-filters-panel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.apb-filters-panel select,
+.apb-filters-panel input {
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #d7dee5;
+  border-radius: 6px;
+  background: #fff;
+  color: #1f2937;
+  font: 12px 'Inter', Arial, sans-serif;
+  min-width: 200px;
+}
+
+.apb-url-cell {
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'Courier New', Monaco, monospace;
+  font-size: 12px;
+  color: #495057;
+}
+
+.apb-manage-btn {
+  height: 28px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 6px;
+  background: #1f2937;
+  color: #fff;
+  cursor: pointer;
+  font: 700 11px 'Inter', Arial, sans-serif;
+}
+
+.apb-toggle {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border: 0;
+  border-radius: 999px;
+  background: #cdd4db;
+  cursor: pointer;
+  flex: 0 0 auto;
+  transition: background .15s ease;
+}
+
+.apb-toggle.on {
+  background: #4f46e5;
+}
+
+.apb-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left .15s ease;
+}
+
+.apb-toggle.on .apb-toggle-knob {
+  left: 18px;
+}
+
+.apb-update-time {
+  font-size: 12px;
+  color: #6b7280;
+  white-space: nowrap;
+}

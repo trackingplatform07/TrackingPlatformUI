@@ -5,8 +5,8 @@
 .linking-rules-card {
   background: #fff;
   border: 1px solid #e6ebf0;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 16px 20px;
 }
 
@@ -145,7 +145,7 @@
   border: 0;
   background: transparent;
   padding: 0;
-  color: #1f78d1;
+  color: #4f46e5;
   cursor: pointer;
   font-size: 13px;
 }
@@ -236,7 +236,7 @@
 .linking-rules-pagination button {
   width: auto;
   border: 1px solid #ccd6dd;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #fff;
   color: #334b5b;
   padding: 5px 9px;
@@ -256,8 +256,8 @@
   width: 26px;
   height: 26px;
   margin: 0 6px;
-  border-radius: 4px;
-  background: #1f78d1;
+  border-radius: 8px;
+  background: #4f46e5;
   color: #fff;
 }
 
@@ -284,7 +284,7 @@
 
 .linking-rules-form-field label {
   color: #1f2937;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .linking-rules-form-field input,
@@ -292,10 +292,10 @@
   height: 34px;
   padding: 0 10px;
   border: 1px solid #c9d0d6;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #f7f8fa;
   color: #1f2937;
-  font: 13px Arial, sans-serif;
+  font: 13px 'Inter', Arial, sans-serif;
 }
 
 .linking-rules-form-row {
@@ -313,10 +313,10 @@
   height: 34px;
   padding: 0 8px;
   border: 1px solid #c9d0d6;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #f7f8fa;
   color: #1f2937;
-  font: 13px Arial, sans-serif;
+  font: 13px 'Inter', Arial, sans-serif;
 }
 
 .linking-rules-mode-row select:not(.linking-rules-mode) {
@@ -339,10 +339,10 @@
   padding: 0 16px;
   border: 0;
   border-radius: 999px;
-  background: #1f78d1;
+  background: #4f46e5;
   color: #fff;
   cursor: pointer;
-  font: 700 12px Arial, sans-serif;
+  font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .linking-rules-submit:disabled {
