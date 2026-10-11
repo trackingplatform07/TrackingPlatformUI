@@ -121,6 +121,15 @@
   color: #111827;
 }
 
+.of-submenu-static {
+  cursor: default;
+}
+
+.of-submenu-static:hover {
+  background: transparent;
+  color: #6b7280;
+}
+
 /* Active */
 .of-submenu-item.active {
   background: #dbeafe;

@@ -113,6 +113,27 @@ const navItems = [
       { label: 'Referral', path: '/account/referral' },
       { label: 'Logout', path: '/login', isLogout: true }
     ]
+  },
+  { label: 'Billing', icon: 'wallet', path: '/billing', permission: 'Billing' },
+  {
+    label: 'Support',
+    icon: 'support',
+    permission: 'Support',
+    children: [
+      { label: 'Call Support', path: '/support/call' },
+      { label: 'Tickets', path: '/support/tickets' },
+      { label: 'Knowledgebase', path: '/support/knowledgebase' }
+    ]
+  },
+  {
+    label: 'Settings',
+    icon: 'settings',
+    permission: 'Settings',
+    children: [
+      { label: 'Enable Chat', static: true },
+      { label: 'Font Size +', static: true },
+      { label: 'Font Size -', static: true }
+    ]
   }
 ];
 
@@ -128,7 +149,7 @@ const Sidebar = ({ isCollapsed }) => {
       setUser(storedUser);
       const permissions = storedUser.permissions || [];
       const allowedMenu = navItems.filter(item => {
-        if (item.label === 'Offers' || item.label === 'Reports / Logs' || item.label === 'Fraud Detection' || item.label === 'Integration' || item.label === 'Tools' || item.label === 'Account') return true;
+        if (item.label === 'Offers' || item.label === 'Reports / Logs' || item.label === 'Fraud Detection' || item.label === 'Integration' || item.label === 'Tools' || item.label === 'Account' || item.label === 'Billing' || item.label === 'Support' || item.label === 'Settings') return true;
         return permissions.map(p => p.toLowerCase()).includes(item.permission.toLowerCase());
       });
       setMenu(allowedMenu);
@@ -172,7 +193,11 @@ const Sidebar = ({ isCollapsed }) => {
                     <ul className='of-submenu'>
                       {item.children.map((sub) => (
                         <li key={sub.label}>
-                          {sub.external ? (
+                          {sub.static ? (
+                            <span className="of-submenu-item of-submenu-static">
+                              {!isCollapsed && <span>{sub.label}</span>}
+                            </span>
+                          ) : sub.external ? (
                             <a href={sub.path} target="_blank" rel="noopener noreferrer" className="of-submenu-item">
                               {!isCollapsed && <span>{sub.label}</span>}
                               {!isCollapsed && sub.badge && <span className="of-submenu-badge">{sub.badge}</span>}

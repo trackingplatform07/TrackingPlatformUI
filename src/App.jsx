@@ -56,6 +56,17 @@ import FraudDetectionToolsPage from "./pages/FraudDetectionToolsPage";
 import ShortUrlPage from "./pages/ShortUrlPage";
 import SuppressionListPage from "./pages/SuppressionListPage";
 import SettingsPage from "./pages/SettingsPage";
+import BillingPage from "./pages/BillingPage";
+import ProfilePage from "./pages/ProfilePage";
+import EmployeeAccessPage from "./pages/EmployeeAccessPage";
+import SecurityPage from "./pages/SecurityPage";
+import ChangeLogsPage from "./pages/ChangeLogsPage";
+import AccessLogsPage from "./pages/AccessLogsPage";
+import ReferralPage from "./pages/ReferralPage";
+import BillingOverviewPage from "./pages/BillingOverviewPage";
+import TicketsPage from "./pages/TicketsPage";
+import CallSupportPage from "./pages/CallSupportPage";
+import KnowledgebasePage from "./pages/KnowledgebasePage";
 
 import './css/App.css';
  
@@ -122,6 +133,17 @@ function App() {
         <Route path="/tools/short-url" element={<ShortUrlPage />} />
         <Route path="/tools/suppression-list" element={<SuppressionListPage />} />
         <Route path="/account/settings" element={<SettingsPage />} />
+        <Route path="/account/billing" element={<BillingPage />} />
+        <Route path="/account/profile" element={<ProfilePage />} />
+        <Route path="/account/employee" element={<EmployeeAccessPage />} />
+        <Route path="/account/security" element={<SecurityPage />} />
+        <Route path="/account/change-logs" element={<ChangeLogsPage />} />
+        <Route path="/account/access-logs" element={<AccessLogsPage />} />
+        <Route path="/account/referral" element={<ReferralPage />} />
+        <Route path="/billing" element={<BillingOverviewPage />} />
+        <Route path="/support/tickets" element={<TicketsPage />} />
+        <Route path="/support/call" element={<CallSupportPage />} />
+        <Route path="/support/knowledgebase" element={<KnowledgebasePage />} />
 
       </Routes>
     </div>

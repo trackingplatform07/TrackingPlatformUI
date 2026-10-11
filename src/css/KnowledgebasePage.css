@@ -1,0 +1,134 @@
+.kb-page {
+  padding: 16px;
+}
+
+.kb-card {
+  background: #fff;
+  border: 1px solid #e6ebf0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  padding: 16px 20px;
+}
+
+.kb-card h1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+  color: #1f2937;
+  font-size: 16px;
+}
+
+.kb-subtitle {
+  margin: 0 0 16px;
+  color: #6b7684;
+  font-size: 12px;
+}
+
+.kb-search {
+  width: 100%;
+  max-width: 420px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #d7dee5;
+  border-radius: 6px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+  box-sizing: border-box;
+  margin-bottom: 14px;
+}
+
+.kb-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.kb-category-chip {
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid #d7dee5;
+  border-radius: 999px;
+  background: #fff;
+  color: #1f2937;
+  cursor: pointer;
+  font: 700 11px Arial, sans-serif;
+}
+
+.kb-category-chip.active {
+  background: #1f78d1;
+  border-color: #1f78d1;
+  color: #fff;
+}
+
+.kb-articles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kb-article {
+  border: 1px solid #e6ebf0;
+  border-radius: 8px;
+}
+
+.kb-article-header {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.kb-article-category {
+  display: inline-block;
+  margin-bottom: 4px;
+  color: #1f78d1;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.kb-article-title {
+  color: #1f2937;
+  font: 700 13px Arial, sans-serif;
+  margin-bottom: 4px;
+}
+
+.kb-article-summary {
+  color: #6b7684;
+  font-size: 12px;
+}
+
+.kb-article-arrow {
+  color: #8a94a3;
+  transition: transform .15s ease;
+  flex: 0 0 auto;
+}
+
+.kb-article-arrow.open {
+  transform: rotate(180deg);
+}
+
+.kb-article-content {
+  padding: 0 16px 16px;
+  color: #1f2937;
+  font-size: 13px;
+  line-height: 1.5;
+  border-top: 1px solid #eef1f3;
+  margin-top: -4px;
+  padding-top: 12px;
+}
+
+.kb-message {
+  text-align: center;
+  padding: 26px 0;
+  color: #6b7684;
+}

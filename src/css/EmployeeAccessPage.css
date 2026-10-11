@@ -1,0 +1,268 @@
+.emp-page {
+  padding: 16px;
+}
+
+.emp-card {
+  background: #fff;
+  border: 1px solid #e6ebf0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  padding: 16px 20px;
+}
+
+.emp-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.emp-toolbar h1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #1f2937;
+  font-size: 15px;
+}
+
+.emp-create-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 5px;
+  background: #2b3a4a;
+  color: #fff;
+  cursor: pointer;
+  font: 700 11px Arial, sans-serif;
+}
+
+.emp-table-scroll {
+  overflow-x: auto;
+}
+
+.emp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.emp-table th {
+  padding: 8px 6px;
+  border-bottom: 1px solid #e6ebf0;
+  text-align: left;
+  color: #1f2937;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.emp-table td {
+  padding: 10px 6px;
+  border-bottom: 1px solid #eef1f3;
+  color: #1f2937;
+  font-size: 13px;
+}
+
+.emp-message {
+  text-align: center;
+  padding: 30px 0;
+  color: #6b7684;
+}
+
+.emp-link {
+  color: #1f78d1;
+}
+
+.emp-account-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.emp-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font: 700 12px Arial, sans-serif;
+  flex: 0 0 auto;
+}
+
+.emp-account-name {
+  color: #1f78d1;
+  font-size: 13px;
+}
+
+.emp-account-email {
+  color: #8a94a3;
+  font-size: 11px;
+}
+
+.emp-permissions-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border: 1px solid #a9d3f5;
+  border-radius: 4px;
+  background: #eaf4fd;
+  color: #1f78d1;
+  font-size: 11px;
+}
+
+.emp-permissions-none {
+  color: #8a94a3;
+  font-size: 12px;
+}
+
+.emp-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 10px;
+  border: 1px solid #82e0bf;
+  border-radius: 4px;
+  color: #00a36c;
+  font-size: 11px;
+}
+
+.emp-status-badge.inactive {
+  border-color: #f3a3a3;
+  color: #c0392b;
+}
+
+.emp-menu-wrapper {
+  position: relative;
+}
+
+.emp-options {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: #edf1f5;
+  color: #77838e;
+  cursor: pointer;
+}
+
+.emp-row-dropdown {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 5px);
+  right: 0;
+  min-width: 130px;
+  padding: 6px 0;
+  border: 1px solid #edf0f3;
+  border-radius: 7px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, .14);
+  display: flex;
+  flex-direction: column;
+}
+
+.emp-row-dropdown button {
+  width: auto;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  padding: 7px 14px;
+  color: #1f2937;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.emp-row-dropdown button:hover {
+  background: #f5f7f9;
+}
+
+.emp-row-dropdown button.danger {
+  color: #e5534b;
+}
+
+.emp-modal {
+  width: 420px;
+  max-width: 92vw;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, .15);
+  padding: 16px 20px;
+}
+
+.emp-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.emp-modal-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #1f2937;
+  font-size: 15px;
+}
+
+.emp-modal-header button {
+  border: 0;
+  background: transparent;
+  color: #8a94a3;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.emp-modal-body label {
+  display: block;
+  margin-bottom: 6px;
+  color: #1f2937;
+  font: 700 12px Arial, sans-serif;
+}
+
+.emp-modal-body input {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #d7dee5;
+  border-radius: 4px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.emp-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.emp-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 4px;
+  background: #1f78d1;
+  color: #fff;
+  cursor: pointer;
+  font: 700 12px Arial, sans-serif;
+}
+
+.emp-submit-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}

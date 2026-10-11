@@ -1,0 +1,219 @@
+.clog-page {
+  padding: 16px;
+}
+
+.clog-card {
+  background: #fff;
+  border: 1px solid #e6ebf0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  padding: 16px 20px;
+}
+
+.clog-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.clog-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+  color: #1f2937;
+  font-size: 16px;
+}
+
+.clog-subtitle {
+  margin: 0;
+  color: #6b7684;
+  font-size: 12px;
+}
+
+.clog-highlight {
+  color: #1f78d1;
+  font-weight: 700;
+}
+
+.clog-highlight-orange {
+  color: #e08a1e;
+  font-weight: 700;
+}
+
+.clog-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.clog-date-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid #d7dee5;
+  border-radius: 5px;
+  background: #f7f8fa;
+}
+
+.clog-date-range input[type="date"] {
+  border: 0;
+  background: transparent;
+  color: #1f2937;
+  font: 12px Arial, sans-serif;
+  height: 28px;
+}
+
+.clog-date-range span {
+  color: #8a94a3;
+}
+
+.clog-page-size {
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid #d7dee5;
+  border-radius: 5px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 12px Arial, sans-serif;
+}
+
+.clog-filters-wrap {
+  position: relative;
+}
+
+.clog-filters-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #d7dee5;
+  border-radius: 5px;
+  background: #fff;
+  color: #1f2937;
+  cursor: pointer;
+  font: 700 12px Arial, sans-serif;
+}
+
+.clog-filters-panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 260px;
+  padding: 14px;
+  border: 1px solid #edf0f3;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 3px 14px rgba(15, 23, 42, .14);
+}
+
+.clog-filters-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  color: #1f2937;
+  font: 700 13px Arial, sans-serif;
+}
+
+.clog-reset-link {
+  border: 0;
+  background: transparent;
+  color: #1f78d1;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.clog-filters-field {
+  margin-bottom: 10px;
+}
+
+.clog-filters-field label {
+  display: block;
+  margin-bottom: 4px;
+  color: #6b7684;
+  font-size: 11px;
+}
+
+.clog-filters-field input,
+.clog-filters-field select {
+  width: 100%;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid #d7dee5;
+  border-radius: 4px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 12px Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.clog-filters-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.clog-apply-btn {
+  height: 30px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 4px;
+  background: #1f78d1;
+  color: #fff;
+  cursor: pointer;
+  font: 700 12px Arial, sans-serif;
+}
+
+.clog-table-scroll {
+  overflow-x: auto;
+}
+
+.clog-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.clog-table th {
+  padding: 8px 6px;
+  border-bottom: 1px solid #e6ebf0;
+  text-align: left;
+  color: #1f2937;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.clog-table td {
+  padding: 10px 6px;
+  border-bottom: 1px solid #eef1f3;
+  color: #1f2937;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.clog-textarea {
+  width: 220px;
+  height: 52px;
+  padding: 6px 8px;
+  border: 1px solid #d7dee5;
+  border-radius: 4px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 11px Arial, sans-serif;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.clog-message {
+  text-align: center;
+  padding: 30px 0;
+  color: #6b7684;
+}

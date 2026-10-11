@@ -1,0 +1,181 @@
+.cs-page {
+  padding: 16px;
+}
+
+.cs-card {
+  background: #fff;
+  border: 1px solid #e6ebf0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+  padding: 16px 20px;
+}
+
+.cs-card h1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+  color: #1f2937;
+  font-size: 16px;
+}
+
+.cs-subtitle {
+  margin: 0 0 18px;
+  color: #6b7684;
+  font-size: 12px;
+}
+
+.cs-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.cs-contact-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #e6ebf0;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.cs-contact-icon {
+  font-size: 20px;
+}
+
+.cs-contact-label {
+  color: #6b7684;
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+.cs-contact-value {
+  color: #1f2937;
+  font: 700 13px Arial, sans-serif;
+  text-decoration: none;
+}
+
+a.cs-contact-value:hover {
+  color: #1f78d1;
+}
+
+.cs-section-title {
+  margin: 0 0 12px;
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.cs-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.cs-field-wide {
+  grid-column: 1 / -1;
+}
+
+.cs-field label {
+  display: block;
+  margin-bottom: 6px;
+  color: #1f2937;
+  font: 700 12px Arial, sans-serif;
+}
+
+.cs-field input,
+.cs-field select,
+.cs-field textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d7dee5;
+  border-radius: 4px;
+  background: #f7f8fa;
+  color: #1f2937;
+  font: 13px Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.cs-field textarea {
+  resize: vertical;
+}
+
+.cs-submit-btn {
+  grid-column: 1 / -1;
+  justify-self: start;
+  height: 32px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 5px;
+  background: #1f78d1;
+  color: #fff;
+  cursor: pointer;
+  font: 700 12px Arial, sans-serif;
+}
+
+.cs-submit-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.cs-table-scroll {
+  overflow-x: auto;
+}
+
+.cs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cs-table th {
+  padding: 8px 6px;
+  border-bottom: 1px solid #e6ebf0;
+  text-align: left;
+  color: #1f2937;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.cs-table td {
+  padding: 10px 6px;
+  border-bottom: 1px solid #eef1f3;
+  color: #1f2937;
+  font-size: 13px;
+}
+
+.cs-query-cell {
+  white-space: pre-line;
+  color: #6b7684;
+  font-size: 12px;
+}
+
+.cs-status-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border: 1px solid #f3a3a3;
+  border-radius: 999px;
+  color: #c0392b;
+  font-size: 11px;
+}
+
+.cs-status-pill.open {
+  border-color: #82e0bf;
+  color: #00a36c;
+}
+
+.cs-message {
+  text-align: center;
+  padding: 26px 0;
+  color: #6b7684;
+}
+
+@media (max-width: 900px) {
+  .cs-contact-grid,
+  .cs-form {
+    grid-template-columns: 1fr;
+  }
+}

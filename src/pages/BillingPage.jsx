@@ -6,8 +6,15 @@ import "../css/BillingPage.css";
 
 const SUBSCRIPTION_API = "https://localhost:7150/api/BillingSubscriptions";
 const PLAN_HISTORY_API = "https://localhost:7150/api/BillingPlanHistoryLogs";
+const INVOICES_API = "https://localhost:7150/api/BillingInvoices";
 
-const BILLING_TABS = ["Invoices", "Tickets", "Subscription Plan", "Billing Profile", "Usage"];
+const BILLING_TABS = [
+  { label: "Invoices", icon: "📄" },
+  { label: "Tickets", icon: "🎫" },
+  { label: "Subscription Plan", icon: "💳" },
+  { label: "Billing Profile", icon: "🖼" },
+  { label: "Usage", icon: "📊" },
+];
 
 const PLAN_OPTIONS = [
   { name: "Starter", type: "Conversion Based Plan", price: 99, conversions: 5000, clicksUnlimited: false, clicks: 100000, impressions: 2000000, description: "Get started with essential tracking for small affiliate networks." },
@@ -22,6 +29,31 @@ const AVAILABLE_ADDONS = [
   { key: "ShortURL", label: "Short URL", priceMonthly: 1 },
 ];
 
+const COUNTRY_OPTIONS = ["India", "United States of America", "United Kingdom", "Canada", "Australia", "Germany", "France", "United Arab Emirates"];
+const INDIA_STATES = [
+  { name: "Maharashtra", code: "27" },
+  { name: "Delhi", code: "07" },
+  { name: "Karnataka", code: "29" },
+  { name: "Gujarat", code: "24" },
+  { name: "Tamil Nadu", code: "33" },
+  { name: "West Bengal", code: "19" },
+  { name: "Rajasthan", code: "08" },
+];
+
+const buildEmptyBillingProfile = () => ({
+  gstVatNumber: "",
+  taxNumberPan: "",
+  companyName: "",
+  companyAddress: "",
+  country: "India",
+  state: "",
+  stateCode: "",
+  city: "",
+  zip: "",
+  phone: "",
+  notificationEmails: [],
+});
+
 const formatMoney = (value) => `$${Number(value || 0).toFixed(2)}`;
 const formatNumber = (value) => (value === null || value === undefined ? "-" : Number(value).toLocaleString());
 
@@ -31,6 +63,42 @@ const parseAddons = (json) => {
     return Array.isArray(parsed) ? parsed : [];
   } catch {
     return [];
+  }
+};
+
+const formatDate = (value) =>
+  new Date(value).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+
+const nextMonthRange = (isoDate) => {
+  const date = new Date(isoDate);
+  const start = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 1));
+  const end = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 2, 0));
+  const toIso = (d) => d.toISOString().slice(0, 10);
+  return `${toIso(start)} - ${toIso(end)}`;
+};
+
+const buildTicketFromLog = (log) => {
+  const changedOn = new Date(log.changedOn);
+  const dateLabel = changedOn.toLocaleString("en-GB", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit" });
+
+  switch (log.action) {
+    case "Plan Created":
+      return { date: dateLabel, type: "Plan Created", description: `Initial subscription setup, Plan : ${log.toPlanName} Plan`, status: "Completed" };
+    case "Plan Changed": {
+      const isDowngrade = Number(log.toPrice) < Number(log.fromPrice);
+      return {
+        date: dateLabel,
+        type: isDowngrade ? "Plan Downgrade" : "Plan Upgrade",
+        description: `Billing Plan Changed For Next Month (${nextMonthRange(log.changedOn)}), Plan : ${log.toPlanName} Plan`,
+        status: "Completed",
+      };
+    }
+    case "Addons Updated":
+      return { date: dateLabel, type: "Addon Update", description: `Addons updated for ${log.toPlanName} Plan`, status: "Completed" };
+    case "Subscription Cancelled":
+      return { date: dateLabel, type: "Subscription Cancelled", description: `Subscription cancelled, Plan : ${log.fromPlanName} Plan`, status: "Completed" };
+    default:
+      return null;
   }
 };
 
@@ -46,6 +114,17 @@ export default function BillingPage() {
   const [showAddonsModal, setShowAddonsModal] = useState(false);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
 
+  const [invoices, setInvoices] = useState([]);
+  const [invoicesLoading, setInvoicesLoading] = useState(false);
+  const [tickets, setTickets] = useState([]);
+  const [ticketsLoading, setTicketsLoading] = useState(false);
+  const [usage, setUsage] = useState(null);
+  const [usageLoading, setUsageLoading] = useState(false);
+
+  const [billingProfile, setBillingProfile] = useState(buildEmptyBillingProfile);
+  const [billingProfileSaving, setBillingProfileSaving] = useState(false);
+  const [emailInput, setEmailInput] = useState("");
+
   const loadSubscription = async () => {
     try {
       setLoading(true);
@@ -60,9 +139,128 @@ export default function BillingPage() {
     }
   };
 
+  const loadInvoices = async () => {
+    try {
+      setInvoicesLoading(true);
+      const response = await fetch(INVOICES_API, { headers: { accept: "*/*" } });
+      if (!response.ok) throw new Error("Unable to load invoices");
+      const data = await response.json();
+      setInvoices(Array.isArray(data) ? data : data.items || data.data || []);
+    } catch {
+      setInvoices([]);
+    } finally {
+      setInvoicesLoading(false);
+    }
+  };
+
+  const loadTickets = async () => {
+    try {
+      setTicketsLoading(true);
+      const response = await fetch(PLAN_HISTORY_API, { headers: { accept: "*/*" } });
+      if (!response.ok) throw new Error("Unable to load billing tickets");
+      const data = await response.json();
+      const logs = Array.isArray(data) ? data : data.items || data.data || [];
+      setTickets(logs.map(buildTicketFromLog).filter(Boolean));
+    } catch {
+      setTickets([]);
+    } finally {
+      setTicketsLoading(false);
+    }
+  };
+
+  const loadUsage = async () => {
+    try {
+      setUsageLoading(true);
+      const response = await fetch(`${SUBSCRIPTION_API}/usage`, { headers: { accept: "*/*" } });
+      if (!response.ok) throw new Error("Unable to load usage");
+      const data = await response.json();
+      setUsage(data);
+    } catch {
+      setUsage(null);
+    } finally {
+      setUsageLoading(false);
+    }
+  };
+
   useEffect(() => {
     loadSubscription();
   }, []);
+
+  useEffect(() => {
+    if (!subscription) return;
+    setBillingProfile({
+      gstVatNumber: subscription.gstVatNumber || "",
+      taxNumberPan: subscription.taxNumberPan || "",
+      companyName: subscription.companyName || "",
+      companyAddress: subscription.companyAddress || "",
+      country: subscription.country || "India",
+      state: subscription.state || "",
+      stateCode: subscription.stateCode || "",
+      city: subscription.city || "",
+      zip: subscription.zip || "",
+      phone: subscription.phone || "",
+      notificationEmails: (subscription.notificationEmails || "").split(",").filter(Boolean),
+    });
+  }, [subscription]);
+
+  useEffect(() => {
+    if (activeTab === "Invoices") loadInvoices();
+    if (activeTab === "Tickets") loadTickets();
+    if (activeTab === "Usage") loadUsage();
+  }, [activeTab]);
+
+  const updateBillingProfile = (field, value) => setBillingProfile((current) => ({ ...current, [field]: value }));
+
+  const addNotificationEmail = () => {
+    const value = emailInput.trim();
+    if (!value) return;
+    setBillingProfile((current) => (current.notificationEmails.includes(value) ? current : { ...current, notificationEmails: [...current.notificationEmails, value] }));
+    setEmailInput("");
+  };
+
+  const removeNotificationEmail = (email) => {
+    setBillingProfile((current) => ({ ...current, notificationEmails: current.notificationEmails.filter((item) => item !== email) }));
+  };
+
+  const submitBillingProfile = async () => {
+    try {
+      setBillingProfileSaving(true);
+      const response = await fetch(`${SUBSCRIPTION_API}/billing-profile`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", accept: "*/*" },
+        body: JSON.stringify({
+          gstVatNumber: billingProfile.gstVatNumber.trim() || null,
+          taxNumberPan: billingProfile.taxNumberPan.trim() || null,
+          companyName: billingProfile.companyName.trim() || null,
+          companyAddress: billingProfile.companyAddress.trim() || null,
+          country: billingProfile.country || null,
+          state: billingProfile.state || null,
+          stateCode: billingProfile.stateCode.trim() || null,
+          city: billingProfile.city.trim() || null,
+          zip: billingProfile.zip.trim() || null,
+          phone: billingProfile.phone.trim() || null,
+          notificationEmails: billingProfile.notificationEmails.join(","),
+        }),
+      });
+      if (!response.ok) throw new Error("Unable to save billing profile");
+      await loadSubscription();
+      alert("Billing profile saved.");
+    } catch {
+      alert("Unable to save the billing profile. Please check the API and try again.");
+    } finally {
+      setBillingProfileSaving(false);
+    }
+  };
+
+  const markInvoicePaid = async (id) => {
+    try {
+      const response = await fetch(`${INVOICES_API}/${id}/mark-paid`, { method: "POST", headers: { accept: "*/*" } });
+      if (!response.ok) throw new Error("Unable to mark invoice as paid");
+      await loadInvoices();
+    } catch {
+      alert("Unable to mark the invoice as paid. Please check the API and try again.");
+    }
+  };
 
   const cancelSubscription = async () => {
     if (!window.confirm("Cancel your subscription? This will not delete your data, but your plan will be marked Cancelled.")) return;
@@ -103,11 +301,11 @@ export default function BillingPage() {
               {BILLING_TABS.map((tab) => (
                 <button
                   type="button"
-                  key={tab}
-                  className={`billing-tab-btn ${activeTab === tab ? "active" : ""}`}
-                  onClick={() => setActiveTab(tab)}
+                  key={tab.label}
+                  className={`billing-tab-btn ${activeTab === tab.label ? "active" : ""}`}
+                  onClick={() => setActiveTab(tab.label)}
                 >
-                  {tab.toUpperCase()}
+                  <span aria-hidden="true">{tab.icon}</span> {tab.label.toUpperCase()}
                 </button>
               ))}
             </div>
@@ -120,7 +318,7 @@ export default function BillingPage() {
                   {!loading && subscription && (
                     <div className="billing-plan-card">
                       <span className={`billing-current-plan-badge ${subscription.status === "Cancelled" ? "cancelled" : ""}`}>
-                        <span aria-hidden="true">🏆</span> {subscription.status === "Cancelled" ? "Cancelled Plan" : "Current Plan"}
+                        <span aria-hidden="true">🛒</span> {subscription.status === "Cancelled" ? "Cancelled Plan" : "Current Plan"}
                       </span>
 
                       <div className="billing-plan-title-row">
@@ -167,7 +365,201 @@ export default function BillingPage() {
                 </>
               )}
 
-              {activeTab !== "Subscription Plan" && (
+              {activeTab === "Invoices" && (
+                <div className="billing-table-scroll">
+                  <table className="billing-flat-table">
+                    <thead>
+                      <tr>
+                        <th>Type</th><th>Invoice</th><th>Invoice Date</th><th>Status</th><th>Amount</th><th>Payment Date</th><th>Payment</th><th>Options</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {invoicesLoading && <tr><td colSpan="8" className="billing-loading">Loading invoices…</td></tr>}
+                      {!invoicesLoading && invoices.length === 0 && <tr><td colSpan="8" className="billing-loading">No invoices yet.</td></tr>}
+                      {!invoicesLoading && invoices.map((invoice) => (
+                        <tr key={invoice.id}>
+                          <td>{invoice.type}</td>
+                          <td>{invoice.invoiceNumber}</td>
+                          <td>{formatDate(invoice.invoiceDate)}</td>
+                          <td><span className={`billing-status-pill ${invoice.status.toLowerCase()}`}>{invoice.status}</span></td>
+                          <td>{formatMoney(invoice.amount)}</td>
+                          <td>{invoice.paymentDate ? formatDate(invoice.paymentDate) : "-"}</td>
+                          <td>{invoice.paymentMethod || "-"}</td>
+                          <td>
+                            {invoice.status === "Due" ? (
+                              <button type="button" className="billing-outline-btn" onClick={() => markInvoicePaid(invoice.id)}>Mark as Paid</button>
+                            ) : "-"}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {activeTab === "Tickets" && (
+                <div className="billing-table-scroll">
+                  <table className="billing-flat-table">
+                    <thead>
+                      <tr><th>Date</th><th>Type</th><th>Description</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                      {ticketsLoading && <tr><td colSpan="4" className="billing-loading">Loading tickets…</td></tr>}
+                      {!ticketsLoading && tickets.length === 0 && <tr><td colSpan="4" className="billing-loading">No tickets yet.</td></tr>}
+                      {!ticketsLoading && tickets.map((ticket, index) => (
+                        <tr key={index}>
+                          <td>{ticket.date}</td>
+                          <td className="billing-ticket-type">{ticket.type}</td>
+                          <td>{ticket.description}</td>
+                          <td><span className="billing-status-pill completed">{ticket.status}</span></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {activeTab === "Usage" && (
+                <>
+                  {usageLoading && <p className="billing-loading">Loading usage…</p>}
+                  {!usageLoading && !usage && <p className="billing-loading">Unable to load usage. Please check the API and try again.</p>}
+                  {!usageLoading && usage && (
+                    <div className="billing-usage-layout">
+                      <div className="billing-usage-card">
+                        <h3><span aria-hidden="true">📅</span> This Month Usage</h3>
+
+                        <div className="billing-usage-row">
+                          <div className="billing-usage-label"><span aria-hidden="true">📶</span> Impressions</div>
+                          <div className="billing-usage-value">{formatNumber(usage.impressionsUsed)} used / out of {formatNumber(usage.impressionsLimit)}</div>
+                        </div>
+                        <div className="billing-usage-bar"><div style={{ width: `${Math.min(100, (usage.impressionsUsed / (usage.impressionsLimit || 1)) * 100)}%` }} /></div>
+
+                        <div className="billing-usage-row">
+                          <div className="billing-usage-label"><span aria-hidden="true">👆</span> Clicks</div>
+                          <div className="billing-usage-value">{formatNumber(usage.clicksUsed)} used / out of {usage.clicksUnlimited ? "Unlimited" : formatNumber(usage.clicksLimit)}</div>
+                        </div>
+                        <div className="billing-usage-bar"><div style={{ width: usage.clicksUnlimited ? "2%" : `${Math.min(100, (usage.clicksUsed / (usage.clicksLimit || 1)) * 100)}%` }} /></div>
+
+                        <div className="billing-usage-row">
+                          <div className="billing-usage-label"><span aria-hidden="true">🎫</span> Conversions</div>
+                          <div className="billing-usage-value">{formatNumber(usage.conversionsUsed)} used / out of {formatNumber(usage.conversionsLimit)}</div>
+                        </div>
+                        <div className="billing-usage-bar"><div style={{ width: `${Math.min(100, (usage.conversionsUsed / (usage.conversionsLimit || 1)) * 100)}%` }} /></div>
+                      </div>
+
+                      <div className="billing-usage-card">
+                        <h3><span aria-hidden="true">📦</span> Addon Services</h3>
+                        <table className="billing-flat-table">
+                          <thead>
+                            <tr><th>Service Name</th><th>Run xTimes</th><th>Units Used</th></tr>
+                          </thead>
+                          <tbody>
+                            {usage.addonUsage.length === 0 && <tr><td colSpan="3" className="billing-loading">No addon usage this month.</td></tr>}
+                            {usage.addonUsage.map((addon) => (
+                              <tr key={addon.serviceName}>
+                                <td>{addon.serviceName}</td>
+                                <td>{addon.runTimes}</td>
+                                <td>{addon.unitsUsed}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {activeTab === "Billing Profile" && (
+                <div className="billing-profile-form">
+                  <h3 className="billing-profile-section-title">Tax Details</h3>
+                  <div className="billing-profile-field">
+                    <label>GST / VAT Number</label>
+                    <input value={billingProfile.gstVatNumber} onChange={(event) => updateBillingProfile("gstVatNumber", event.target.value)} />
+                    <small className="billing-profile-hint">Changes in GST, <span>Only Applicable on Future Invoices.</span></small>
+                  </div>
+                  <div className="billing-profile-field">
+                    <label>Tax Number (PAN)</label>
+                    <input value={billingProfile.taxNumberPan} onChange={(event) => updateBillingProfile("taxNumberPan", event.target.value)} />
+                  </div>
+
+                  <h3 className="billing-profile-section-title">Company Details</h3>
+                  <div className="billing-profile-field">
+                    <label>Company Name</label>
+                    <input value={billingProfile.companyName} onChange={(event) => updateBillingProfile("companyName", event.target.value)} />
+                  </div>
+                  <div className="billing-profile-field">
+                    <label>Address</label>
+                    <input value={billingProfile.companyAddress} onChange={(event) => updateBillingProfile("companyAddress", event.target.value)} />
+                  </div>
+                  <div className="billing-profile-field">
+                    <label>Country</label>
+                    <select value={billingProfile.country} onChange={(event) => updateBillingProfile("country", event.target.value)}>
+                      {COUNTRY_OPTIONS.map((country) => <option key={country}>{country}</option>)}
+                    </select>
+                  </div>
+                  <div className="billing-profile-field billing-profile-split">
+                    <div>
+                      <label>State</label>
+                      <select
+                        value={billingProfile.state}
+                        onChange={(event) => {
+                          const state = INDIA_STATES.find((item) => item.name === event.target.value);
+                          updateBillingProfile("state", event.target.value);
+                          updateBillingProfile("stateCode", state ? state.code : billingProfile.stateCode);
+                        }}
+                      >
+                        <option value="">Select State</option>
+                        {INDIA_STATES.map((state) => <option key={state.name} value={state.name}>{state.name}</option>)}
+                      </select>
+                    </div>
+                    <input placeholder="State Code 08" value={billingProfile.stateCode} onChange={(event) => updateBillingProfile("stateCode", event.target.value)} />
+                  </div>
+                  <div className="billing-profile-field">
+                    <label>City</label>
+                    <input placeholder="Select City" value={billingProfile.city} onChange={(event) => updateBillingProfile("city", event.target.value)} />
+                  </div>
+                  <div className="billing-profile-field">
+                    <label>ZIP</label>
+                    <input placeholder="Select ZIP / PIN" value={billingProfile.zip} onChange={(event) => updateBillingProfile("zip", event.target.value)} />
+                  </div>
+                  <div className="billing-profile-field">
+                    <label>Phone</label>
+                    <input value={billingProfile.phone} onChange={(event) => updateBillingProfile("phone", event.target.value)} />
+                  </div>
+
+                  <h3 className="billing-profile-section-title">Notifications</h3>
+                  <div className="billing-profile-field">
+                    <label>Email</label>
+                    <div className="billing-profile-chip-field">
+                      {billingProfile.notificationEmails.map((email) => (
+                        <span className="billing-profile-chip" key={email}>
+                          {email}
+                          <button type="button" onClick={() => removeNotificationEmail(email)} aria-label={`Remove ${email}`}>×</button>
+                        </span>
+                      ))}
+                      <input
+                        placeholder="billing@example.com"
+                        value={emailInput}
+                        onChange={(event) => setEmailInput(event.target.value)}
+                        onKeyDown={(event) => {
+                          if (event.key === "Enter" || event.key === ",") {
+                            event.preventDefault();
+                            addNotificationEmail();
+                          }
+                        }}
+                        onBlur={addNotificationEmail}
+                      />
+                    </div>
+                  </div>
+
+                  <button type="button" className="billing-change-plan-btn" onClick={submitBillingProfile} disabled={billingProfileSaving}>
+                    <span aria-hidden="true">🕐</span> {billingProfileSaving ? "Saving…" : "Submit"}
+                  </button>
+                </div>
+              )}
+
+              {activeTab !== "Subscription Plan" && activeTab !== "Invoices" && activeTab !== "Tickets" && activeTab !== "Usage" && activeTab !== "Billing Profile" && (
                 <p className="billing-loading">This section is not available yet.</p>
               )}
             </div>
