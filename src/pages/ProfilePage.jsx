@@ -292,7 +292,7 @@ export default function ProfilePage() {
                       ↻
                     </button>
                   </div>
-                  <p className="cprofile-secret-note">(If you want to make any changes in your account, provide fresh access key to Offer18 account manager)</p>
+                  <p className="cprofile-secret-note">(If you want to make any changes in your account, provide fresh access key to Nexa Fliker account manager)</p>
                 </div>
               </>
             )}

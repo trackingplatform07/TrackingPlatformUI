@@ -3,8 +3,8 @@
 }
 
 .mailer-card {
-  background: #fff;
-  border: 1px solid #e6ebf0;
+  background: var(--nf-surface, #fff);
+  border: 1px solid var(--nf-line, #e6ebf0);
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 18px 22px;
@@ -24,7 +24,7 @@
   align-items: center;
   gap: 8px;
   margin: 0;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 16px;
 }
 
@@ -41,7 +41,7 @@
   padding: 0 12px;
   border: 0;
   border-radius: 5px;
-  background: #3730a3;
+  background: var(--nf-p700, #3730a3);
   color: #fff;
   cursor: pointer;
   font: 700 11px 'Inter', Arial, sans-serif;
@@ -61,17 +61,17 @@
 }
 
 .mailer-target-column label {
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .mailer-target-column select {
   height: 34px;
   padding: 0 10px;
-  border: 1px solid #d7dee5;
+  border: 1px solid var(--nf-line, #d7dee5);
   border-radius: 8px;
-  background: #f7f8fa;
-  color: #1f2937;
+  background: var(--nf-surface-2, #f7f8fa);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 
@@ -79,7 +79,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #4f46e5;
+  color: var(--nf-p, #4f46e5);
   font: 12px 'Inter', Arial, sans-serif;
 }
 
@@ -91,7 +91,7 @@
 
 .mailer-divider {
   border: 0;
-  border-top: 1px solid #e6ebf0;
+  border-top: 1px solid var(--nf-line, #e6ebf0);
   margin: 16px 0;
 }
 
@@ -104,7 +104,7 @@
 }
 
 .mailer-field label {
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font: 700 12px 'Inter', Arial, sans-serif;
 }
 
@@ -113,10 +113,10 @@
 .mailer-field textarea {
   height: 34px;
   padding: 0 10px;
-  border: 1px solid #d7dee5;
+  border: 1px solid var(--nf-line, #d7dee5);
   border-radius: 8px;
-  background: #f7f8fa;
-  color: #1f2937;
+  background: var(--nf-surface-2, #f7f8fa);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 
@@ -126,7 +126,7 @@
 }
 
 .mailer-editor {
-  border: 1px solid #d7dee5;
+  border: 1px solid var(--nf-line, #d7dee5);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -136,8 +136,8 @@
   align-items: center;
   gap: 6px;
   padding: 6px 8px;
-  border-bottom: 1px solid #e6ebf0;
-  background: #f7f8fa;
+  border-bottom: 1px solid var(--nf-line, #e6ebf0);
+  background: var(--nf-surface-2, #f7f8fa);
   flex-wrap: wrap;
 }
 
@@ -147,22 +147,22 @@
   border: 0;
   border-radius: 3px;
   background: transparent;
-  color: #4a5568;
+  color: var(--nf-ink-2, #4a5568);
   cursor: pointer;
   font-size: 12px;
 }
 
 .mailer-editor-toolbar button:hover {
-  background: #e9edf1;
+  background: var(--nf-surface-2, #e9edf1);
 }
 
 .mailer-editor-toolbar select {
   height: 26px;
   padding: 0 6px;
-  border: 1px solid #d7dee5;
+  border: 1px solid var(--nf-line, #d7dee5);
   border-radius: 3px;
-  background: #fff;
-  color: #8a94a3;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-ink-2, #8a94a3);
   font-size: 11px;
 }
 
@@ -173,12 +173,12 @@
   border-radius: 0;
   padding: 10px;
   resize: vertical;
-  background: #fff;
+  background: var(--nf-surface, #fff);
 }
 
 .mailer-recipient-summary {
   margin-bottom: 12px;
-  color: #6b7684;
+  color: var(--nf-ink-2, #6b7684);
   font-size: 12px;
 }
 
@@ -197,7 +197,7 @@
   padding: 0 12px;
   border: 1px solid #34d399;
   border-radius: 8px;
-  background: #fff;
+  background: var(--nf-surface, #fff);
   color: #059669;
   cursor: pointer;
   font: 700 11px 'Inter', Arial, sans-serif;
@@ -211,7 +211,7 @@
   padding: 0 16px;
   border: 0;
   border-radius: 8px;
-  background: #4f46e5;
+  background: var(--nf-p, #4f46e5);
   color: #fff;
   cursor: pointer;
   font: 700 12px 'Inter', Arial, sans-serif;
@@ -230,18 +230,18 @@
 }
 
 .mailer-result-banner.success {
-  background: #e7f8f0;
+  background: var(--nf-surface-2, #e7f8f0);
   color: #00a36c;
 }
 
 .mailer-result-banner.error {
-  background: #fdecea;
+  background: var(--nf-surface-2, #fdecea);
   color: #c0392b;
 }
 
 .mailer-result-banner.info {
-  background: #eef2ff;
-  color: #4f46e5;
+  background: var(--nf-p50, #eef2ff);
+  color: var(--nf-p, #4f46e5);
 }
 
 .mailer-modal {
@@ -249,7 +249,7 @@
   max-width: 92vw;
   max-height: 86vh;
   overflow-y: auto;
-  background: #fff;
+  background: var(--nf-surface, #fff);
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, .15);
   padding: 18px 22px;
@@ -265,7 +265,7 @@
   justify-content: space-between;
   margin-bottom: 14px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #e6ebf0;
+  border-bottom: 1px solid var(--nf-line, #e6ebf0);
 }
 
 .mailer-modal-header h2 {
@@ -273,14 +273,14 @@
   align-items: center;
   gap: 8px;
   margin: 0;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 15px;
 }
 
 .mailer-modal-close {
   border: 0;
   background: transparent;
-  color: #8a94a3;
+  color: var(--nf-ink-2, #8a94a3);
   cursor: pointer;
   font-size: 18px;
 }
@@ -297,18 +297,18 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 12px;
-  border: 1px solid #e6ebf0;
+  border: 1px solid var(--nf-line, #e6ebf0);
   border-radius: 6px;
 }
 
 .mailer-template-row strong {
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 13px;
 }
 
 .mailer-template-row p {
   margin: 2px 0 0;
-  color: #6b7684;
+  color: var(--nf-ink-2, #6b7684);
   font-size: 12px;
 }
 
@@ -319,8 +319,8 @@
 
 .mailer-template-row-actions button {
   border: 0;
-  background: #edf1f5;
-  color: #1f2937;
+  background: var(--nf-surface-2, #edf1f5);
+  color: var(--nf-ink, #1f2937);
   border-radius: 8px;
   padding: 5px 10px;
   cursor: pointer;
@@ -328,7 +328,7 @@
 }
 
 .mailer-template-row-actions button.danger {
-  background: #fdecea;
+  background: var(--nf-surface-2, #fdecea);
   color: #c0392b;
 }
 
@@ -342,7 +342,7 @@
 .mailer-empty {
   text-align: center;
   padding: 20px 0;
-  color: #6b7684;
+  color: var(--nf-ink-2, #6b7684);
   font-size: 13px;
 }
 
@@ -357,16 +357,16 @@
 
 .mailer-logs-table th {
   padding: 8px 6px;
-  border-bottom: 1px solid #e6ebf0;
+  border-bottom: 1px solid var(--nf-line, #e6ebf0);
   text-align: left;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 12px;
 }
 
 .mailer-logs-table td {
   padding: 8px 6px;
-  border-bottom: 1px solid #eef1f3;
-  color: #1f2937;
+  border-bottom: 1px solid var(--nf-line, #eef1f3);
+  color: var(--nf-ink, #1f2937);
   font-size: 12px;
 }
 

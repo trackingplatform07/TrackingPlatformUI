@@ -8,7 +8,7 @@ const POSTBACK_TYPES = ["S2S", "Pixel", "iframe", "Google Tag Manager", "Web SDK
 const TOKEN_COLUMNS = ["AdvSub1", "AdvSub4", "Payout", "AdvSub2", "AdvSub5", "Currency", "AdvSub3", "Sale", "Event"];
 
 const MOBILE_ATTRIBUTION_INTEGRATIONS = [
-  { key: "offer18", name: "Offer18 (SDK)", logoClass: "logo-offer18", buttons: [{ label: "Android", icon: "📱" }, { label: "iOS (comming soon)", icon: "🍎", disabled: true }] },
+  { key: "offer18", name: "Nexa Fliker (SDK)", logoClass: "logo-offer18", buttons: [{ label: "Android", icon: "📱" }, { label: "iOS (comming soon)", icon: "🍎", disabled: true }] },
   { key: "appsflyer", name: "Appsflyer", logoClass: "logo-appsflyer", buttons: [{ label: "Setup", icon: "+" }, { label: "Read", icon: "📖" }] },
   { key: "singular", name: "Singular", logoClass: "logo-singular", buttons: [{ label: "Setup", icon: "+" }, { label: "Read", icon: "📖" }] },
   { key: "branch", name: "Branch", logoClass: "logo-branch", buttons: [{ label: "Setup", icon: "+" }, { label: "Read", icon: "📖" }] },

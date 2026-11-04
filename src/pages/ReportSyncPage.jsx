@@ -6,8 +6,8 @@ import "../css/MobileAttributionPage.css";
 import "../css/ReportSyncPage.css";
 
 const PARTNERS = [
-  { key: "offer18-affiliate", name: "Offer18", subname: "Offer18 (Affiliate)", logo: "offer18" },
-  { key: "offer18-admin", name: "Offer18", subname: "Offer18 (Admin)", logo: "offer18" },
+  { key: "offer18-affiliate", name: "Nexa Fliker", subname: "Nexa Fliker (Affiliate)", logo: "offer18" },
+  { key: "offer18-admin", name: "Nexa Fliker", subname: "Nexa Fliker (Admin)", logo: "offer18" },
   { key: "facebook", name: "Facebook", subname: "Facebook", logo: "facebook" },
 ];
 
@@ -33,8 +33,8 @@ export default function ReportSyncPage() {
               onChange={(e) => setChosenIntegration(e.target.value)}
             >
               <option value="">Choose Integration</option>
-              <option value="offer18-affiliate">Offer18 (Affiliate)</option>
-              <option value="offer18-admin">Offer18 (Admin)</option>
+              <option value="offer18-affiliate">Nexa Fliker (Affiliate)</option>
+              <option value="offer18-admin">Nexa Fliker (Admin)</option>
               <option value="facebook">Facebook</option>
             </select>
           </section>

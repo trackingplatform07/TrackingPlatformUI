@@ -4,10 +4,10 @@
   --text-main: #0d2750;
   --text-sub: #6b7280;
   --line: #d7dde5;
-  --accent: #4f46e5;
-  --accent-dark: #3730a3;
-  --accent-light: #eef2ff;
-  --accent-light-border: #c7d2fe;
+  --accent: var(--nf-p, #4f46e5);
+  --accent-dark: var(--nf-p700, #3730a3);
+  --accent-light: var(--nf-p50, #eef2ff);
+  --accent-light-border: var(--nf-p200, #c7d2fe);
   --font-sans: 'Inter', Arial, sans-serif;
 }
 
@@ -64,7 +64,7 @@
 
 .of-summary p,
 .of-summary small {
-  color: #4b5563;
+  color: var(--nf-ink-2, #4b5563);
 }
 
 .of-tabline {
@@ -100,8 +100,8 @@
 .of-selects button {
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: #fff;
-  color: #334155;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-ink, #334155);
   padding: 8px 11px;
 }
 
@@ -115,7 +115,7 @@
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 12px;
-  background: #fff;
+  background: var(--nf-surface, #fff);
 }
 
 .of-icon {
@@ -139,7 +139,7 @@
 
 .of-metric-foot {
   margin-top: 8px;
-  color: #475569;
+  color: var(--nf-ink-2, #475569);
   display: flex;
   justify-content: space-between;
   font-size: 12px;
@@ -153,7 +153,7 @@
 
 .of-right-info p {
   margin: 6px 0;
-  color: #64748b;
+  color: var(--nf-ink-2, #64748b);
 }
 
 .of-right-info hr {
@@ -170,12 +170,12 @@
 
 .of-placeholder {
   margin-top: 12px;
-  border: 1px dashed #b6c0cc;
+  border: 1px dashed var(--nf-line, #b6c0cc);
   border-radius: 10px;
   min-height: 220px;
   display: grid;
   place-items: center;
-  color: #8090a1;
+  color: var(--nf-ink-2, #8090a1);
   font-size: 14px;
 }
 
@@ -184,14 +184,14 @@
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  border: 28px solid #d2d6dc;
+  border: 28px solid var(--nf-line, #d2d6dc);
   display: grid;
   place-items: center;
 }
 
 .of-ring p {
   margin: 0;
-  color: #667085;
+  color: var(--nf-ink-2, #667085);
   text-align: center;
 }
 
@@ -211,5 +211,128 @@
 @media (max-width: 980px) {
   .of-layout {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Dashboard welcome ---------- */
+
+.nf-dash {
+  padding: 8px 6px 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.nf-hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 36px;
+  border-radius: 20px;
+  color: #fff;
+  background: var(--nf-hero);
+  box-shadow: 0 24px 48px -24px rgba(var(--nf-p-rgb), .6);
+}
+
+.nf-hero-eyebrow {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .7);
+}
+
+.nf-hero h2 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+.nf-hero p {
+  margin: 0;
+  max-width: 560px;
+  color: rgba(255, 255, 255, .82);
+  font-size: 15px;
+}
+
+.nf-hero-mark .nf-brand-mark {
+  width: 84px;
+  height: 84px;
+  border-radius: 22px;
+  box-shadow: 0 18px 40px -12px rgba(15, 23, 42, .55);
+  transform: rotate(-6deg);
+}
+
+.nf-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.nf-quick-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--nf-surface, #fff);
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+.nf-quick-card:hover {
+  border-color: var(--nf-p200, #c7d2fe);
+  transform: translateY(-2px);
+  color: var(--text-main);
+}
+
+.nf-quick-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--nf-p50, #eef2ff);
+  color: var(--nf-p, #4f46e5);
+}
+
+.nf-quick-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.nf-quick-card strong {
+  display: block;
+  font-size: 15px;
+}
+
+.nf-quick-card small {
+  color: var(--nf-ink-2, #64748b);
+  font-size: 13px;
+}
+
+@media (max-width: 1100px) {
+  .nf-quick-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .nf-quick-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nf-hero {
+    padding: 24px;
+  }
+
+  .nf-hero-mark {
+    display: none;
   }
 }

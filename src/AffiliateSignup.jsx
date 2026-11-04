@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./css/AffiliateSignup.css";
+import BrandLogo from "./components/BrandLogo";
 
 const AffiliateSignup = () => {
   const [countries, setCountries] = useState([]);
@@ -329,7 +330,7 @@ const AffiliateSignup = () => {
   return (
     <div className="signup-container">
       <div className="signup-card">
-        <h2>Demo</h2>
+        <BrandLogo tone="dark" className="nf-auth-brand" />
         <h4>Register to Affiliate Portal</h4>
 
         <form onSubmit={handleSubmit}>

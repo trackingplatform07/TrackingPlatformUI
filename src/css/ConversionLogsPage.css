@@ -3,8 +3,8 @@
 }
 
 .conversion-logs-page-card {
-  background: #fff;
-  border: 1px solid #e6ebf0;
+  background: var(--nf-surface, #fff);
+  border: 1px solid var(--nf-line, #e6ebf0);
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 20px;
@@ -26,7 +26,7 @@
 .postback-logs-header h2 {
   margin: 0;
   font-size: 16px;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
 }
 
 .conversion-logs-header {
@@ -59,10 +59,10 @@
   height: 34px;
   min-width: 160px;
   padding: 0 10px;
-  border: 1px solid #c9d0d6;
+  border: 1px solid var(--nf-line, #c9d0d6);
   border-radius: 8px;
-  background: #fff;
-  color: #1f2937;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 
@@ -72,9 +72,9 @@
   height: 34px;
   box-sizing: border-box;
   justify-content: space-between;
-  border: 1px solid #c9d0d6;
+  border: 1px solid var(--nf-line, #c9d0d6);
   border-radius: 8px;
-  background: #f7f8fa;
+  background: var(--nf-surface-2, #f7f8fa);
   padding: 0 10px;
   font: 12px 'Inter', Arial, sans-serif;
 }
@@ -85,8 +85,8 @@
   gap: 4px;
   padding: 4px 8px;
   border-radius: 3px;
-  background: #eef1f3;
-  color: #1f2937;
+  background: var(--nf-surface-2, #eef1f3);
+  color: var(--nf-ink, #1f2937);
   font: 700 11px 'Inter', Arial, sans-serif;
 }
 
@@ -107,10 +107,10 @@
 .postback-logs-date-range input {
   height: 34px;
   padding: 0 8px;
-  border: 1px solid #c9d0d6;
+  border: 1px solid var(--nf-line, #c9d0d6);
   border-radius: 8px;
-  background: #fff;
-  color: #1f2937;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 
@@ -122,10 +122,10 @@
   width: auto;
   height: 30px;
   padding: 0 12px;
-  border: 1px solid #c9d0d6;
+  border: 1px solid var(--nf-line, #c9d0d6);
   border-radius: 8px;
-  background: #fff;
-  color: #1f2937;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-ink, #1f2937);
   cursor: pointer;
   font: 700 12px 'Inter', Arial, sans-serif;
 }
@@ -140,7 +140,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   padding: 16px 0;
-  border-bottom: 1px solid #e6ebf0;
+  border-bottom: 1px solid var(--nf-line, #e6ebf0);
 }
 
 .conversion-filter-field {
@@ -150,7 +150,7 @@
 }
 
 .conversion-filter-field label {
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font: 700 12px 'Inter', Arial, sans-serif;
 }
 
@@ -158,10 +158,10 @@
 .conversion-filter-field select {
   height: 34px;
   padding: 0 10px;
-  border: 1px solid #c9d0d6;
+  border: 1px solid var(--nf-line, #c9d0d6);
   border-radius: 8px;
-  background: #f7f8fa;
-  color: #1f2937;
+  background: var(--nf-surface-2, #f7f8fa);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Icon from './Icon';
+import BrandLogo from './BrandLogo';
 import '../css/Sidebar.css';
 
 const navItems = [
@@ -137,11 +138,25 @@ const navItems = [
   }
 ];
 
-const Sidebar = ({ isCollapsed }) => {
+const Sidebar = ({ isCollapsed: collapsedProp }) => {
   const [user, setUser] = useState(null);
   const [menu, setMenu] = useState([]);
   const [openMenu, setOpenMenu] = useState(null);
   const location = useLocation();
+  // Phone/tablet slide-out drawer, opened from the header menu button.
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const isCollapsed = collapsedProp && !mobileOpen;
+
+  useEffect(() => {
+    const toggle = () => setMobileOpen((open) => !open);
+    const onKey = (e) => { if (e.key === 'Escape') setMobileOpen(false); };
+    window.addEventListener('nf:toggle-nav', toggle);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('nf:toggle-nav', toggle);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, []);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -166,9 +181,11 @@ const Sidebar = ({ isCollapsed }) => {
   };
 
   return (
-    <aside className={`of-sidebar ${isCollapsed ? 'is-collapsed' : ''}`}>
+    <>
+    {mobileOpen && <div className='of-nav-backdrop' onClick={() => setMobileOpen(false)} />}
+    <aside className={`of-sidebar ${isCollapsed ? 'is-collapsed' : ''} ${mobileOpen ? 'is-mobile-open' : ''}`}>
       <div className='of-logo-row'>
-        <p>Company</p>
+        <BrandLogo showName={!isCollapsed} />
       </div>
 
       {!isCollapsed && <p className='of-nav-title'>Navigation</p>}
@@ -256,6 +273,7 @@ const Sidebar = ({ isCollapsed }) => {
         )}
       </div>
     </aside>
+    </>
   );
 };
 

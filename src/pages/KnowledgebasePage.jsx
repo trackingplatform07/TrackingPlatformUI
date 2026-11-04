@@ -54,7 +54,7 @@ export default function KnowledgebasePage() {
         <main className="kb-page">
           <section className="kb-card">
             <h1><span aria-hidden="true">📚</span> Knowledgebase</h1>
-            <p className="kb-subtitle">Find answers and guides for using Offer18</p>
+            <p className="kb-subtitle">Find answers and guides for using Nexa Fliker</p>
 
             <input
               className="kb-search"

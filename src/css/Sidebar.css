@@ -1,5 +1,5 @@
 .of-sidebar {
-  background: linear-gradient(180deg, #4338ca 0%, #4f46e5 100%);
+  background: linear-gradient(180deg, var(--nf-p600, #4338ca) 0%, var(--nf-p, #4f46e5) 100%);
   border-right: 1px solid rgba(255, 255, 255, .1);
   padding: 14px 10px 18px;
   display: flex;
@@ -125,7 +125,7 @@
   padding: 0 5px;
   border-radius: 3px;
   background: #fbbf24;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 9px;
   font-weight: 700;
 }
@@ -147,8 +147,8 @@
 
 /* Active */
 .of-submenu-item.active {
-  background: #fff;
-  color: #4338ca;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-p600, #4338ca);
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .18);
 }

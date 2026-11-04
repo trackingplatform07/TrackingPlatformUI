@@ -1,6 +1,6 @@
 .report-sync-panel {
-  background: #fff;
-  border: 1px solid #e6ebf0;
+  background: var(--nf-surface, #fff);
+  border: 1px solid var(--nf-line, #e6ebf0);
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 14px 20px;
@@ -18,7 +18,7 @@
   align-items: center;
   gap: 8px;
   margin: 0;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 13px;
   font-weight: 700;
 }
@@ -27,10 +27,10 @@
   height: 30px;
   min-width: 180px;
   padding: 0 10px;
-  border: 1px solid #c7d2fe;
+  border: 1px solid var(--nf-p200, #c7d2fe);
   border-radius: 8px;
-  background: #eef2ff;
-  color: #1f2937;
+  background: var(--nf-p50, #eef2ff);
+  color: var(--nf-ink, #1f2937);
   font: 12px 'Inter', Arial, sans-serif;
 }
 
@@ -47,7 +47,7 @@
 
 .report-sync-card-subname {
   margin: 0;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 13px;
 }
 

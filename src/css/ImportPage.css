@@ -5,7 +5,7 @@
 .import-header {
   margin-bottom: 15px;
   font-weight: 600;
-  color: #444;
+  color: var(--nf-ink, #444);
 }
 
 /* Grid */
@@ -17,11 +17,11 @@
 
 /* Card */
 .import-card {
-  background: #fff;
+  background: var(--nf-surface, #fff);
   border-radius: 12px;
   padding: 25px;
   text-align: left;
-  border: 1px solid #eee;
+  border: 1px solid var(--nf-line, #eee);
   transition: 0.2s;
 }
 
@@ -38,7 +38,7 @@
 /* Colors */
 .icon.green { color: #22c55e; }
 .icon.orange { color: #f97316; }
-.icon.blue { color: #6366f1; }
+.icon.blue { color: var(--nf-p400, #6366f1); }
 .icon.yellow { color: #eab308; }
 
 /* Button */

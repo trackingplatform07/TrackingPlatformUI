@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './css/LoginPage.css';
 import { useNavigate, Link } from 'react-router-dom';
 import { API_BASE_URL } from './config';
+import { BRAND_NAME } from './brand';
+import BrandLogo from './components/BrandLogo';
 
 const createCaptcha = () => {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -184,7 +186,9 @@ const LoginPage = () => {
           <div className="col-md-6">
             <div className="login-card">
               <div className="login-header">
+                <BrandLogo tone="dark" className="login-brand" />
                 <div className="brand-logo">Login Account</div>
+                <p>Welcome back! Sign in to continue to {BRAND_NAME}.</p>
               </div>
 
               <form className="login-form" onSubmit={handleSubmit}>
@@ -296,7 +300,7 @@ const LoginPage = () => {
               <div className="login-footer">
                 <p>
                   <Link className="create-user-link">
-                    Powered by Offer18
+                    Powered by {BRAND_NAME}
                   </Link>
                 </p>
               </div>

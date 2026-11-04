@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./css/ForgotPassword.css";
 import { API_BASE_URL } from "./config";
 import { useNavigate, Link } from "react-router-dom";
+import BrandLogo from "./components/BrandLogo";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -126,6 +127,7 @@ const ForgotPassword = () => {
   return (
     <div className="forgot-wrapper">
       <div className="forgot-box">
+        <BrandLogo tone="dark" className="nf-auth-brand" />
         <h2>Reset Password</h2>
         <p className="sub-text">Recover your account access</p>
 

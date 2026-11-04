@@ -19,8 +19,8 @@
 .btn {
   padding: 6px 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid var(--nf-line, #ccc);
+  background: var(--nf-surface, #fff);
   cursor: pointer;
 }
 
@@ -33,7 +33,7 @@
 .input {
   padding: 6px 10px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--nf-line, #ccc);
 }
 
 .entries {
@@ -44,9 +44,9 @@
 
 /* Table */
 .billing-table-wrapper {
-  background: #fff;
+  background: var(--nf-surface, #fff);
   border-radius: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--nf-line, #ddd);
   overflow: hidden;
 }
 
@@ -58,17 +58,17 @@
 .billing-table th,
 .billing-table td {
   padding: 12px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--nf-line, #eee);
   font-size: 14px;
 }
 
 .billing-table th {
-  background: #f9fafb;
+  background: var(--nf-surface-2, #f9fafb);
   font-weight: 600;
 }
 
 .link {
-  color: #4f46e5;
+  color: var(--nf-p, #4f46e5);
   cursor: pointer;
 }
 
@@ -80,18 +80,18 @@
 }
 
 .status.pending {
-  background: #fff3cd;
+  background: var(--nf-surface-2, #fff3cd);
   color: #d97706;
 }
 
 .status.paid {
-  background: #e6f7ee;
+  background: var(--nf-surface-2, #e6f7ee);
   color: #16a34a;
 }
 
 /* Option button */
 .option-btn {
-  background: #f1f5f9;
+  background: var(--nf-surface-2, #f1f5f9);
   border: none;
   padding: 6px 10px;
   border-radius: 6px;
@@ -108,12 +108,12 @@
 
 .pagination button {
   padding: 6px 10px;
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid var(--nf-line, #ccc);
+  background: var(--nf-surface, #fff);
   cursor: pointer;
 }
 
 .pagination .active {
-  background: #6366f1;
+  background: var(--nf-p400, #6366f1);
   color: #fff;
 }

@@ -12,7 +12,7 @@
 }
 
 .product-feed-form-row label {
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font: 700 12px 'Inter', Arial, sans-serif;
 }
 
@@ -20,10 +20,10 @@
 .product-feed-form-row > select {
   height: 34px;
   padding: 0 10px;
-  border: 1px solid #c9d0d6;
+  border: 1px solid var(--nf-line, #c9d0d6);
   border-radius: 8px;
-  background: #f7f8fa;
-  color: #1f2937;
+  background: var(--nf-surface-2, #f7f8fa);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 
@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #4f46e5;
+  color: var(--nf-p, #4f46e5);
   font: 13px 'Inter', Arial, sans-serif;
 }
 
@@ -54,10 +54,10 @@
   flex: 0 0 110px;
   height: 34px;
   padding: 0 8px;
-  border: 1px solid #c9d0d6;
+  border: 1px solid var(--nf-line, #c9d0d6);
   border-radius: 8px;
-  background: #f7f8fa;
-  color: #1f2937;
+  background: var(--nf-surface-2, #f7f8fa);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 
@@ -65,10 +65,10 @@
   flex: 1 1 auto;
   height: 34px;
   padding: 0 10px;
-  border: 1px solid #c9d0d6;
+  border: 1px solid var(--nf-line, #c9d0d6);
   border-radius: 8px;
-  background: #f7f8fa;
-  color: #1f2937;
+  background: var(--nf-surface-2, #f7f8fa);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 
@@ -85,15 +85,15 @@
 .product-feed-status-fields select {
   height: 34px;
   padding: 0 10px;
-  border: 1px solid #c9d0d6;
+  border: 1px solid var(--nf-line, #c9d0d6);
   border-radius: 8px;
-  background: #f7f8fa;
-  color: #1f2937;
+  background: var(--nf-surface-2, #f7f8fa);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 
 .product-feed-sync-label {
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font: 700 12px 'Inter', Arial, sans-serif;
 }
 

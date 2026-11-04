@@ -1,11 +1,11 @@
 .mobile-attribution-page {
   padding: 16px;
-  background: #eef2f5;
+  background: var(--nf-surface-2, #eef2f5);
 }
 
 .mobile-attribution-title-card {
-  background: #fff;
-  border: 1px solid #e6ebf0;
+  background: var(--nf-surface, #fff);
+  border: 1px solid var(--nf-line, #e6ebf0);
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 16px 20px;
@@ -17,7 +17,7 @@
   align-items: center;
   gap: 8px;
   margin: 0;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 15px;
   font-weight: 700;
 }

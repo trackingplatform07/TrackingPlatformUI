@@ -81,7 +81,7 @@ export default function ReferralPage() {
             <div className="ref-header">
               <div>
                 <h1><span aria-hidden="true">🚀</span> Referral</h1>
-                <p className="ref-subtitle">Invite networks to Offer18 and earn a bonus on their plans</p>
+                <p className="ref-subtitle">Invite networks to Nexa Fliker and earn a bonus on their plans</p>
               </div>
               <div className="ref-tabs">
                 <button

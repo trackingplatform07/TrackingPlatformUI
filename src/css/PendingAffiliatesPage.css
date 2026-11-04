@@ -16,7 +16,7 @@
 
 .paff-subtitle {
   margin: 0;
-  color: #6b7280;
+  color: var(--nf-ink-2, #6b7280);
   font-size: 12px;
 }
 
@@ -30,10 +30,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 1px solid #e6ebf0;
+  border: 1px solid var(--nf-line, #e6ebf0);
   border-radius: 10px;
   padding: 10px 14px;
-  background: #fff;
+  background: var(--nf-surface, #fff);
   min-width: 150px;
 }
 
@@ -47,24 +47,24 @@
   flex: 0 0 auto;
 }
 
-.paff-stat-icon.blue { background: #eef2ff; color: #4f46e5; }
-.paff-stat-icon.green { background: #e6f7ee; color: #16a34a; }
-.paff-stat-icon.red { background: #fee2e2; color: #dc2626; }
-.paff-stat-icon.amber { background: #fff3e0; color: #f59e0b; }
+.paff-stat-icon.blue { background: var(--nf-p50, #eef2ff); color: var(--nf-p, #4f46e5); }
+.paff-stat-icon.green { background: var(--nf-surface-2, #e6f7ee); color: #16a34a; }
+.paff-stat-icon.red { background: var(--nf-surface-2, #fee2e2); color: #dc2626; }
+.paff-stat-icon.amber { background: var(--nf-surface-2, #fff3e0); color: #f59e0b; }
 
 .paff-stat-value {
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font: 700 16px 'Inter', Arial, sans-serif;
 }
 
 .paff-stat-pct {
-  color: #8a94a3;
+  color: var(--nf-ink-2, #8a94a3);
   font-size: 11px;
   font-weight: 600;
 }
 
 .paff-stat-label {
-  color: #6b7280;
+  color: var(--nf-ink-2, #6b7280);
   font-size: 11px;
 }
 
@@ -87,17 +87,17 @@
 .paff-filter-row select {
   height: 32px;
   padding: 0 8px;
-  border: 1px solid #d7dee5;
+  border: 1px solid var(--nf-line, #d7dee5);
   border-radius: 6px;
-  background: #fff;
-  color: #1f2937;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-ink, #1f2937);
   font: 12px 'Inter', Arial, sans-serif;
 }
 
 .paff-reset-link {
   border: 0;
   background: transparent;
-  color: #4f46e5;
+  color: var(--nf-p, #4f46e5);
   cursor: pointer;
   font-size: 12px;
   text-decoration: underline;
@@ -131,7 +131,7 @@
   padding: 0 4px;
   margin-left: 4px;
   border-radius: 999px;
-  background: #4f46e5;
+  background: var(--nf-p, #4f46e5);
   color: #fff;
   font-size: 10px;
   font-weight: 700;
@@ -148,9 +148,9 @@
   right: 0;
   min-width: 160px;
   padding: 8px;
-  border: 1px solid #edf0f3;
+  border: 1px solid var(--nf-line, #edf0f3);
   border-radius: 8px;
-  background: #fff;
+  background: var(--nf-surface, #fff);
   box-shadow: 0 3px 14px rgba(15, 23, 42, .14);
 }
 
@@ -159,7 +159,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 4px;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 12px;
   text-transform: capitalize;
   cursor: pointer;

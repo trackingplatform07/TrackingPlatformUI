@@ -1,0 +1,33 @@
+.nf-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1;
+}
+
+.nf-brand-mark {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  box-shadow: 0 6px 18px rgba(99, 102, 241, .45);
+}
+
+.nf-brand-name {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  white-space: nowrap;
+}
+
+.nf-brand--light .nf-brand-name {
+  color: #fff;
+}
+
+.nf-brand--dark .nf-brand-name {
+  background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 60%, #0891b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

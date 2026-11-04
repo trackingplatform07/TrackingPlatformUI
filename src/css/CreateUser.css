@@ -31,7 +31,7 @@ border-radius:6px;
 .create-user-card button{
 width:100%;
 padding:12px;
-background:#4f46e5;
+background:var(--nf-p, #4f46e5);
 color:white;
 border:none;
 border-radius:6px;
@@ -39,7 +39,7 @@ cursor:pointer;
 }
 
 .create-user-card button:hover{
-background:#4338ca;
+background:var(--nf-p600, #4338ca);
 }
 
 .success{

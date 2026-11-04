@@ -1,8 +1,75 @@
-/* Global visual polish layer — cosmetic only, adds no new behavior. */
+/* Global visual layer — cosmetic only, adds no new behavior.
+   Loaded after Bootstrap and every page stylesheet, so it refines the shared
+   app shell (sidebar, header, typography) without touching page logic.
+   Colours come from the active theme in themes.css. */
+
+:root {
+  --nf-border: #e5e7f0;
+  --nf-text: #0f172a;
+  --nf-muted: #64748b;
+
+  /* shared tokens used by Dashboard.css / Header.css */
+  --page-bg: var(--nf-bg);
+  --line: var(--nf-border);
+  --text-main: var(--nf-text);
+  --accent: var(--nf-p);
+  --accent-light: var(--nf-p50);
+}
+
+::selection {
+  background: var(--nf-p200);
+  color: #0f172a;
+}
+
+body {
+  background: var(--nf-bg);
+}
+
+/* ---------- Typography ---------- */
+
+/* Page content keeps its original font so dense tables and forms keep their
+   widths; the shell (sidebar, header, dashboard) uses Inter. */
+.of-sidebar,
+.of-header,
+.nf-dash {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.of-layout {
+  background:
+    radial-gradient(900px 420px at 100% -10%, var(--nf-glow-a), transparent 60%),
+    radial-gradient(700px 380px at 20% -20%, var(--nf-glow-b), transparent 60%),
+    var(--nf-bg);
+}
 
 h1, h2, h3 {
   letter-spacing: -0.2px;
 }
+
+/* ---------- Scrollbars ---------- */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;
+}
+
+/* ---------- Interaction polish ---------- */
 
 button:not(:disabled),
 a {
@@ -24,18 +91,426 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--accent, #4f46e5) !important;
-  box-shadow: 0 0 0 3px var(--accent-light, #eef2ff);
+  border-color: var(--nf-p) !important;
+  box-shadow: 0 0 0 3px rgba(var(--nf-p-rgb), .18);
 }
 
 [class*="-card"] {
-  transition: box-shadow .2s ease;
+  transition: box-shadow .2s ease, transform .2s ease;
 }
 
 [class*="-card"]:hover {
-  box-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+  box-shadow: 0 10px 30px -12px rgba(15, 23, 42, .18);
 }
 
 table tr:hover td {
-  background: rgba(79, 70, 229, 0.035);
+  background: rgba(var(--nf-p-rgb), 0.04);
+}
+
+/* ---------- Sidebar ---------- */
+
+.of-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 18px 12px 16px;
+  border-right: 1px solid var(--nf-side-border);
+  background: var(--nf-side-bg);
+  scrollbar-color: var(--nf-side-scroll) transparent;
+}
+
+.of-sidebar::-webkit-scrollbar-thumb {
+  background-color: var(--nf-side-scroll);
+}
+
+.of-sidebar .nf-brand--light .nf-brand-name {
+  color: var(--nf-side-strong);
+}
+
+.of-logo-row {
+  padding: 2px 6px 16px;
+  border-bottom: 1px solid var(--nf-side-line);
+}
+
+.is-collapsed .of-logo-row {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.of-nav-title {
+  margin: 18px 10px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  color: var(--nf-side-title);
+}
+
+.of-nav-list {
+  gap: 2px;
+}
+
+.of-nav-btn {
+  padding: 10px 10px;
+  border-radius: 10px;
+  color: var(--nf-side-text);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.of-nav-btn:hover {
+  background: var(--nf-side-hover);
+  color: var(--nf-side-strong);
+}
+
+.of-nav-icon,
+.of-arrow-icon {
+  color: var(--nf-side-icon);
+}
+
+.of-nav-btn:hover .of-nav-icon,
+.of-nav-btn:hover .of-arrow-icon {
+  color: var(--nf-side-strong);
+}
+
+.of-arrow-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.of-submenu {
+  margin: 2px 0 6px 19px;
+  padding-left: 12px;
+  border-left: 1px solid var(--nf-side-line);
+}
+
+.of-submenu-item {
+  padding: 7px 10px;
+  color: var(--nf-side-sub);
+  font-size: 13.5px;
+  border-radius: 8px;
+}
+
+.of-submenu-item:hover {
+  background: var(--nf-side-hover);
+  color: var(--nf-side-strong);
+}
+
+.of-submenu-item.active {
+  background: var(--nf-side-active);
+  color: var(--nf-side-active-text);
+  font-weight: 600;
+  box-shadow: 0 8px 18px -6px rgba(var(--nf-p-rgb), .65);
+}
+
+.of-submenu-static:hover {
+  background: transparent;
+  color: var(--nf-side-sub);
+}
+
+.of-submenu-badge {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  border-radius: 999px;
+  padding: 0 6px;
+}
+
+.of-sidebar-bottom {
+  padding-top: 10px;
+}
+
+.of-sidebar-foot {
+  margin-top: 12px;
+  padding: 10px;
+  gap: 10px;
+  border: 1px solid var(--nf-side-line);
+  border-radius: 14px;
+  background: var(--nf-side-foot);
+}
+
+.of-avatar {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+  box-shadow: 0 6px 14px -4px rgba(236, 72, 153, .6);
+}
+
+.of-sidebar-foot strong {
+  font-size: 14px;
+  color: var(--nf-side-strong);
+}
+
+.of-sidebar-foot p {
+  font-size: 12px;
+  color: var(--nf-side-sub);
+}
+
+.of-exit-link {
+  border-radius: 999px;
+  padding: 6px 11px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--nf-side-strong);
+  border-color: var(--nf-side-line);
+}
+
+.of-exit-link:hover {
+  background: var(--nf-side-hover);
+  color: var(--nf-side-strong);
+}
+
+/* ---------- Header ---------- */
+
+.of-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  margin: 0 0 14px;
+  padding: 12px 12px 6px;
+  background: color-mix(in srgb, var(--nf-bg) 84%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* .of-main has 12px padding; pull the header to its edges and stick to the very top */
+.of-main > .of-header {
+  top: -12px;
+  margin: -12px -12px 14px;
+}
+
+/* detail pages (affiliate / advertiser) use their own scroll container */
+.main-container > .content {
+  background: var(--nf-bg);
+}
+
+.of-topbar {
+  padding: 8px 10px;
+  border: 1px solid var(--nf-top-border);
+  border-radius: 14px;
+  background: var(--nf-top-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04), 0 8px 24px -16px rgba(15, 23, 42, .18);
+}
+
+.of-collapse-btn,
+.of-shortcuts {
+  border-color: var(--nf-top-border);
+  border-radius: 10px;
+  padding: 7px 11px;
+  background: var(--nf-top-btn-bg);
+  color: var(--nf-top-btn-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.of-collapse-btn:hover,
+.of-shortcuts:hover {
+  border-color: var(--nf-p200);
+  background: var(--nf-top-btn-bg);
+  color: var(--nf-p);
+}
+
+.of-top-actions {
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.of-top-actions > span {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--nf-chip-bg);
+  color: var(--nf-chip-text);
+  font-weight: 500;
+}
+
+.of-breadcrumb {
+  margin-top: 10px;
+  padding: 0 8px;
+  color: var(--nf-muted);
+  font-size: 12.5px;
+}
+
+.of-breadcrumb span:last-child {
+  color: var(--nf-text);
+  font-weight: 600;
+}
+
+/* Bootstrap underlines router links that render as nav buttons */
+.of-layout a.of-nav-btn,
+.of-layout a.of-submenu-item,
+.of-layout a.of-exit-link {
+  text-decoration: none;
+}
+
+/* ---------- Responsive: phones & tablets ---------- */
+
+.of-nav-backdrop {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  /* sidebar becomes a slide-out drawer opened by the header menu button */
+  .of-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1100;
+    width: min(280px, 86vw);
+    height: 100vh;
+    height: 100dvh;
+    transform: translateX(-105%);
+    transition: transform .25s ease;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, .35);
+  }
+
+  .of-sidebar.is-mobile-open {
+    transform: none;
+  }
+
+  .of-nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1090;
+    background: rgba(15, 23, 42, .45);
+    backdrop-filter: blur(2px);
+  }
+
+  .of-layout > .of-main,
+  .main-container > .content {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .of-topbar {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .of-top-actions {
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 640px) {
+  /* icon-only top bar buttons on phones */
+  .of-top-actions > span,
+  .of-shortcuts {
+    font-size: 0;
+    gap: 0;
+  }
+
+  .of-top-actions > span {
+    padding: 8px;
+  }
+
+  .of-top-actions .nf-theme-trigger > span:not(.nf-theme-dot) {
+    display: none;
+  }
+
+  .of-top-actions .nf-theme-trigger {
+    padding: 7px 9px;
+  }
+
+  .of-top-icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  .nf-theme-menu {
+    right: -90px;
+  }
+}
+
+/* ---------- Standalone auth pages (forgot password, signup, create account) ---------- */
+
+.forgot-wrapper,
+.signup-container,
+.create-user-container {
+  background:
+    radial-gradient(40% 50% at 12% 18%, rgba(var(--nf-p-rgb), .26), transparent 70%),
+    radial-gradient(35% 45% at 88% 12%, rgba(34, 211, 238, .2), transparent 70%),
+    radial-gradient(45% 55% at 75% 92%, rgba(var(--nf-p-rgb), .2), transparent 70%),
+    linear-gradient(180deg, #f8f9ff 0%, var(--nf-bg) 100%);
+}
+
+.forgot-box,
+.signup-card,
+.create-user-card {
+  border: 1px solid rgba(255, 255, 255, .7);
+  border-radius: 20px;
+  box-shadow: 0 30px 60px -30px rgba(30, 27, 75, .35), 0 1px 2px rgba(15, 23, 42, .05);
+}
+
+.nf-auth-brand {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+/* Page-level wrappers that paint their own full-width grey panel; let the
+   theme background show through instead. */
+.of-main main.mobile-attribution-page,
+.of-main main.suppression-page,
+.of-main main.nsp-page,
+.of-main main.live-offers-page,
+.of-main main.link-tester-page,
+.of-main main.cprofile-page,
+.of-main main.billing-page,
+.of-main main.automation-page,
+.of-main main.approved-offers-page,
+.of-main div.billing-page {
+  background: transparent;
+}
+
+/* ---------- Dark theme exceptions ----------
+   Setting a theme variable to `initial` makes var() use its fallback, i.e. the
+   original light colour, so these stay light even in a dark theme. */
+
+/* login / signup / password pages keep their light cards */
+.login-container,
+.forgot-wrapper,
+.signup-container,
+.create-user-container,
+/* partner logo chips keep their brand colours on a light chip */
+.offer-sync-logo-badge,
+.mobile-attribution-logo,
+.report-sync-logo-text,
+/* badges with their own coloured background */
+.billing-current-plan-badge,
+.smart-offer-badge {
+  --nf-surface: initial;
+  --nf-surface-2: initial;
+  --nf-surface-3: initial;
+  --nf-ink: initial;
+  --nf-ink-2: initial;
+  --nf-line: initial;
+}
+
+.login-container,
+.forgot-wrapper,
+.signup-container,
+.create-user-container {
+  color-scheme: light;
+  color: #1f2937;
+  --bs-body-color: #1f2937;
+  --nf-text: #0f172a;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --line: #e5e7f0;
+  --nf-muted: #64748b;
+  --nf-border: #e5e7f0;
+  --bs-link-color-rgb: 79, 70, 229;
+  --bs-link-hover-color-rgb: 67, 56, 202;
+}
+
+[data-bs-theme="dark"] .offer-sync-logo-badge:not(.offer-sync-logo-boxed),
+[data-bs-theme="dark"] .mobile-attribution-logo,
+[data-bs-theme="dark"] .report-sync-logo-text {
+  background-color: #f8f9fa;
 }

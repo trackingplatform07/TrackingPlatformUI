@@ -1,0 +1,109 @@
+.nf-theme {
+  position: relative;
+}
+
+.of-top-actions .nf-theme-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  margin: 0;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--nf-chip-bg);
+  color: var(--nf-chip-text);
+  font: 500 13px 'Inter', system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.of-top-actions .nf-theme-trigger:hover {
+  border-color: var(--nf-p200, #c7d2fe);
+}
+
+.nf-theme-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, .8);
+}
+
+.nf-theme-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 1000;
+  width: 232px;
+  padding: 8px;
+  border: 1px solid #e5e7f0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 20px 40px -16px rgba(15, 23, 42, .35);
+}
+
+.nf-theme-menu-title {
+  margin: 4px 8px 8px;
+  color: #64748b;
+  font: 600 11px 'Inter', system-ui, sans-serif;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.nf-theme-menu .nf-theme-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 8px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #0f172a;
+  font: 500 14px 'Inter', system-ui, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.nf-theme-menu .nf-theme-option:hover {
+  background: #f4f5fa;
+}
+
+.nf-theme-menu .nf-theme-option.is-active {
+  background: var(--nf-p50, #eef2ff);
+}
+
+.nf-theme-swatch {
+  display: inline-flex;
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 30px;
+  height: 20px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, .12);
+}
+
+.nf-theme-swatch span {
+  flex: 1;
+}
+
+.nf-theme-label {
+  flex: 1;
+}
+
+.nf-theme-check {
+  color: var(--nf-p, #4f46e5);
+  font-weight: 700;
+}
+
+/* a global span rule elsewhere collapses these; pin their size */
+.nf-theme-menu .nf-theme-swatch {
+  display: inline-flex;
+  height: 20px;
+}
+
+.nf-theme-menu .nf-theme-swatch span {
+  display: block;
+  flex: 1;
+  height: 100%;
+}

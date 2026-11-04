@@ -1,0 +1,244 @@
+/* Colour themes, selected with <html data-theme="...">  (see src/theme.js).
+   --nf-p* is the accent scale used by every page stylesheet (with the original
+   indigo as fallback); the --nf-side-*, --nf-top-* and --nf-bg* tokens colour
+   the sidebar, the top bar and the page background. */
+
+:root,
+[data-theme="indigo"] {
+  --nf-p400: #6366f1;
+  --nf-p: #4f46e5;
+  --nf-p600: #4338ca;
+  --nf-p700: #3730a3;
+  --nf-p50: #eef2ff;
+  --nf-p100: #e0e7ff;
+  --nf-p200: #c7d2fe;
+  --nf-p300: #a5b4fc;
+  --nf-p-rgb: 99, 102, 241;
+  --nf-accent2: #8b5cf6;
+
+  --nf-bg: #eceefb;
+  --nf-glow-a: rgba(99, 102, 241, .16);
+  --nf-glow-b: rgba(34, 211, 238, .12);
+
+  --nf-side-bg:
+    radial-gradient(120% 45% at 0% 0%, rgba(99, 102, 241, .38), transparent 62%),
+    radial-gradient(90% 35% at 100% 100%, rgba(34, 211, 238, .14), transparent 60%),
+    linear-gradient(180deg, #0f1029 0%, #141137 55%, #191446 100%);
+  --nf-side-border: rgba(255, 255, 255, .06);
+  --nf-side-line: rgba(255, 255, 255, .08);
+  --nf-side-text: #c9cbeb;
+  --nf-side-sub: #a9acd8;
+  --nf-side-icon: #8f93dc;
+  --nf-side-title: #8487c4;
+  --nf-side-hover: rgba(255, 255, 255, .07);
+  --nf-side-strong: #fff;
+  --nf-side-active: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+  --nf-side-active-text: #fff;
+  --nf-side-foot: rgba(255, 255, 255, .05);
+  --nf-side-scroll: rgba(255, 255, 255, .18);
+
+  --nf-top-bg: rgba(255, 255, 255, .78);
+  --nf-top-border: #e5e7f0;
+  --nf-top-btn-bg: #fff;
+  --nf-top-btn-text: #334155;
+  --nf-chip-bg: #f1f3fa;
+  --nf-chip-text: #475569;
+
+  --nf-hero:
+    radial-gradient(60% 120% at 100% 0%, rgba(34, 211, 238, .35), transparent 60%),
+    radial-gradient(50% 90% at 0% 100%, rgba(236, 72, 153, .25), transparent 60%),
+    linear-gradient(135deg, #4338ca 0%, #6d28d9 60%, #7c3aed 100%);
+}
+
+[data-theme="ocean"] {
+  --nf-p400: #0ea5e9;
+  --nf-p: #0284c7;
+  --nf-p600: #0369a1;
+  --nf-p700: #075985;
+  --nf-p50: #e0f2fe;
+  --nf-p100: #e0f2fe;
+  --nf-p200: #bae6fd;
+  --nf-p300: #7dd3fc;
+  --nf-p-rgb: 14, 165, 233;
+  --nf-accent2: #06b6d4;
+
+  --nf-bg: #e4f0fa;
+  --nf-glow-a: rgba(14, 165, 233, .18);
+  --nf-glow-b: rgba(20, 184, 166, .12);
+
+  --nf-side-bg:
+    radial-gradient(120% 45% at 0% 0%, rgba(14, 165, 233, .35), transparent 62%),
+    radial-gradient(90% 35% at 100% 100%, rgba(45, 212, 191, .16), transparent 60%),
+    linear-gradient(180deg, #071a33 0%, #0b2545 55%, #0d3257 100%);
+  --nf-side-text: #c6dcf0;
+  --nf-side-sub: #a3c3e0;
+  --nf-side-icon: #6fb5e6;
+  --nf-side-title: #7ea6c9;
+  --nf-side-active: linear-gradient(90deg, #0284c7 0%, #06b6d4 100%);
+
+  --nf-hero:
+    radial-gradient(60% 120% at 100% 0%, rgba(45, 212, 191, .4), transparent 60%),
+    linear-gradient(135deg, #075985 0%, #0284c7 60%, #0891b2 100%);
+}
+
+[data-theme="emerald"] {
+  --nf-p400: #10b981;
+  --nf-p: #059669;
+  --nf-p600: #047857;
+  --nf-p700: #065f46;
+  --nf-p50: #ecfdf5;
+  --nf-p100: #d1fae5;
+  --nf-p200: #a7f3d0;
+  --nf-p300: #6ee7b7;
+  --nf-p-rgb: 16, 185, 129;
+  --nf-accent2: #14b8a6;
+
+  --nf-bg: #e3f3ea;
+  --nf-glow-a: rgba(16, 185, 129, .18);
+  --nf-glow-b: rgba(132, 204, 22, .12);
+
+  --nf-side-bg:
+    radial-gradient(120% 45% at 0% 0%, rgba(16, 185, 129, .32), transparent 62%),
+    radial-gradient(90% 35% at 100% 100%, rgba(163, 230, 53, .12), transparent 60%),
+    linear-gradient(180deg, #03201a 0%, #04291f 55%, #063528 100%);
+  --nf-side-text: #c3e6d8;
+  --nf-side-sub: #9fd1bd;
+  --nf-side-icon: #5fcf9f;
+  --nf-side-title: #77b39b;
+  --nf-side-active: linear-gradient(90deg, #059669 0%, #14b8a6 100%);
+
+  --nf-hero:
+    radial-gradient(60% 120% at 100% 0%, rgba(163, 230, 53, .3), transparent 60%),
+    linear-gradient(135deg, #065f46 0%, #059669 60%, #0d9488 100%);
+}
+
+[data-theme="sunset"] {
+  --nf-p400: #f43f5e;
+  --nf-p: #e11d48;
+  --nf-p600: #be123c;
+  --nf-p700: #9f1239;
+  --nf-p50: #fff1f2;
+  --nf-p100: #ffe4e6;
+  --nf-p200: #fecdd3;
+  --nf-p300: #fda4af;
+  --nf-p-rgb: 244, 63, 94;
+  --nf-accent2: #f97316;
+
+  --nf-bg: #fbe9ed;
+  --nf-glow-a: rgba(244, 63, 94, .16);
+  --nf-glow-b: rgba(249, 115, 22, .12);
+
+  --nf-side-bg:
+    radial-gradient(120% 45% at 0% 0%, rgba(244, 63, 94, .32), transparent 62%),
+    radial-gradient(90% 35% at 100% 100%, rgba(249, 115, 22, .16), transparent 60%),
+    linear-gradient(180deg, #22081a 0%, #2d0b1e 55%, #3a0f24 100%);
+  --nf-side-text: #f0cdd6;
+  --nf-side-sub: #ddaab8;
+  --nf-side-icon: #f08aa0;
+  --nf-side-title: #c48a9a;
+  --nf-side-active: linear-gradient(90deg, #e11d48 0%, #f97316 100%);
+
+  --nf-hero:
+    radial-gradient(60% 120% at 100% 0%, rgba(251, 191, 36, .35), transparent 60%),
+    linear-gradient(135deg, #9f1239 0%, #e11d48 60%, #f97316 100%);
+}
+
+[data-theme="royal"] {
+  --nf-p400: #8b5cf6;
+  --nf-p: #7c3aed;
+  --nf-p600: #6d28d9;
+  --nf-p700: #5b21b6;
+  --nf-p50: #f5f3ff;
+  --nf-p100: #ede9fe;
+  --nf-p200: #ddd6fe;
+  --nf-p300: #c4b5fd;
+  --nf-p-rgb: 139, 92, 246;
+  --nf-accent2: #d946ef;
+
+  --nf-bg: #efe8fb;
+  --nf-glow-a: rgba(139, 92, 246, .18);
+  --nf-glow-b: rgba(217, 70, 239, .12);
+
+  --nf-side-bg:
+    radial-gradient(120% 45% at 0% 0%, rgba(139, 92, 246, .4), transparent 62%),
+    radial-gradient(90% 35% at 100% 100%, rgba(217, 70, 239, .16), transparent 60%),
+    linear-gradient(180deg, #170830 0%, #1e0b3a 55%, #270e4a 100%);
+  --nf-side-text: #dccff5;
+  --nf-side-sub: #bfaee6;
+  --nf-side-icon: #a98bf0;
+  --nf-side-title: #9c88c9;
+  --nf-side-active: linear-gradient(90deg, #7c3aed 0%, #d946ef 100%);
+
+  --nf-hero:
+    radial-gradient(60% 120% at 100% 0%, rgba(217, 70, 239, .4), transparent 60%),
+    linear-gradient(135deg, #5b21b6 0%, #7c3aed 60%, #a21caf 100%);
+}
+
+[data-theme="light"] {
+  --nf-bg: #f5f6f8;
+  --nf-glow-a: rgba(99, 102, 241, .04);
+  --nf-glow-b: rgba(34, 211, 238, .03);
+
+  --nf-side-bg: #ffffff;
+  --nf-side-border: #e5e7eb;
+  --nf-side-line: #eef0f4;
+  --nf-side-text: #334155;
+  --nf-side-sub: #64748b;
+  --nf-side-icon: #94a3b8;
+  --nf-side-title: #94a3b8;
+  --nf-side-hover: #f4f5fa;
+  --nf-side-strong: #0f172a;
+  --nf-side-active: linear-gradient(90deg, #4f46e5 0%, #6366f1 100%);
+  --nf-side-foot: #f8fafc;
+  --nf-side-scroll: #cbd5e1;
+}
+
+[data-theme="graphite"] {
+  --nf-p400: #3b82f6;
+  --nf-p: #2563eb;
+  --nf-p600: #1d4ed8;
+  --nf-p700: #1e40af;
+  --nf-p50: rgba(59, 130, 246, .14);
+  --nf-p100: rgba(59, 130, 246, .22);
+  --nf-p200: #1e40af;
+  --nf-p300: #93c5fd;
+  --nf-p-rgb: 59, 130, 246;
+  --nf-accent2: #6366f1;
+
+  --nf-bg: #0f1115;
+  --nf-glow-a: rgba(59, 130, 246, .10);
+  --nf-glow-b: rgba(99, 102, 241, .06);
+
+  /* dark page surfaces, text and borders (page stylesheets fall back to
+     their original light colours in every other theme) */
+  color-scheme: dark;
+  --nf-surface: #181b21;
+  --nf-surface-2: #1f232b;
+  --nf-surface-3: #2a2f38;
+  --nf-ink: #e5e7eb;
+  --nf-ink-2: #9aa3b2;
+  --nf-line: #2c313a;
+  --nf-text: #e5e7eb;
+  --nf-muted: #9aa3b2;
+  --nf-border: #2c313a;
+
+  --nf-side-bg:
+    radial-gradient(120% 40% at 0% 0%, rgba(59, 130, 246, .18), transparent 62%),
+    linear-gradient(180deg, #0c0c0e 0%, #111113 55%, #18181b 100%);
+  --nf-side-text: #d4d4d8;
+  --nf-side-sub: #a1a1aa;
+  --nf-side-icon: #71717a;
+  --nf-side-title: #71717a;
+  --nf-side-active: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+
+  --nf-top-bg: rgba(24, 24, 27, .92);
+  --nf-top-border: #27272a;
+  --nf-top-btn-bg: #27272a;
+  --nf-top-btn-text: #e4e4e7;
+  --nf-chip-bg: #27272a;
+  --nf-chip-text: #d4d4d8;
+
+  --nf-hero:
+    radial-gradient(60% 120% at 100% 0%, rgba(59, 130, 246, .35), transparent 60%),
+    linear-gradient(135deg, #18181b 0%, #27272a 55%, #1e3a8a 100%);
+}

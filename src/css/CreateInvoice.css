@@ -11,10 +11,10 @@
 }
 
 .invoice-box {
-  background: #fff;
+  background: var(--nf-surface, #fff);
   border-radius: 10px;
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--nf-line, #ddd);
 }
 
 /* Grid */
@@ -39,7 +39,7 @@
 .form-group select {
   padding: 8px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--nf-line, #ccc);
 }
 
 /* Flex */
@@ -58,8 +58,8 @@
 .btn {
   padding: 6px 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid var(--nf-line, #ccc);
+  background: var(--nf-surface, #fff);
   cursor: pointer;
 }
 

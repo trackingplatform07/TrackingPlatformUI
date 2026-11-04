@@ -13,7 +13,7 @@ const TODAY_STATS = [
 ];
 
 const INTEGRATED_PARTNERS = [
-  { name: "Offer18", color: "#f27f2c", style: "italic" },
+  { name: "Nexa Fliker", color: "#6d28d9", style: "italic" },
   { name: "Avazu2.2", color: "#e0263e", style: "bold" },
   { name: "Cake", color: "#1a1a2e", style: "boxed" },
   { name: "8lions", color: "#b8860b", style: "serif" },
@@ -118,9 +118,9 @@ export default function OfferSyncPage() {
           </h3>
           <div className="offer-sync-partners-grid offer-sync-active-grid">
             <div className="mobile-attribution-card offer-sync-partner-card">
-              <p className="mobile-attribution-card-name">Offer18</p>
-              <div className="offer-sync-logo-badge logo-offer18">Offer18</div>
-              <p className="offer-sync-partner-subname">Offer18</p>
+              <p className="mobile-attribution-card-name">Nexa Fliker</p>
+              <div className="offer-sync-logo-badge logo-offer18">Nexa Fliker</div>
+              <p className="offer-sync-partner-subname">Nexa Fliker</p>
               <div className="mobile-attribution-card-buttons">
                 <button type="button" className="mobile-attribution-btn offer-sync-manage-btn">
                   Manage <span aria-hidden="true">▾</span>
@@ -153,7 +153,7 @@ export default function OfferSyncPage() {
                     >
                       <span aria-hidden="true">+</span> Setup
                     </button>
-                    {partner.name === "Offer18" && (
+                    {partner.name === "Nexa Fliker" && (
                       <button type="button" className="mobile-attribution-btn offer-sync-manage-btn">
                         Manage <span aria-hidden="true">▾</span>
                       </button>

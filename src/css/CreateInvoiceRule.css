@@ -8,7 +8,7 @@
   align-items: center;
   margin-bottom: 20px;
 
-  background: #fff;
+  background: var(--nf-surface, #fff);
   padding: 16px 20px;
   border-radius: 14px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
@@ -19,13 +19,13 @@
   font-size: 20px;
   font-weight: 600;
   margin: 0;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
 }
 
 /* Breadcrumb */
 .breadcrumb {
   font-size: 12px;
-  color: #6b7280;
+  color: var(--nf-ink-2, #6b7280);
 }
 
 /* 👉 Button ko right push karne ka main fix */
@@ -38,10 +38,10 @@
 
 /* Form */
 .rule-form {
-  background: #fff;
+  background: var(--nf-surface, #fff);
   border-radius: 10px;
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--nf-line, #ddd);
   max-width: 600px;
 }
 
@@ -61,7 +61,7 @@
 .form-group select {
   padding: 8px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--nf-line, #ccc);
 }
 
 /* Flex row */
@@ -90,8 +90,8 @@
 .btn {
   padding: 6px 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid var(--nf-line, #ccc);
+  background: var(--nf-surface, #fff);
   cursor: pointer;
 }
 

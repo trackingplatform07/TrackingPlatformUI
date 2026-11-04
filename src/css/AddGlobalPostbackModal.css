@@ -14,7 +14,7 @@
 }
 
 .modal-box-gp {
-  background: white;
+  background: var(--nf-surface, white);
   border-radius: 14px;
   width: 90%;
   max-width: 800px;
@@ -33,7 +33,7 @@
   font-size: 28px;
   line-height: 1;
   cursor: pointer;
-  color: #999;
+  color: var(--nf-ink-2, #999);
   z-index: 10;
   padding: 0;
   width: 32px;
@@ -46,13 +46,13 @@
 }
 
 .close-btn-gp:hover {
-  color: #000;
-  background-color: #f0f0f0;
+  color: var(--nf-ink, #000);
+  background-color: var(--nf-surface-2, #f0f0f0);
 }
 
 .modal-header-gp {
   padding: 20px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--nf-line, #e5e7eb);
   position: relative;
   padding-right: 50px; /* Space for close button */
 }
@@ -110,7 +110,7 @@
 .textarea-gp {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--nf-line, #d1d5db);
   border-radius: 8px;
   font-size: 14px;
 }
@@ -120,7 +120,7 @@
 }
 
 .text-muted-gp {
-  color: #6b7280;
+  color: var(--nf-ink-2, #6b7280);
 }
 
 .text-xs-gp {
@@ -143,13 +143,13 @@
 .advance-setup-gp {
   margin-top: 16px;
   padding: 16px;
-  background: #f9fafb;
+  background: var(--nf-surface-2, #f9fafb);
   border-radius: 6px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--nf-line, #e5e7eb);
 }
 
 .fieldset-gp {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--nf-line, #e5e7eb);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;
@@ -169,20 +169,20 @@
 
 .btn-outline-gp {
   padding: 6px 12px;
-  background: white;
-  border: 1px solid #d1d5db;
+  background: var(--nf-surface, white);
+  border: 1px solid var(--nf-line, #d1d5db);
   border-radius: 8px;
   cursor: pointer;
   font-size: 13px;
 }
 
 .btn-outline-gp:hover {
-  background: #f9fafb;
+  background: var(--nf-surface-2, #f9fafb);
 }
 
 .btn-primary-gp {
   padding: 8px 20px;
-  background: #6366f1;
+  background: var(--nf-p400, #6366f1);
   color: white;
   border: none;
   border-radius: 8px;
@@ -194,7 +194,7 @@
 }
 
 .btn-primary-gp:hover {
-  background: #4f46e5;
+  background: var(--nf-p, #4f46e5);
 }
 
 .btn-primary-gp:disabled {
@@ -205,7 +205,7 @@
 .submit-row-gp {
   margin-top: 24px;
   padding-top: 16px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--nf-line, #e5e7eb);
 }
 
 .partner-template-gp {
@@ -214,7 +214,7 @@
 
 .alert-info-gp {
   padding: 12px;
-  background: #e0f2fe;
+  background: var(--nf-surface-2, #e0f2fe);
   border: 1px solid #bae6fd;
   border-radius: 8px;
   color: #0369a1;
@@ -250,7 +250,7 @@
 .tokens-table-container-gp {
   max-height: 300px;
   overflow-y: auto;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--nf-line, #e5e7eb);
   border-radius: 6px;
 }
 
@@ -260,11 +260,11 @@
 }
 
 .table-gp tbody tr {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--nf-line, #e5e7eb);
 }
 
 .table-gp tbody tr:hover {
-  background: #f9fafb;
+  background: var(--nf-surface-2, #f9fafb);
 }
 
 .token-label-gp {
@@ -277,16 +277,16 @@
 .token-input-gp {
   width: 100%;
   padding: 6px 10px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--nf-line, #e5e7eb);
   border-radius: 8px;
   font-size: 12px;
   font-family: monospace;
-  background: #f9fafb;
+  background: var(--nf-surface-2, #f9fafb);
 }
 
 .token-input-gp:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: var(--nf-p400, #6366f1);
 }
 
 @media (max-width: 768px) {
@@ -334,13 +334,13 @@
 }
 
 .checkbox-text-gp {
-  color: #6b7280;
+  color: var(--nf-ink-2, #6b7280);
   font-size: 12px;
   font-weight: normal;
 }
 
 .checkbox-label-gp:hover .checkbox-text-gp {
-  color: #374151;
+  color: var(--nf-ink, #374151);
 }
 
 .checkbox-label-gp input[type="checkbox"]:disabled {

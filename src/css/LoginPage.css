@@ -1,7 +1,7 @@
 /* Reset & Variables */
 :root {
-  --primary-color: #4f46e5;
-  --primary-hover: #4338ca;
+  --primary-color: var(--nf-p, #4f46e5);
+  --primary-hover: var(--nf-p600, #4338ca);
   --bg-color: #f3f4f6;
   --card-bg: #ffffff;
   --text-main: #1f2937;
@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
+  background: linear-gradient(135deg, var(--nf-p100, #e0e7ff) 0%, #f3f4f6 100%);
   padding: 1rem;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -329,7 +329,7 @@
 }
 
 .submit-btn:disabled {
-  background-color: #a5b4fc;
+  background-color: var(--nf-p300, #a5b4fc);
   cursor: not-allowed;
 }
 
@@ -408,4 +408,114 @@
 }
 .button-pass {
   width: 20% !important;
+}
+/* ---------- Nexa Fliker refresh (visual only) ---------- */
+
+.login-container {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(40% 50% at 12% 18%, rgba(var(--nf-p-rgb), .28), transparent 70%),
+    radial-gradient(35% 45% at 88% 12%, rgba(34, 211, 238, .22), transparent 70%),
+    radial-gradient(45% 55% at 75% 92%, rgba(var(--nf-p-rgb), .2), transparent 70%),
+    linear-gradient(180deg, #f8f9ff 0%, #eef1fb 100%);
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(var(--nf-p-rgb), .12) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+
+.login-container > .container {
+  position: relative;
+}
+
+.login-card {
+  border: 1px solid rgba(255, 255, 255, .7);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, .86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 30px 60px -30px rgba(30, 27, 75, .35), 0 1px 2px rgba(15, 23, 42, .05);
+}
+
+.login-header {
+  margin-bottom: 1.75rem;
+}
+
+.login-brand {
+  margin-bottom: 1.5rem;
+}
+
+.login-brand .nf-brand-mark {
+  width: 40px;
+  height: 40px;
+}
+
+.login-brand .nf-brand-name {
+  font-size: 22px;
+}
+
+.login-header .brand-logo {
+  margin-bottom: .35rem;
+  font-size: 1.6rem;
+  color: #0f172a;
+}
+
+.form-group input,
+.form-group select,
+.password-wrapper input {
+  border-color: #e2e8f0;
+  border-radius: 12px;
+  background-color: #f8fafc;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.password-wrapper input:focus {
+  background-color: #fff;
+}
+
+.captcha-display,
+.refresh-captcha {
+  border-color: #e2e8f0;
+  border-radius: 12px;
+}
+
+.login-card .submit-btn {
+  /* a global .submit-btn rule from another page shifts this button */
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--nf-p, #4f46e5) 0%, var(--nf-accent2, #7c3aed) 100%);
+  box-shadow: 0 12px 24px -12px rgba(var(--nf-p-rgb), .8);
+  letter-spacing: .2px;
+}
+
+.login-card .submit-btn:hover {
+  background: linear-gradient(90deg, var(--nf-p600, #4338ca) 0%, var(--nf-p700, #6d28d9) 100%);
+}
+
+.login-card .submit-btn:disabled {
+  background: var(--nf-p300, #a5b4fc);
+  box-shadow: none;
+}
+
+.info-card {
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .78);
+  border: 1px solid rgba(255, 255, 255, .8);
+  box-shadow: 0 20px 40px -28px rgba(30, 27, 75, .4);
+}
+
+.signup-btn {
+  border-radius: 12px;
+  font-weight: 600;
 }

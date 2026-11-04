@@ -20,8 +20,8 @@
 .btn {
   padding: 6px 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid var(--nf-line, #ccc);
+  background: var(--nf-surface, #fff);
   cursor: pointer;
 }
 
@@ -40,9 +40,9 @@
 
 /* Table */
 .settings-table-wrapper {
-  background: #fff;
+  background: var(--nf-surface, #fff);
   border-radius: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--nf-line, #ddd);
   overflow: hidden;
 }
 
@@ -54,12 +54,12 @@
 .settings-table th,
 .settings-table td {
   padding: 12px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--nf-line, #eee);
   font-size: 14px;
 }
 
 .settings-table th {
-  background: #f9fafb;
+  background: var(--nf-surface-2, #f9fafb);
   font-weight: 600;
 }
 
@@ -67,5 +67,5 @@
 .no-data {
   text-align: center;
   padding: 40px;
-  color: #888;
+  color: var(--nf-ink-2, #888);
 }

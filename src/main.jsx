@@ -5,6 +5,10 @@ import './css/index.css'
 import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/theme-enhance.css'
+import './css/themes.css'
+import { applyTheme, getSavedTheme } from './theme'
+
+applyTheme(getSavedTheme())
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

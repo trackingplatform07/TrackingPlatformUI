@@ -27,7 +27,7 @@
 }
 
 .otp-logo-otp {
-  border: 1px solid #d7dee5;
+  border: 1px solid var(--nf-line, #d7dee5);
   font: 700 12px 'Inter', Arial, sans-serif;
 }
 

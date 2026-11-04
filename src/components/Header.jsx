@@ -1,11 +1,22 @@
 import React from 'react';
 import Icon from './Icon';
+import ThemePicker from './ThemePicker';
 import { useLocation } from 'react-router-dom';
 import '../css/Header.css';
 
-const Header = ({ isSidebarCollapsed, onToggleSidebar }) => {
+const Header = ({ isSidebarCollapsed, onToggleSidebar, onMenuClick }) => {
 
   const location = useLocation();
+
+  // On phones/tablets the sidebar is a slide-out drawer owned by <Sidebar />;
+  // on desktop the button keeps collapsing/expanding it as before.
+  const handleMenuClick = () => {
+    if (window.matchMedia('(max-width: 991px)').matches) {
+      window.dispatchEvent(new Event('nf:toggle-nav'));
+    } else {
+      (onToggleSidebar || onMenuClick)?.();
+    }
+  };
 
   const getPageName = () => {
     const path = location.pathname;
@@ -28,7 +39,7 @@ const Header = ({ isSidebarCollapsed, onToggleSidebar }) => {
           <button
             type="button"
             className="of-collapse-btn"
-            onClick={onToggleSidebar}
+            onClick={handleMenuClick}
             aria-label={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
             <Icon name="menu" className="of-top-icon" />
@@ -42,6 +53,8 @@ const Header = ({ isSidebarCollapsed, onToggleSidebar }) => {
         </div>
 
         <div className="of-top-actions">
+
+          <ThemePicker />
 
           <span>
             <Icon name="spark" className="of-top-icon" />

@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import Icon from './components/Icon';
+import BrandLogo from './components/BrandLogo';
+import { BRAND_NAME, BRAND_TAGLINE } from './brand';
 import './css/Dashboard.css';
+
+const quickLinks = [
+  { title: 'Affiliates', sub: 'Partners & payouts', path: '/affiliates', icon: 'users' },
+  { title: 'Advertisers', sub: 'Accounts & billing', path: '/advertisers', icon: 'user' },
+  { title: 'Create Offer', sub: 'Launch a campaign', path: '/offers/create', icon: 'offers' },
+  { title: 'Reports', sub: 'Clicks & conversions', path: '/reports', icon: 'reports' },
+];
 
 const Dashboard = () => {
   const metrics = [
@@ -26,12 +37,29 @@ const Dashboard = () => {
               onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
             />
     
-            <div style={{padding:"30px"}}>
-    
-              <h2>Dashbord</h2>
-    
-              <p>Welcome to the Dashbord page.</p>
-    
+            <div className="nf-dash">
+
+              <section className="nf-hero">
+                <div>
+                  <p className="nf-hero-eyebrow">Dashboard</p>
+                  <h2>Welcome to {BRAND_NAME}</h2>
+                  <p>{BRAND_TAGLINE}. Manage affiliates, advertisers, offers and reports from one place.</p>
+                </div>
+                <BrandLogo showName={false} className="nf-hero-mark" />
+              </section>
+
+              <div className="nf-quick-grid">
+                {quickLinks.map((link) => (
+                  <Link to={link.path} className="nf-quick-card" key={link.path}>
+                    <span className="nf-quick-icon"><Icon name={link.icon} /></span>
+                    <span>
+                      <strong>{link.title}</strong>
+                      <small>{link.sub}</small>
+                    </span>
+                  </Link>
+                ))}
+              </div>
+
             </div>
     
           </div>

@@ -647,7 +647,7 @@ export default function SettingsPage() {
         body: JSON.stringify({
           recipients: testEmail.trim(),
           subject: "Test Email",
-          body: "This is a test email sent from your Offer18 SMTP settings.",
+          body: "This is a test email sent from your Nexa Fliker SMTP settings.",
           schedule: "Send Now",
           recipientCount: 1,
         }),

@@ -1,6 +1,6 @@
 .link-tester-page {
   padding: 16px;
-  background: #eef2f5;
+  background: var(--nf-surface-2, #eef2f5);
 }
 
 .link-tester-layout {
@@ -12,7 +12,7 @@
 
 .link-tester-card,
 .link-tester-form-card {
-  background: #fff;
+  background: var(--nf-surface, #fff);
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 18px 22px;
@@ -34,7 +34,7 @@
   align-items: center;
   gap: 8px;
   margin: 0;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 16px;
 }
 
@@ -51,7 +51,7 @@
   padding: 0 12px;
   border: 0;
   border-radius: 5px;
-  background: #3730a3;
+  background: var(--nf-p700, #3730a3);
   color: #fff;
   cursor: pointer;
   font: 700 11px 'Inter', Arial, sans-serif;
@@ -70,7 +70,7 @@
   padding: 0 12px;
   border: 1px solid #f3a3a3;
   border-radius: 5px;
-  background: #fff;
+  background: var(--nf-surface, #fff);
   color: #c0392b;
   cursor: pointer;
   font: 700 11px 'Inter', Arial, sans-serif;
@@ -83,16 +83,16 @@
 
 .link-tester-table th {
   padding: 8px 6px;
-  border-bottom: 1px solid #e6ebf0;
+  border-bottom: 1px solid var(--nf-line, #e6ebf0);
   text-align: left;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 12px;
 }
 
 .link-tester-table td {
   padding: 10px 6px;
-  border-bottom: 1px solid #eef1f3;
-  color: #1f2937;
+  border-bottom: 1px solid var(--nf-line, #eef1f3);
+  color: var(--nf-ink, #1f2937);
   font-size: 13px;
 }
 
@@ -106,7 +106,7 @@
 .link-tester-empty {
   text-align: center;
   padding: 30px 0;
-  color: #6b7684;
+  color: var(--nf-ink-2, #6b7684);
 }
 
 .link-tester-link {
@@ -114,7 +114,7 @@
   border: 0;
   background: transparent;
   padding: 0;
-  color: #4f46e5;
+  color: var(--nf-p, #4f46e5);
   cursor: pointer;
   font-size: 13px;
 }
@@ -136,7 +136,7 @@
 }
 
 .link-tester-usage-card {
-  background: #fff;
+  background: var(--nf-surface, #fff);
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 16px 18px;
@@ -144,7 +144,7 @@
 
 .link-tester-usage-card h3 {
   margin: 0 0 12px;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 14px;
 }
 
@@ -153,7 +153,7 @@
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 12px;
 }
 
@@ -185,15 +185,15 @@
   border: 0;
   background: transparent;
   padding: 8px 4px;
-  color: #6b7684;
+  color: var(--nf-ink-2, #6b7684);
   cursor: pointer;
   font: 700 11px 'Inter', Arial, sans-serif;
   letter-spacing: .3px;
 }
 
 .link-tester-form-sidebar button.active {
-  color: #4f46e5;
-  border-bottom: 2px solid #4f46e5;
+  color: var(--nf-p, #4f46e5);
+  border-bottom: 2px solid var(--nf-p, #4f46e5);
 }
 
 .link-tester-form-content h4 {
@@ -201,12 +201,12 @@
   align-items: center;
   gap: 8px;
   margin: 4px 0 14px;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 13px;
 }
 
 .link-tester-form-content h4 small {
-  color: #8a94a3;
+  color: var(--nf-ink-2, #8a94a3);
   font-weight: 400;
   font-size: 11px;
 }
@@ -220,7 +220,7 @@
 }
 
 .link-tester-field label {
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font: 700 12px 'Inter', Arial, sans-serif;
 }
 
@@ -228,21 +228,21 @@
 .link-tester-field select {
   height: 34px;
   padding: 0 10px;
-  border: 1px solid #d7dee5;
+  border: 1px solid var(--nf-line, #d7dee5);
   border-radius: 8px;
-  background: #f7f8fa;
-  color: #1f2937;
+  background: var(--nf-surface-2, #f7f8fa);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 
 .link-tester-hint {
-  color: #4f46e5;
+  color: var(--nf-p, #4f46e5);
   font-size: 11px;
 }
 
 .link-tester-divider {
   border: 0;
-  border-top: 1px solid #e6ebf0;
+  border-top: 1px solid var(--nf-line, #e6ebf0);
   margin: 4px 0 16px;
 }
 
@@ -257,15 +257,15 @@
   gap: 6px;
   min-height: 34px;
   padding: 4px 28px 4px 8px;
-  border: 1px solid #d7dee5;
+  border: 1px solid var(--nf-line, #d7dee5);
   border-radius: 8px;
-  background: #f7f8fa;
+  background: var(--nf-surface-2, #f7f8fa);
   cursor: pointer;
   position: relative;
 }
 
 .link-tester-multiselect-placeholder {
-  color: #8a94a3;
+  color: var(--nf-ink-2, #8a94a3);
   font-size: 13px;
 }
 
@@ -275,8 +275,8 @@
   height: 22px;
   padding: 0 8px;
   border-radius: 8px;
-  background: #eef2f5;
-  color: #1f2937;
+  background: var(--nf-surface-2, #eef2f5);
+  color: var(--nf-ink, #1f2937);
   font-size: 12px;
 }
 
@@ -285,7 +285,7 @@
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  color: #8a94a3;
+  color: var(--nf-ink-2, #8a94a3);
 }
 
 .link-tester-multiselect-dropdown {
@@ -294,9 +294,9 @@
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  border: 1px solid #e6ebf0;
+  border: 1px solid var(--nf-line, #e6ebf0);
   border-radius: 6px;
-  background: #fff;
+  background: var(--nf-surface, #fff);
   box-shadow: 0 3px 12px rgba(15, 23, 42, .14);
   padding: 6px 0;
 }
@@ -306,13 +306,13 @@
   align-items: center;
   gap: 8px;
   padding: 6px 12px;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 12px;
   cursor: pointer;
 }
 
 .link-tester-multiselect-dropdown label:hover {
-  background: #f5f7f9;
+  background: var(--nf-surface-2, #f5f7f9);
 }
 
 .link-tester-toggle-field {
@@ -323,7 +323,7 @@
 }
 
 .link-tester-toggle-field label {
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font: 700 12px 'Inter', Arial, sans-serif;
   min-width: 140px;
 }
@@ -334,7 +334,7 @@
   height: 20px;
   border: 0;
   border-radius: 20px;
-  background: #cfd6dc;
+  background: var(--nf-surface-3, #cfd6dc);
   cursor: pointer;
   padding: 0;
 }
@@ -346,12 +346,12 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--nf-surface, #fff);
   transition: left .15s;
 }
 
 .link-tester-switch.on {
-  background: #4f46e5;
+  background: var(--nf-p, #4f46e5);
 }
 
 .link-tester-switch.on span {
@@ -392,10 +392,10 @@
 .link-tester-result-box {
   height: 220px;
   padding: 10px;
-  border: 1px solid #d7dee5;
+  border: 1px solid var(--nf-line, #d7dee5);
   border-radius: 8px;
-  background: #fff;
-  color: #1f2937;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-ink, #1f2937);
   font: 12px monospace;
   resize: vertical;
   white-space: pre-wrap;

@@ -3,8 +3,8 @@
 }
 
 .short-url-card {
-  background: #fff;
-  border: 1px solid #e6ebf0;
+  background: var(--nf-surface, #fff);
+  border: 1px solid var(--nf-line, #e6ebf0);
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(15, 23, 42, .06);
   padding: 16px 20px;
@@ -25,7 +25,7 @@
   align-items: center;
   gap: 8px;
   margin: 0;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 15px;
 }
 
@@ -43,7 +43,7 @@
   height: 30px;
   border: 0;
   border-radius: 5px;
-  background: #3730a3;
+  background: var(--nf-p700, #3730a3);
   color: #fff;
   padding: 0 12px;
   font-size: 11px;
@@ -62,14 +62,14 @@
   gap: 6px;
   height: 30px;
   padding: 0 9px;
-  border: 1px solid #bdc9d2;
+  border: 1px solid var(--nf-line, #bdc9d2);
   border-radius: 6px;
 }
 
 .short-url-search input {
   border: 0;
   outline: 0;
-  color: #263945;
+  color: var(--nf-ink, #263945);
   font-size: 11px;
   width: 140px;
 }
@@ -78,7 +78,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #263945;
+  color: var(--nf-ink, #263945);
   font-size: 11px;
 }
 
@@ -86,20 +86,20 @@
   width: 50px;
   height: 28px;
   padding: 0 6px;
-  border: 1px solid #bdc9d2;
+  border: 1px solid var(--nf-line, #bdc9d2);
   border-radius: 5px;
-  background: #fff;
-  color: #263945;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-ink, #263945);
   font-size: 11px;
 }
 
 .short-url-filter-btn {
   width: 30px;
   height: 30px;
-  border: 1px solid #bdc9d2;
+  border: 1px solid var(--nf-line, #bdc9d2);
   border-radius: 6px;
-  background: #fff;
-  color: #4a5568;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-ink-2, #4a5568);
   cursor: pointer;
 }
 
@@ -117,7 +117,7 @@
   max-width: calc(100vw - 20px);
   height: 100%;
   overflow-y: auto;
-  background: #fff;
+  background: var(--nf-surface, #fff);
   box-shadow: -6px 0 24px rgba(15, 23, 42, .15);
   display: flex;
   flex-direction: column;
@@ -128,7 +128,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 18px;
-  border-bottom: 1px solid #e6ebf0;
+  border-bottom: 1px solid var(--nf-line, #e6ebf0);
 }
 
 .short-url-filters-header h2 {
@@ -136,14 +136,14 @@
   align-items: center;
   gap: 8px;
   margin: 0;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 15px;
 }
 
 .short-url-filters-header button {
   border: 0;
   background: transparent;
-  color: #6b7684;
+  color: var(--nf-ink-2, #6b7684);
   font: 700 18px 'Inter', Arial, sans-serif;
   cursor: pointer;
 }
@@ -160,9 +160,9 @@
   width: 100%;
   height: 44px;
   border: 0;
-  border-bottom: 1px solid #e6ebf0;
+  border-bottom: 1px solid var(--nf-line, #e6ebf0);
   background: transparent;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font: 700 13px 'Inter', Arial, sans-serif;
   text-align: left;
   cursor: pointer;
@@ -182,17 +182,17 @@
 }
 
 .short-url-filters-field label {
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .short-url-filters-field select {
   height: 34px;
   padding: 0 10px;
-  border: 1px solid #d7dee5;
+  border: 1px solid var(--nf-line, #d7dee5);
   border-radius: 8px;
-  background: #f7f8fa;
-  color: #1f2937;
+  background: var(--nf-surface-2, #f7f8fa);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 
@@ -213,15 +213,15 @@
   height: 26px;
   padding: 0 8px;
   border-radius: 8px;
-  background: #eef2f5;
-  color: #1f2937;
+  background: var(--nf-surface-2, #eef2f5);
+  color: var(--nf-ink, #1f2937);
   font-size: 12px;
 }
 
 .short-url-filters-chip button {
   border: 0;
   background: transparent;
-  color: #8a94a3;
+  color: var(--nf-ink-2, #8a94a3);
   cursor: pointer;
   font-size: 12px;
   padding: 0;
@@ -233,8 +233,8 @@
   display: flex;
   justify-content: flex-end;
   padding: 14px 18px;
-  background: #fff;
-  border-top: 1px solid #e6ebf0;
+  background: var(--nf-surface, #fff);
+  border-top: 1px solid var(--nf-line, #e6ebf0);
 }
 
 .short-url-table-scroll {
@@ -248,28 +248,28 @@
 
 .short-url-table th {
   padding: 8px 6px;
-  border-bottom: 1px solid #e6ebf0;
+  border-bottom: 1px solid var(--nf-line, #e6ebf0);
   text-align: left;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font-size: 12px;
   white-space: nowrap;
 }
 
 .short-url-table td {
   padding: 10px 6px;
-  border-bottom: 1px solid #eef1f3;
-  color: #1f2937;
+  border-bottom: 1px solid var(--nf-line, #eef1f3);
+  color: var(--nf-ink, #1f2937);
   font-size: 13px;
 }
 
 .short-url-message {
   text-align: center;
   padding: 30px 0;
-  color: #6b7684;
+  color: var(--nf-ink-2, #6b7684);
 }
 
 .short-url-code {
-  color: #4f46e5;
+  color: var(--nf-p, #4f46e5);
   font-weight: 700;
 }
 
@@ -280,7 +280,7 @@
 }
 
 .short-url-cell a {
-  color: #4f46e5;
+  color: var(--nf-p, #4f46e5);
   text-decoration: none;
   max-width: 220px;
   overflow: hidden;
@@ -291,10 +291,10 @@
 .short-url-copy-btn {
   width: 22px;
   height: 22px;
-  border: 1px solid #d7dee5;
+  border: 1px solid var(--nf-line, #d7dee5);
   border-radius: 8px;
-  background: #f7f8fa;
-  color: #4a5568;
+  background: var(--nf-surface-2, #f7f8fa);
+  color: var(--nf-ink-2, #4a5568);
   cursor: pointer;
   font-size: 12px;
   flex: 0 0 auto;
@@ -329,8 +329,8 @@
   padding: 0;
   border: 0;
   border-radius: 5px;
-  background: #edf1f5;
-  color: #77838e;
+  background: var(--nf-surface-2, #edf1f5);
+  color: var(--nf-ink-2, #77838e);
   cursor: pointer;
 }
 
@@ -341,9 +341,9 @@
   right: 0;
   min-width: 120px;
   padding: 6px 0;
-  border: 1px solid #edf0f3;
+  border: 1px solid var(--nf-line, #edf0f3);
   border-radius: 7px;
-  background: #fff;
+  background: var(--nf-surface, #fff);
   box-shadow: 0 3px 12px rgba(15, 23, 42, .14);
   display: flex;
   flex-direction: column;
@@ -355,13 +355,13 @@
   background: transparent;
   text-align: left;
   padding: 7px 14px;
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   cursor: pointer;
   font-size: 12px;
 }
 
 .short-url-row-dropdown button:hover {
-  background: #f5f7f9;
+  background: var(--nf-surface-2, #f5f7f9);
 }
 
 .short-url-row-dropdown button.danger {
@@ -387,10 +387,10 @@
   gap: 6px;
   height: 28px;
   padding: 0 12px;
-  border: 1px solid #ccd6dd;
+  border: 1px solid var(--nf-line, #ccd6dd);
   border-radius: 20px;
-  background: #fff;
-  color: #334b5b;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-ink, #334b5b);
   cursor: pointer;
   font: 700 11px 'Inter', Arial, sans-serif;
 }
@@ -403,17 +403,17 @@
 }
 
 .short-url-form-field label {
-  color: #1f2937;
+  color: var(--nf-ink, #1f2937);
   font: 700 12px 'Inter', Arial, sans-serif;
 }
 
 .short-url-form-field input {
   height: 34px;
   padding: 0 10px;
-  border: 1px solid #c9d0d6;
+  border: 1px solid var(--nf-line, #c9d0d6);
   border-radius: 8px;
-  background: #f7f8fa;
-  color: #1f2937;
+  background: var(--nf-surface-2, #f7f8fa);
+  color: var(--nf-ink, #1f2937);
   font: 13px 'Inter', Arial, sans-serif;
 }
 

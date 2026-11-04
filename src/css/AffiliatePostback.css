@@ -1,6 +1,6 @@
 /* ===== PAGE ===== */
 .affiliate-postback-page {
-  background: #f5f7fb;
+  background: var(--nf-surface-2, #f5f7fb);
   min-height: 100vh;
 }
 
@@ -25,7 +25,7 @@
 .page-header h2 {
   font-size: 20px;
   font-weight: 600;
-  color: #333;
+  color: var(--nf-ink, #333);
   margin: 0;
 }
 
@@ -66,13 +66,13 @@
 }
 
 .btn-outline {
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid var(--nf-line, #ccc);
+  background: var(--nf-surface, #fff);
 }
 
 /* ===== TABLE ===== */
 .table-container {
-  background: #fff;
+  background: var(--nf-surface, #fff);
   border-radius: 14px;
   padding: 10px;
 }
@@ -86,12 +86,12 @@
 .postback-table th {
   text-align: left;
   padding: 10px;
-  background: #f8f9fc;
+  background: var(--nf-surface-2, #f8f9fc);
 }
 
 .postback-table td {
   padding: 10px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--nf-line, #eee);
 }
 
 /* ===== STATUS ===== */
@@ -102,13 +102,13 @@
 }
 
 .status-badge.approved {
-  background: #e6f7ee;
+  background: var(--nf-surface-2, #e6f7ee);
   color: #1aa36f;
 }
 
 /* ===== ACTION BUTTONS ===== */
 .action-trigger {
-  background: #e9ecef;
+  background: var(--nf-surface-2, #e9ecef);
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -136,12 +136,12 @@
 /* ===== TOPBAR ===== */
 .topbar {
   height: 50px;
-  background: #f8f9fc;
+  background: var(--nf-surface-2, #f8f9fc);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 15px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--nf-line, #ddd);
 }
 
 .top-left {
@@ -151,15 +151,15 @@
 }
 
 .menu-btn {
-  background: #fff;
-  border: 1px solid #ccc;
+  background: var(--nf-surface, #fff);
+  border: 1px solid var(--nf-line, #ccc);
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 6px;
 }
 
 .shortcut {
-  background: #e9ecef;
+  background: var(--nf-surface-2, #e9ecef);
   padding: 6px 12px;
   border-radius: 14px;
   font-weight: 500;
@@ -174,8 +174,8 @@
 /* ===== SIDEBAR ===== */
 .sidebar {
   width: 220px;
-  background: #fff;
-  border-right: 1px solid #ddd;
+  background: var(--nf-surface, #fff);
+  border-right: 1px solid var(--nf-line, #ddd);
   height: calc(100vh - 50px);
   transition: 0.3s;
   padding: 10px;
@@ -193,7 +193,7 @@
 }
 
 .sidebar li:hover {
-  background: #f1f3f9;
+  background: var(--nf-surface-2, #f1f3f9);
 }
 
 /* ===== COLLAPSE EFFECT ===== */
