@@ -46,7 +46,7 @@ export default function OfferLinkingRulesPage() {
   const [advertisersLoading, setAdvertisersLoading] = useState(true);
 
   const [search, setSearch] = useState("");
-  const [showEntries, setShowEntries] = useState(20);
+  const [showEntries, setShowEntries] = useState(10);
   const [openMenu, setOpenMenu] = useState(null);
 
   const [form, setForm] = useState(emptyForm);

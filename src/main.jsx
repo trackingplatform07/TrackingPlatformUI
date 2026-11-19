@@ -7,8 +7,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/theme-enhance.css'
 import './css/themes.css'
 import { applyTheme, getSavedTheme } from './theme'
+import { initStickyColumns } from './stickyColumns'
 
 applyTheme(getSavedTheme())
+initStickyColumns()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -555,36 +555,36 @@ export default function CreateOfferPage({ editOfferId = null }) {
   const [postbackLogsOfferId, setPostbackLogsOfferId] = useState("");
   const [postbackLogsDateStart, setPostbackLogsDateStart] = useState(() => new Date().toISOString().slice(0, 10));
   const [postbackLogsDateEnd, setPostbackLogsDateEnd] = useState(() => new Date().toISOString().slice(0, 10));
-  const [postbackLogsShowEntries, setPostbackLogsShowEntries] = useState(20);
+  const [postbackLogsShowEntries, setPostbackLogsShowEntries] = useState(10);
   const [affPostbackLogsTestOnly, setAffPostbackLogsTestOnly] = useState(false);
   const [affPostbackLogsOfferId, setAffPostbackLogsOfferId] = useState("");
   const [affPostbackLogsAffiliateId, setAffPostbackLogsAffiliateId] = useState("");
   const [affPostbackLogsDateStart, setAffPostbackLogsDateStart] = useState(() => new Date().toISOString().slice(0, 10));
   const [affPostbackLogsDateEnd, setAffPostbackLogsDateEnd] = useState(() => new Date().toISOString().slice(0, 10));
-  const [affPostbackLogsShowEntries, setAffPostbackLogsShowEntries] = useState(20);
+  const [affPostbackLogsShowEntries, setAffPostbackLogsShowEntries] = useState(10);
 
   const [reportsActiveTemplate, setReportsActiveTemplate] = useState("basic");
   const [reportsPeriodStart, setReportsPeriodStart] = useState(() => `${new Date().toISOString().slice(0, 10)}T00:00:00`);
   const [reportsPeriodEnd, setReportsPeriodEnd] = useState(() => `${new Date().toISOString().slice(0, 10)}T23:59:59`);
-  const [reportsShowEntries, setReportsShowEntries] = useState(100);
+  const [reportsShowEntries, setReportsShowEntries] = useState(10);
 
   const [conversionLogsOfferId, setConversionLogsOfferId] = useState("");
   const [conversionLogsDateStart, setConversionLogsDateStart] = useState(() => new Date().toISOString().slice(0, 10));
   const [conversionLogsDateEnd, setConversionLogsDateEnd] = useState(() => new Date().toISOString().slice(0, 10));
-  const [conversionLogsShowEntries, setConversionLogsShowEntries] = useState(20);
+  const [conversionLogsShowEntries, setConversionLogsShowEntries] = useState(10);
 
   const [cappingLogsOfferId, setCappingLogsOfferId] = useState("");
   const [cappingLogsAffiliateId, setCappingLogsAffiliateId] = useState("");
   const [cappingLogsPeriodStart, setCappingLogsPeriodStart] = useState(() => `${new Date().toISOString().slice(0, 10)}T00:00:00`);
   const [cappingLogsPeriodEnd, setCappingLogsPeriodEnd] = useState(() => `${new Date().toISOString().slice(0, 10)}T23:59:59`);
-  const [cappingLogsShowEntries, setCappingLogsShowEntries] = useState(100);
+  const [cappingLogsShowEntries, setCappingLogsShowEntries] = useState(10);
 
   const [changeLogsOfferId, setChangeLogsOfferId] = useState("");
   const [changeLogsAdvertiserId, setChangeLogsAdvertiserId] = useState("");
   const [changeLogsAffiliateId, setChangeLogsAffiliateId] = useState("");
   const [changeLogsDateStart, setChangeLogsDateStart] = useState(() => new Date().toISOString().slice(0, 10));
   const [changeLogsDateEnd, setChangeLogsDateEnd] = useState(() => new Date().toISOString().slice(0, 10));
-  const [changeLogsShowEntries, setChangeLogsShowEntries] = useState(100);
+  const [changeLogsShowEntries, setChangeLogsShowEntries] = useState(10);
 
   const [showLinkTesterModal, setShowLinkTesterModal] = useState(false);
   const [linkTesterUrl, setLinkTesterUrl] = useState("");

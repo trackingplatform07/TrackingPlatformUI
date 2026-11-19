@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Icon from './Icon';
+import BrandLogo from './BrandLogo';
 import ThemePicker from './ThemePicker';
-import { useLocation } from 'react-router-dom';
+import { navItems, findGroup } from './navItems';
 import '../css/Header.css';
+
+const readUser = () => {
+  try {
+    return JSON.parse(localStorage.getItem('user')) || null;
+  } catch {
+    return null;
+  }
+};
 
 const Header = ({ isSidebarCollapsed, onToggleSidebar, onMenuClick }) => {
 
   const location = useLocation();
+  const [user] = useState(readUser);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const userRef = useRef(null);
+
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+    const close = (e) => { if (userRef.current && !userRef.current.contains(e.target)) setMenuOpen(false); };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, [menuOpen]);
 
   // On phones/tablets the sidebar is a slide-out drawer owned by <Sidebar />;
   // on desktop the button keeps collapsing/expanding it as before.
@@ -18,73 +38,84 @@ const Header = ({ isSidebarCollapsed, onToggleSidebar, onMenuClick }) => {
     }
   };
 
-  const getPageName = () => {
-    const path = location.pathname;
-
-    if (path === "/") return "Dashboard";
-    if (path === "/user-manager") return "User Manager";
-    if (path === "/affiliates") return "Affiliates";
-    if (path === "/advertisers") return "Advertisers";
-
-    return "";
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
   };
 
+  const section = location.pathname === '/user-manager'
+    ? { label: 'User Manager', icon: 'users' }
+    : findGroup(navItems, location.pathname);
+
+  const displayName = user?.firstName || user?.role || 'User';
+
   return (
-    <header className="of-header">
+    <header className="of-header nf-topbar">
 
-      <div className="of-topbar">
+      <div className="nf-topbar-left">
+        <button
+          type="button"
+          className="of-collapse-btn nf-top-btn"
+          onClick={handleMenuClick}
+          aria-label={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        >
+          <Icon name="menu" className="of-top-icon" />
+        </button>
 
-        <div className="of-topbar-left">
+        <Link to="/dashboard" className="nf-topbar-brand">
+          <BrandLogo />
+        </Link>
 
-          <button
-            type="button"
-            className="of-collapse-btn"
-            onClick={handleMenuClick}
-            aria-label={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          >
-            <Icon name="menu" className="of-top-icon" />
-          </button>
-
-          <button type="button" className="of-shortcuts">
-            <Icon name="spark" className="of-top-icon" />
-            <span>Shortcuts</span>
-          </button>
-
-        </div>
-
-        <div className="of-top-actions">
-
-          <ThemePicker />
-
-          <span>
-            <Icon name="spark" className="of-top-icon" />
-            What's new
+        {section && (
+          <span className="nf-section-chip">
+            <Icon name={section.icon} className="of-top-icon" />
+            {section.label}
           </span>
-
-          <span>
-            <Icon name="bell" className="of-top-icon" />
-            Notifications (0)
-          </span>
-
-          {/* <span>
-            <Icon name="globe" className="of-top-icon" />
-            Lang
-          </span> */}
-
-        </div>
-
+        )}
       </div>
 
-      {/* Dynamic Breadcrumb */}
+      <div className="of-top-actions nf-topbar-right">
+        <button type="button" className="of-shortcuts nf-top-link">
+          <Icon name="spark" className="of-top-icon" />
+          <span>Shortcuts</span>
+        </button>
 
-      <div className="of-breadcrumb">
+        <Link to="/billing" className="nf-top-link">
+          <Icon name="wallet" className="of-top-icon" />
+          <span>Billing</span>
+        </Link>
 
-        <span>Home</span>
+        <Link to="/support/call" className="nf-top-link">
+          <Icon name="support" className="of-top-icon" />
+          <span>Support</span>
+        </Link>
 
-        <Icon name="arrowRight" className="of-breadcrumb-icon" />
+        <ThemePicker />
 
-        <span>{getPageName()}</span>
+        <button type="button" className="nf-top-btn nf-bell" aria-label="Notifications (0)" title="Notifications (0)">
+          <Icon name="bell" className="of-top-icon" />
+        </button>
 
+        <div className="nf-user" ref={userRef}>
+          <button type="button" className="nf-user-trigger" onClick={() => setMenuOpen((v) => !v)} aria-expanded={menuOpen}>
+            <span className="nf-user-avatar">{displayName.charAt(0).toUpperCase()}</span>
+            <span className="nf-user-name">{displayName}</span>
+            <Icon name="arrowRight" className="nf-user-caret" />
+          </button>
+          {menuOpen && (
+            <div className="nf-user-menu" role="menu">
+              {user && (
+                <div className="nf-user-head">
+                  <strong>{user.firstName} {user.lastName}</strong>
+                  <span>{user.role}</span>
+                </div>
+              )}
+              <Link to="/account/profile" role="menuitem">Profile</Link>
+              <Link to="/account/settings" role="menuitem">Settings</Link>
+              <Link to="/login" role="menuitem" className="is-danger" onClick={handleLogout}>Logout</Link>
+            </div>
+          )}
+        </div>
       </div>
 
     </header>

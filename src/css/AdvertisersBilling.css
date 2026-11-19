@@ -114,6 +114,6 @@
 }
 
 .pagination .active {
-  background: var(--nf-p400, #6366f1);
+  background: var(--nf-p, #6366f1);
   color: #fff;
 }

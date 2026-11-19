@@ -22,7 +22,7 @@ export default function CappingLogsPage() {
   const [cappingLogsAffiliateId, setCappingLogsAffiliateId] = useState("");
   const [cappingLogsPeriodStart, setCappingLogsPeriodStart] = useState(() => `${new Date().toISOString().slice(0, 10)}T00:00:00`);
   const [cappingLogsPeriodEnd, setCappingLogsPeriodEnd] = useState(() => `${new Date().toISOString().slice(0, 10)}T23:59:59`);
-  const [cappingLogsShowEntries, setCappingLogsShowEntries] = useState(100);
+  const [cappingLogsShowEntries, setCappingLogsShowEntries] = useState(10);
 
   const [logsLoading, setLogsLoading] = useState(false);
 

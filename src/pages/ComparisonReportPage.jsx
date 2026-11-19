@@ -45,7 +45,7 @@ export default function ComparisonReportPage() {
   const [previousEnd, setPreviousEnd] = useState(() => monthRange(-1).end);
   const [currentStart, setCurrentStart] = useState(() => monthRange(0).start);
   const [currentEnd, setCurrentEnd] = useState(() => monthRange(0).end);
-  const [showEntries, setShowEntries] = useState(100);
+  const [showEntries, setShowEntries] = useState(10);
 
   const [reportRows, setReportRows] = useState([]);
   const [reportRowsLoading, setReportRowsLoading] = useState(false);

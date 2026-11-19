@@ -22,7 +22,7 @@ const AdvertisersPage = () => {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(20);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalItems, setTotalItems] = useState(0);
 
   // Selection
@@ -851,12 +851,12 @@ const AdvertisersPage = () => {
                       Status{getSortIndicator('status')}
                     </th>
                   )}
-                  {visibleColumns.options && <th>Options</th>}
                   {visibleColumns.postbackToken && (
                     <th onClick={() => requestSort('postbackToken')} style={{ cursor: 'pointer', userSelect: 'none' }}>
                       PostbackToken{getSortIndicator('postbackToken')}
                     </th>
                   )}
+                  {visibleColumns.options && <th>Options</th>}
                 </tr>
               </thead>
 
@@ -965,6 +965,7 @@ const AdvertisersPage = () => {
                         </td>
                       )}
 
+                    {visibleColumns.postbackToken && <td>{row.postbackToken}</td>}
                       {visibleColumns.options && (
                         <td>
                           <div className="option-wrapper">
@@ -1017,7 +1018,6 @@ const AdvertisersPage = () => {
                           </div>
                         </td>
                       )}
-                    {visibleColumns.postbackToken && <td>{row.postbackToken}</td>}
                     </tr>
                   ))
                 )}

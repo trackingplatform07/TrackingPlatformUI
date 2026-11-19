@@ -130,7 +130,7 @@ export default function ReportsPage() {
   const [activeTemplate, setActiveTemplate] = useState("basic");
   const [periodStart, setPeriodStart] = useState(() => `${new Date().toISOString().slice(0, 10)}T00:00:00`);
   const [periodEnd, setPeriodEnd] = useState(() => `${new Date().toISOString().slice(0, 10)}T23:59:59`);
-  const [showEntries, setShowEntries] = useState(100);
+  const [showEntries, setShowEntries] = useState(10);
 
   const [reportRows, setReportRows] = useState([]);
   const [reportRowsLoading, setReportRowsLoading] = useState(false);

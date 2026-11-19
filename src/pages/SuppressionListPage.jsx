@@ -32,7 +32,7 @@ export default function SuppressionListPage() {
 
   const [search, setSearch] = useState("");
   const [offerFilter, setOfferFilter] = useState("");
-  const [showEntries, setShowEntries] = useState(20);
+  const [showEntries, setShowEntries] = useState(10);
 
   const [form, setForm] = useState(buildEmptyForm);
 

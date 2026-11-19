@@ -40,7 +40,7 @@ export default function ChangeLogsPage() {
     affiliateId: "",
   });
 
-  const [pageSize, setPageSize] = useState(100);
+  const [pageSize, setPageSize] = useState(10);
   const [showFilters, setShowFilters] = useState(false);
 
   const [logs, setLogs] = useState([]);
@@ -138,6 +138,7 @@ export default function ChangeLogsPage() {
                   <input type="date" value={draftEndDate} onChange={(event) => setDraftEndDate(event.target.value)} />
                 </div>
                 <select className="clog-page-size" value={pageSize} onChange={(event) => setPageSize(Number(event.target.value))}>
+                  <option value={10}>10 / page</option>
                   <option value={20}>20 / page</option>
                   <option value={50}>50 / page</option>
                   <option value={100}>100 / page</option>

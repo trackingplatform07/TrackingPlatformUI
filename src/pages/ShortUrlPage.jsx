@@ -29,7 +29,7 @@ export default function ShortUrlPage() {
   const [pendingStatuses, setPendingStatuses] = useState(["All"]);
   const [pendingOfferId, setPendingOfferId] = useState("");
   const [pendingAffiliateId, setPendingAffiliateId] = useState("");
-  const [showEntries, setShowEntries] = useState(20);
+  const [showEntries, setShowEntries] = useState(10);
   const [openMenu, setOpenMenu] = useState(null);
   const [copiedId, setCopiedId] = useState(null);
 

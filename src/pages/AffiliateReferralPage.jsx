@@ -20,7 +20,7 @@ export default function AffiliateReferralPage() {
 
   const [referrals, setReferrals] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [itemsPerPage, setItemsPerPage] = useState(20);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [showFilters, setShowFilters] = useState(false);
   const [statusFilter, setStatusFilter] = useState("");
 

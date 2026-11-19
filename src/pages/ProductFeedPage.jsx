@@ -48,7 +48,7 @@ export default function ProductFeedPage() {
   const [search, setSearch] = useState("");
   const [filterOfferId, setFilterOfferId] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
-  const [showEntries, setShowEntries] = useState(20);
+  const [showEntries, setShowEntries] = useState(10);
   const [openMenu, setOpenMenu] = useState(null);
 
   const [form, setForm] = useState(buildEmptyForm);

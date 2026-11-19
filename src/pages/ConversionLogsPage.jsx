@@ -40,7 +40,7 @@ export default function ConversionLogsPage() {
   const [conversionLogsOfferId, setConversionLogsOfferId] = useState("");
   const [dateStart, setDateStart] = useState(() => new Date().toISOString().slice(0, 10));
   const [dateEnd, setDateEnd] = useState(() => new Date().toISOString().slice(0, 10));
-  const [showEntries, setShowEntries] = useState(20);
+  const [showEntries, setShowEntries] = useState(10);
 
   const [showFiltersPanel, setShowFiltersPanel] = useState(false);
   const [filtersSectionOpen, setFiltersSectionOpen] = useState(true);

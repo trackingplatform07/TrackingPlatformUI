@@ -59,7 +59,7 @@ export default function IGamingReportsPage() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [periodStart, setPeriodStart] = useState(() => monthRange().start);
   const [periodEnd, setPeriodEnd] = useState(() => monthRange().end);
-  const [showEntries, setShowEntries] = useState(100);
+  const [showEntries, setShowEntries] = useState(10);
 
   const [offers, setOffers] = useState([]);
   const [offersLoading, setOffersLoading] = useState(true);

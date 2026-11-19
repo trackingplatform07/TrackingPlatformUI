@@ -53,7 +53,7 @@ export default function CouponsPage() {
   const [search, setSearch] = useState("");
   const [filterOfferId, setFilterOfferId] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
-  const [showEntries, setShowEntries] = useState(20);
+  const [showEntries, setShowEntries] = useState(10);
   const [openMenu, setOpenMenu] = useState(null);
 
   const [reportsSearch, setReportsSearch] = useState("");
@@ -61,7 +61,7 @@ export default function CouponsPage() {
   const [reportsDateStart, setReportsDateStart] = useState(() => new Date().toISOString().slice(0, 10));
   const [reportsDateEnd, setReportsDateEnd] = useState(() => new Date().toISOString().slice(0, 10));
   const [reportsConversionStatus, setReportsConversionStatus] = useState("");
-  const [reportsShowEntries, setReportsShowEntries] = useState(20);
+  const [reportsShowEntries, setReportsShowEntries] = useState(10);
 
   const [form, setForm] = useState(buildEmptyForm);
   const [saving, setSaving] = useState(false);

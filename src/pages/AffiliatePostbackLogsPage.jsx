@@ -36,7 +36,7 @@ export default function AffiliatePostbackLogsPage() {
   const [logsAffiliateId, setLogsAffiliateId] = useState("");
   const [dateStart, setDateStart] = useState(() => new Date().toISOString().slice(0, 10));
   const [dateEnd, setDateEnd] = useState(() => new Date().toISOString().slice(0, 10));
-  const [showEntries, setShowEntries] = useState(20);
+  const [showEntries, setShowEntries] = useState(10);
 
   const [logsLoading, setLogsLoading] = useState(false);
 
