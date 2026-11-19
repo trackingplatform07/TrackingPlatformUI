@@ -36,7 +36,6 @@
   background-color: var(--nf-surface, #fff) !important;
   box-shadow: 0 30px 70px -20px rgba(15, 23, 42, .55), 0 2px 6px rgba(15, 23, 42, .08) !important;
   animation: nf-pop-in .2s ease-out;
-  scrollbar-gutter: stable;
 }
 
 /* side panels (filters & columns) */
@@ -52,10 +51,12 @@
 
 [data-nf-dialog-head] {
   display: flex !important;
+  width: auto !important;
   align-items: center !important;
   justify-content: space-between !important;
   gap: 12px;
-  margin: 0 !important;
+  /* stretch edge to edge across the dialog's own padding (gaps measured in popupPolish.js) */
+  margin: calc(-1 * var(--nf-bleed-t, 0px)) calc(-1 * var(--nf-bleed-r, 0px)) 12px calc(-1 * var(--nf-bleed-l, 0px)) !important;
   padding: 16px 20px !important;
   border-bottom: 1px solid var(--nf-line, #eef0f4) !important;
   background:
@@ -66,7 +67,7 @@
 [data-nf-dialog] > [data-nf-dialog-head]:first-child,
 [data-nf-drawer] > [data-nf-dialog-head]:first-child {
   position: sticky;
-  top: 0;
+  top: calc(-1 * var(--nf-bleed-t, 0px));
   z-index: 2;
 }
 
@@ -118,11 +119,12 @@
 
 [data-nf-dialog-foot] {
   display: flex !important;
+  width: auto !important;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
-  margin: 8px 0 0 !important;
+  margin: 12px calc(-1 * var(--nf-bleed-r, 0px)) calc(-1 * var(--nf-bleed-b, 0px)) calc(-1 * var(--nf-bleed-l, 0px)) !important;
   padding: 14px 20px !important;
   border-top: 1px solid var(--nf-line, #eef0f4) !important;
   background: var(--nf-surface-2, #f8fafc) !important;
@@ -130,7 +132,7 @@
 
 [data-nf-dialog] > [data-nf-dialog-foot]:last-child {
   position: sticky;
-  bottom: 0;
+  bottom: calc(-1 * var(--nf-bleed-b, 0px));
   z-index: 2;
 }
 
@@ -147,4 +149,27 @@
     max-height: calc(100vh - 24px) !important;
     border-radius: 14px !important;
   }
+}
+
+/* file pickers inside popups: readable dashed drop zone + soft button */
+:is([data-nf-dialog], [data-nf-drawer]) input[type="file"] {
+  width: 100%;
+  padding: 8px !important;
+  border: 1.5px dashed var(--nf-p200, #b4cbeb) !important;
+  border-radius: 10px !important;
+  background: var(--nf-p50, #f3f7fd) !important;
+  color: var(--nf-ink-2, #475569) !important;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+:is([data-nf-dialog], [data-nf-drawer]) input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 6px 14px;
+  border: 1px solid var(--nf-line, #d5dce6);
+  border-radius: 8px;
+  background: var(--nf-surface, #fff);
+  color: var(--nf-ink, #1f2937);
+  font-weight: 600;
+  cursor: pointer;
 }

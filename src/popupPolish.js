@@ -27,8 +27,32 @@ function within(root, depth) {
   return out;
 }
 
+// How far an element sits inside the dialog's padding box, so its band can be
+// stretched edge to edge with negative margins (measured before any styling).
+// The value is gap minus the element's existing margin, so elements that already
+// use negative margins (e.g. Bootstrap .row) end up flush too.
+function setBleed(el, inner, edges) {
+  const r = el.getBoundingClientRect();
+  const cs = getComputedStyle(el);
+  const gap = { l: r.left - inner.left, r: inner.right - r.right, t: r.top - inner.top, b: inner.bottom - r.bottom };
+  const margin = { l: cs.marginLeft, r: cs.marginRight, t: cs.marginTop, b: cs.marginBottom };
+  for (const e of edges) {
+    const v = Math.round(gap[e] - (parseFloat(margin[e]) || 0));
+    if (v > 0 && v < 80) el.style.setProperty(`--nf-bleed-${e}`, `${v}px`);
+  }
+}
+
 function tagParts(dialog) {
   const box = dialog.getBoundingClientRect();
+  const dcs = getComputedStyle(dialog);
+  const bl = parseFloat(dcs.borderLeftWidth) || 0;
+  const scrollbar = dialog.offsetWidth - dialog.clientWidth - bl - (parseFloat(dcs.borderRightWidth) || 0);
+  const inner = {
+    left: box.left + bl,
+    right: box.right - (parseFloat(dcs.borderRightWidth) || 0) - Math.max(0, scrollbar),
+    top: box.top + (parseFloat(dcs.borderTopWidth) || 0),
+    bottom: box.bottom - (parseFloat(dcs.borderBottomWidth) || 0),
+  };
   const parts = within(dialog, 3).filter(visible);
 
   const close = [...dialog.querySelectorAll('button, [role="button"], span, i')].find((el) => {
@@ -38,20 +62,25 @@ function tagParts(dialog) {
     const text = el.textContent.trim();
     return nearTop && (CLOSE_TEXT.test(text) || /close/i.test(el.className || '') || /close/i.test(el.getAttribute('aria-label') || ''));
   });
-  if (close) close.dataset.nfClose = '';
 
   const head = parts.find((el) => {
     const r = el.getBoundingClientRect();
     return r.top - box.top < 40 && r.height < 110 && r.width >= box.width * 0.6 &&
       (el.querySelector('h1, h2, h3, h4, h5, [class*="title"]') || /^h[1-5]$/i.test(el.tagName) || (close && el.contains(close)));
   });
-  if (head && !head.matches('h1, h2, h3, h4, h5')) head.dataset.nfDialogHead = '';
+  const styledHead = head && !head.matches('h1, h2, h3, h4, h5') ? head : null;
+  if (styledHead) setBleed(styledHead, inner, ['l', 'r', 't']);
 
   const foot = [...parts].reverse().find((el) => {
     const r = el.getBoundingClientRect();
     return box.bottom - r.bottom < 40 && r.height < 110 && r.width >= box.width * 0.6 &&
       el.querySelector('button') && !el.querySelector('input, select, textarea, table') && el !== head;
   });
+  if (foot) setBleed(foot, inner, ['l', 'r', 'b']);
+
+  // tag only after everything is measured, since tagging restyles the element
+  if (close) close.dataset.nfClose = '';
+  if (styledHead) styledHead.dataset.nfDialogHead = '';
   if (foot) foot.dataset.nfDialogFoot = '';
 }
 
@@ -71,8 +100,8 @@ function tagOverlay(overlay) {
   // a side panel is full height and pinned to the left or right edge
   const atEdge = d.right >= innerWidth - 2 || d.left <= 2;
   const isDrawer = atEdge && d.height >= innerHeight * 0.95 && d.width < innerWidth * 0.8;
-  dialog.dataset[isDrawer ? 'nfDrawer' : 'nfDialog'] = '';
   tagParts(dialog);
+  dialog.dataset[isDrawer ? 'nfDrawer' : 'nfDialog'] = '';
 }
 
 let queued = false;

@@ -4,7 +4,7 @@
 // as data attributes, and css/buttons.css styles those. Purely visual: no classes,
 // handlers or content are touched.
 
-const SCOPE = '.of-main button, .main-container .content button';
+const SCOPE = '.of-main button, .main-container .content button, [class*="modal"] button, [class*="overlay"] button, [class*="popup"] button, [class*="drawer"] button';
 
 // navigation-like controls keep their own design
 const SKIP_CLASS = /(tab|step|toggle|switch|chip|tag|pagination|page-|editor|toolbar|tiptap|dropdown-item|menu-item|accordion|article-header|captcha|password|theme)/i;

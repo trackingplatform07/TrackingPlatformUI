@@ -221,3 +221,15 @@
   opacity: .6;
   cursor: not-allowed;
 }
+
+/* `.tk-field label` (above) also matched the upload button and turned it into a
+   full-width bar with dark text; keep it a compact button */
+.tk-field label.tk-upload-btn {
+  display: inline-flex;
+  width: auto;
+  margin: 0;
+  color: #fff;
+  background: linear-gradient(135deg, var(--nf-p, #2f62b3), var(--nf-p600, #26509a));
+  box-shadow: 0 6px 14px -8px rgba(var(--nf-p-rgb, 47, 98, 179), .9);
+  font-size: 12px;
+}
