@@ -1,0 +1,149 @@
+/* Unified page buttons (see src/buttonPolish.js, which sets data-nf-btn / data-nf-size).
+   Colours follow the active theme through the --nf-p* accent scale. */
+
+/* ---------- shape & size ---------- */
+
+[data-nf-btn]:not([data-nf-btn="skip"]) {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  letter-spacing: .01em;
+  line-height: 1.15 !important;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease,
+    color .15s ease, transform .12s ease, filter .15s ease !important;
+}
+
+[data-nf-btn][data-nf-pill] {
+  border-radius: 999px !important;
+}
+
+[data-nf-size="sm"]:not([data-nf-btn="skip"]) {
+  min-height: 28px;
+  padding: 4px 11px !important;
+  font-size: 12px !important;
+}
+
+[data-nf-size="md"]:not([data-nf-btn="skip"]) {
+  min-height: 34px;
+  padding: 6px 15px !important;
+  font-size: 13px !important;
+}
+
+[data-nf-size="lg"]:not([data-nf-btn="skip"]) {
+  min-height: 40px;
+  padding: 8px 20px !important;
+  font-size: 14px !important;
+}
+
+/* square icon buttons (⋮, ×, ↻, filter …) */
+[data-nf-btn="icon"] {
+  padding: 0 !important;
+  border-radius: 8px !important;
+}
+
+[data-nf-btn="icon"][data-nf-size="sm"] { min-width: 28px; min-height: 28px; }
+[data-nf-btn="icon"][data-nf-size="md"] { min-width: 34px; min-height: 34px; }
+[data-nf-btn="icon"][data-nf-size="lg"] { min-width: 40px; min-height: 40px; }
+
+/* ---------- filled buttons ---------- */
+
+/* generic dark-grey action buttons take the theme accent */
+[data-nf-btn="solid-neutral"]:not(:disabled) {
+  border-color: transparent !important;
+  background: linear-gradient(135deg, var(--nf-p, #2f62b3) 0%, var(--nf-p600, #26509a) 100%) !important;
+  color: #fff !important;
+}
+
+/* coloured buttons keep their colour (status meaning) and gain a soft gloss */
+[data-nf-btn="solid"]:not(:disabled),
+[data-nf-btn="solid-neutral"]:not(:disabled) {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, .18) 0%, rgba(255, 255, 255, 0) 55%, rgba(0, 0, 0, .06) 100%) !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .14), 0 6px 14px -8px rgba(15, 23, 42, .45),
+    inset 0 1px 0 rgba(255, 255, 255, .18) !important;
+}
+
+[data-nf-btn="solid-neutral"]:not(:disabled) {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, .14) 0%, rgba(255, 255, 255, 0) 55%),
+    linear-gradient(135deg, var(--nf-p, #2f62b3) 0%, var(--nf-p600, #26509a) 100%) !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .14), 0 8px 18px -10px rgba(var(--nf-p-rgb, 47, 98, 179), .9),
+    inset 0 1px 0 rgba(255, 255, 255, .18) !important;
+}
+
+[data-nf-btn="solid"]:not(:disabled):hover,
+[data-nf-btn="solid-neutral"]:not(:disabled):hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 2px 4px rgba(15, 23, 42, .14), 0 10px 20px -10px rgba(15, 23, 42, .5),
+    inset 0 1px 0 rgba(255, 255, 255, .2) !important;
+}
+
+[data-nf-btn="solid"]:not(:disabled):active,
+[data-nf-btn="solid-neutral"]:not(:disabled):active {
+  transform: translateY(0);
+  filter: brightness(.97);
+}
+
+/* light grey filled buttons become a soft neutral chip */
+[data-nf-btn="soft"]:not(:disabled) {
+  border: 1px solid var(--nf-line, #dde3ec) !important;
+  background: var(--nf-surface-2, #f4f6fa) !important;
+  color: var(--nf-ink, #1f2937) !important;
+}
+
+[data-nf-btn="soft"]:not(:disabled):hover {
+  border-color: var(--nf-p200, #b4cbeb) !important;
+  background: var(--nf-p50, #e8eff9) !important;
+  color: var(--nf-p, #2f62b3) !important;
+}
+
+/* ---------- outline & text buttons ---------- */
+
+[data-nf-btn="outline"]:not(:disabled) {
+  background-color: var(--nf-surface, #fff);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .06);
+}
+
+[data-nf-btn="outline"]:not(:disabled):hover {
+  border-color: var(--nf-p, #2f62b3) !important;
+  background-color: var(--nf-p50, #e8eff9) !important;
+  box-shadow: 0 4px 12px -8px rgba(var(--nf-p-rgb, 47, 98, 179), .7);
+}
+
+[data-nf-btn="ghost"]:not(:disabled):hover {
+  background-color: rgba(var(--nf-p-rgb, 47, 98, 179), .08) !important;
+}
+
+[data-nf-btn="icon"]:not(:disabled):hover {
+  background-color: rgba(var(--nf-p-rgb, 47, 98, 179), .1) !important;
+  color: var(--nf-p, #2f62b3) !important;
+}
+
+/* ---------- keyboard focus & disabled ---------- */
+
+[data-nf-btn]:not([data-nf-btn="skip"]):focus-visible {
+  outline: 2px solid var(--nf-p, #2f62b3) !important;
+  outline-offset: 2px;
+}
+
+[data-nf-btn]:not([data-nf-btn="skip"]):disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* ---------- secondary (Cancel / Close / Back) ---------- */
+
+[data-nf-btn="secondary"]:not(:disabled) {
+  border: 1px solid var(--nf-line, #d5dce6) !important;
+  background: var(--nf-surface, #fff) !important;
+  background-image: none !important;
+  color: var(--nf-ink, #334155) !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .06) !important;
+}
+
+[data-nf-btn="secondary"]:not(:disabled):hover {
+  border-color: var(--nf-ink-2, #94a3b8) !important;
+  background: var(--nf-surface-2, #f1f5f9) !important;
+}

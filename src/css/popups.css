@@ -1,0 +1,150 @@
+/* Unified popups (see src/popupPolish.js, which sets the data attributes). */
+
+@keyframes nf-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes nf-pop-in {
+  from { opacity: 0; transform: translateY(10px) scale(.98); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes nf-slide-in {
+  from { transform: translateX(24px); opacity: .4; }
+  to { transform: none; opacity: 1; }
+}
+
+/* ---------- backdrop ---------- */
+
+[data-nf-overlay] {
+  z-index: 1200 !important;
+  background: rgba(15, 23, 42, .52) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: nf-fade-in .16s ease-out;
+}
+
+/* ---------- dialog box ---------- */
+
+[data-nf-dialog] {
+  max-width: calc(100vw - 32px) !important;
+  max-height: calc(100vh - 48px) !important;
+  overflow-y: auto !important;
+  border: 1px solid var(--nf-line, rgba(15, 23, 42, .08)) !important;
+  border-radius: 16px !important;
+  background-color: var(--nf-surface, #fff) !important;
+  box-shadow: 0 30px 70px -20px rgba(15, 23, 42, .55), 0 2px 6px rgba(15, 23, 42, .08) !important;
+  animation: nf-pop-in .2s ease-out;
+  scrollbar-gutter: stable;
+}
+
+/* side panels (filters & columns) */
+[data-nf-drawer] {
+  border-left: 1px solid var(--nf-line, rgba(15, 23, 42, .08)) !important;
+  border-radius: 16px 0 0 16px !important;
+  background-color: var(--nf-surface, #fff) !important;
+  box-shadow: -24px 0 60px -20px rgba(15, 23, 42, .5) !important;
+  animation: nf-slide-in .22s ease-out;
+}
+
+/* ---------- header ---------- */
+
+[data-nf-dialog-head] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px;
+  margin: 0 !important;
+  padding: 16px 20px !important;
+  border-bottom: 1px solid var(--nf-line, #eef0f4) !important;
+  background:
+    linear-gradient(180deg, rgba(var(--nf-p-rgb, 47, 98, 179), .06), rgba(var(--nf-p-rgb, 47, 98, 179), 0)),
+    var(--nf-surface, #fff) !important;
+}
+
+[data-nf-dialog] > [data-nf-dialog-head]:first-child,
+[data-nf-drawer] > [data-nf-dialog-head]:first-child {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* titles: one line, consistent size */
+[data-nf-dialog-head] :is(h1, h2, h3, h4, h5, [class*="title"]),
+[data-nf-dialog-head]:is(h1, h2, h3, h4, h5) {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 !important;
+  overflow: hidden;
+  color: var(--nf-ink, #0f172a) !important;
+  font: 700 17px/1.3 'Inter', system-ui, sans-serif !important;
+  letter-spacing: -0.2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- close (×) ---------- */
+
+[data-nf-close] {
+  display: inline-flex !important;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--nf-ink-2, #64748b) !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, transform .15s ease !important;
+}
+
+[data-nf-close]:hover {
+  background: rgba(var(--nf-p-rgb, 47, 98, 179), .1) !important;
+  color: var(--nf-p, #2f62b3) !important;
+  transform: rotate(90deg);
+}
+
+/* ---------- footer ---------- */
+
+[data-nf-dialog-foot] {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 8px 0 0 !important;
+  padding: 14px 20px !important;
+  border-top: 1px solid var(--nf-line, #eef0f4) !important;
+  background: var(--nf-surface-2, #f8fafc) !important;
+}
+
+[data-nf-dialog] > [data-nf-dialog-foot]:last-child {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+}
+
+/* ---------- inputs inside popups ---------- */
+
+:is([data-nf-dialog], [data-nf-drawer]) :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea) {
+  border-radius: 8px;
+}
+
+/* phones: popups use almost the full screen */
+@media (max-width: 640px) {
+  [data-nf-dialog] {
+    max-width: calc(100vw - 16px) !important;
+    max-height: calc(100vh - 24px) !important;
+    border-radius: 14px !important;
+  }
+}

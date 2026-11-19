@@ -6,11 +6,17 @@ import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/theme-enhance.css'
 import './css/themes.css'
+import './css/buttons.css'
+import './css/popups.css'
 import { applyTheme, getSavedTheme } from './theme'
 import { initStickyColumns } from './stickyColumns'
+import { initButtonPolish } from './buttonPolish'
+import { initPopupPolish } from './popupPolish'
 
 applyTheme(getSavedTheme())
 initStickyColumns()
+initButtonPolish()
+initPopupPolish()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
