@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Icon from './Icon';
 import BrandLogo from './BrandLogo';
-import ThemePicker from './ThemePicker';
-import { navItems, findGroup } from './navItems';
+import { navItems, findPage } from './navItems';
 import '../css/Header.css';
 
 const readUser = () => {
@@ -43,9 +42,8 @@ const Header = ({ isSidebarCollapsed, onToggleSidebar, onMenuClick }) => {
     localStorage.removeItem('token');
   };
 
-  const section = location.pathname === '/user-manager'
-    ? { label: 'User Manager', icon: 'users' }
-    : findGroup(navItems, location.pathname);
+  // name of the open page (e.g. "Pending Affiliates") with its section's icon
+  const section = findPage(navItems, location.pathname);
 
   const displayName = user?.firstName || user?.role || 'User';
 
@@ -90,7 +88,6 @@ const Header = ({ isSidebarCollapsed, onToggleSidebar, onMenuClick }) => {
           <span>Support</span>
         </Link>
 
-        <ThemePicker />
 
         <button type="button" className="nf-top-btn nf-bell" aria-label="Notifications (0)" title="Notifications (0)">
           <Icon name="bell" className="of-top-icon" />
@@ -112,6 +109,11 @@ const Header = ({ isSidebarCollapsed, onToggleSidebar, onMenuClick }) => {
               )}
               <Link to="/account/profile" role="menuitem">Profile</Link>
               <Link to="/account/settings" role="menuitem">Settings</Link>
+              {/* opens the Notifications tab of the Settings page */}
+              <Link to="/account/settings" state={{ tab: 'Notifications' }} role="menuitem">Notifications</Link>
+              <Link to="/account/change-logs" role="menuitem">Change logs</Link>
+              <Link to="/account/access-logs" role="menuitem">Access logs</Link>
+              <Link to="/account/referral" role="menuitem">Referral</Link>
               <Link to="/login" role="menuitem" className="is-danger" onClick={handleLogout}>Logout</Link>
             </div>
           )}

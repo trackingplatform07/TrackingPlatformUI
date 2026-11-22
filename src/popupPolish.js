@@ -4,7 +4,7 @@
 // css/popups.css styles. Purely visual: no classes, handlers or content change.
 
 const CANDIDATES = '[class*="modal"], [class*="overlay"], [class*="popup"], [class*="backdrop"], [class*="dialog"], [class*="drawer"]';
-const IGNORE = '.of-nav-backdrop, .nf-shell, .nf-topbar, .nf-theme-menu, .nf-user-menu';
+const IGNORE = '.of-nav-backdrop, .nf-shell, .nf-topbar, .nf-user-menu';
 const CLOSE_TEXT = /^(×|✕|✖|x|X|close)$/;
 
 const visible = (el) => el && el.offsetWidth > 0 && el.offsetHeight > 0;

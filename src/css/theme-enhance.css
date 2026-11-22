@@ -368,8 +368,7 @@ table tr:hover td {
 
 .nf-topbar .nf-top-btn,
 .nf-topbar .nf-top-link,
-.nf-topbar .nf-user-trigger,
-.nf-topbar .nf-theme-trigger {
+.nf-topbar .nf-user-trigger {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -388,8 +387,7 @@ table tr:hover td {
 
 .nf-topbar .nf-top-btn:hover,
 .nf-topbar .nf-top-link:hover,
-.nf-topbar .nf-user-trigger:hover,
-.nf-topbar .nf-theme-trigger:hover {
+.nf-topbar .nf-user-trigger:hover {
   background: var(--nf-top-hover);
   color: var(--nf-top-strong);
   filter: none;
@@ -434,9 +432,6 @@ table tr:hover td {
   white-space: nowrap;
 }
 
-.nf-topbar .nf-theme-dot {
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, .55);
-}
 
 .nf-user {
   position: relative;
@@ -570,14 +565,12 @@ table tr:hover td {
   .nf-topbar .nf-top-link span,
   .nf-topbar .nf-user-name,
   .nf-topbar .nf-user-caret,
-  .nf-topbar .nf-theme-trigger > span:not(.nf-theme-dot),
   .nf-topbar-brand .nf-brand-name {
     display: none;
   }
 
   .nf-topbar .nf-top-btn,
-  .nf-topbar .nf-top-link,
-  .nf-topbar .nf-theme-trigger {
+  .nf-topbar .nf-top-link {
     padding: 7px;
   }
 
@@ -753,4 +746,76 @@ table tr:hover td {
 .of-table .option-btn:hover {
   background: var(--nf-p50, #e8eff9);
   color: var(--nf-p, #2f62b3);
+}
+
+/* ---------- Clickable text in tables (ID / name / email links) ----------
+   Same colour and weight as the other columns; still clickable, underlined on hover. */
+:is(.of-main, .main-container) table tbody :is(
+  td.link,
+  .link,
+  a,
+  [class*="-link"]:not([data-nf-btn="solid"]):not([data-nf-btn="solid-neutral"]),
+  .approved-offers-name,
+  .live-offers-name
+) {
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
+:is(.of-main, .main-container) table tbody :is(td.link, .link, a, [class*="-link"], .approved-offers-name, .live-offers-name):hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Page titles ----------
+   The open page's name is shown in the top bar, so the big title at the top of
+   each page is hidden (only the title: subtitles, buttons and filters stay).
+   Not applied inside Create Offer, popups or the detail pages, where the same
+   classes are section headings. */
+:is(
+  .of-page-header > h2,
+  .billing-header > h1,
+  .billing-header > h2,
+  .nsp-header > h1,
+  .emp-toolbar > h1,
+  .cprofile-card > h1,
+  .clog-header h1,
+  .ref-header h1,
+  .abp-header h2,
+  .cai-header h2,
+  .paff-top h2,
+  .apb-header h2,
+  .apt-header h1,
+  .arf-header h2,
+  .bo-header h1,
+  .tk-header h1,
+  .invoice-header > h2,
+  .rule-header > .page-title,
+  .settings-header > h2,
+  .reports-header > h2,
+  .postback-logs-header > h2,
+  .fraud-fender-toolbar > h2,
+  .offer-sync-header-card > h1,
+  .report-sync-header-panel > h1,
+  .coupons-toolbar > h1,
+  .linking-rules-toolbar > h1,
+  .approve-requests-toolbar > h1,
+  .approved-offers-toolbar > h1,
+  .live-offers-toolbar > h1,
+  .postback-header > h2,
+  .events-section-header > h2,
+  .link-tester-header > h1,
+  .mailer-toolbar > h1,
+  .default-template-header > h1,
+  .short-url-toolbar > h1,
+  .cs-card > h1,
+  .kb-card > h1,
+  .container > h3:first-child
+):not(:is(.create-offer-container, [class*="modal"], .main-container) *) {
+  display: none !important;
+}
+
+/* Integration / Fraud Detection pages: the title card holds only the title */
+.of-main main.mobile-attribution-page > .mobile-attribution-title-card {
+  display: none !important;
 }

@@ -147,3 +147,40 @@
   border-color: var(--nf-ink-2, #94a3b8) !important;
   background: var(--nf-surface-2, #f1f5f9) !important;
 }
+
+/* ---------- form actions on the right (see arrangeActions in buttonPolish.js) ---------- */
+
+[data-nf-actions] {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end !important;
+  gap: 10px !important;
+}
+
+[data-nf-actions] > button {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 96px;
+  margin: 0 !important;
+}
+
+/* Cancel / Close / Back first, main action last */
+[data-nf-actions] > [data-nf-btn="secondary"] {
+  order: -1;
+}
+
+[data-nf-action-block] {
+  display: block !important;
+  width: auto !important;
+  min-width: 120px;
+  margin-right: 0 !important;
+  margin-left: auto !important;
+  align-self: flex-end;
+}
+
+/* header action buttons keep their label on one line */
+.apb-add-btn,
+.apb-header button {
+  white-space: nowrap;
+}

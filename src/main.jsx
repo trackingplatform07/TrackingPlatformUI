@@ -8,12 +8,12 @@ import './css/theme-enhance.css'
 import './css/themes.css'
 import './css/buttons.css'
 import './css/popups.css'
-import { applyTheme, getSavedTheme } from './theme'
+import { applyTheme } from './theme'
 import { initStickyColumns } from './stickyColumns'
 import { initButtonPolish } from './buttonPolish'
 import { initPopupPolish } from './popupPolish'
 
-applyTheme(getSavedTheme())
+applyTheme()
 initStickyColumns()
 initButtonPolish()
 initPopupPolish()

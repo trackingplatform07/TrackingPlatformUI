@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import "../css/SettingsPage.css";
@@ -262,7 +263,14 @@ const RichToolbar = () => (
 
 export default function SettingsPage() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [activeTab, setActiveTab] = useState("General");
+  // a link can open a specific tab, e.g. Admin menu > Notifications passes { tab: "Notifications" }
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState(() => location.state?.tab || "General");
+  const [seenLocationKey, setSeenLocationKey] = useState(location.key);
+  if (location.key !== seenLocationKey) {
+    setSeenLocationKey(location.key);
+    setActiveTab(location.state?.tab || "General");
+  }
 
   const [form, setForm] = useState(buildEmptyForm);
   const [loading, setLoading] = useState(true);

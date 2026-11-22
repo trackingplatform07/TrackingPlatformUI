@@ -9,6 +9,7 @@ import '../css/Sidebar.css';
 // Two-column navigation: a narrow icon rail with every section, and a panel
 // listing the pages of the selected section. `isCollapsed` hides the panel.
 const Sidebar = ({ isCollapsed: collapsedProp }) => {
+  // eslint-disable-next-line no-unused-vars -- read by the commented-out User Manager item below
   const [user, setUser] = useState(null);
   const [menu, setMenu] = useState([]);
   const location = useLocation();
@@ -34,7 +35,7 @@ const Sidebar = ({ isCollapsed: collapsedProp }) => {
       setUser(storedUser);
       const permissions = storedUser.permissions || [];
       const allowedMenu = navItems.filter(item => {
-        if (item.label === 'Offers' || item.label === 'Reports / Logs' || item.label === 'Fraud Detection' || item.label === 'Integration' || item.label === 'Tools' || item.label === 'Account' || item.label === 'Billing' || item.label === 'Support' || item.label === 'Settings') return true;
+        if (item.label === 'Offers' || item.label === 'Reports / Logs' || item.label === 'Reports' || item.label === 'Employee' || item.label === 'Fraud Detection' || item.label === 'Integration' || item.label === 'Tools' || item.label === 'Account' || item.label === 'Billing' || item.label === 'Support' || item.label === 'Settings') return true;
         return permissions.map(p => p.toLowerCase()).includes(item.permission.toLowerCase());
       });
       setMenu(allowedMenu);
@@ -86,6 +87,7 @@ const Sidebar = ({ isCollapsed: collapsedProp }) => {
             );
           })}
 
+          {/* User Manager is not part of the current menu; the page still works at /user-manager
           {user?.permissions?.includes('UserManagement') && (
             <li>
               <Link
@@ -97,7 +99,7 @@ const Sidebar = ({ isCollapsed: collapsedProp }) => {
                 <span className='nf-rail-label'>Users</span>
               </Link>
             </li>
-          )}
+          )} */}
         </ul>
 
         <div className='nf-rail-foot'>

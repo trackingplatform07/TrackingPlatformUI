@@ -9,7 +9,7 @@ const SCOPE = '.of-main button, .main-container .content button, [class*="modal"
 // navigation-like controls keep their own design
 const SKIP_CLASS = /(tab|step|toggle|switch|chip|tag|pagination|page-|editor|toolbar|tiptap|dropdown-item|menu-item|accordion|article-header|captcha|password|theme)/i;
 const SECONDARY_TEXT = /^(cancel|close|back|discard|reset|no)\b/i;
-const SKIP_INSIDE = '[role="tablist"], [class*="editor"], .mailer-toolbar, [class*="tabs"], [class*="pagination"], .nf-shell, .nf-topbar, .nf-theme';
+const SKIP_INSIDE = '[role="tablist"], [class*="editor"], .mailer-toolbar, [class*="tabs"], [class*="pagination"], .nf-shell, .nf-topbar';
 
 function parse(color) {
   const m = color.match(/rgba?\(([^)]+)\)/);
@@ -65,6 +65,7 @@ function schedule() {
   requestAnimationFrame(() => {
     queued = false;
     document.querySelectorAll(SCOPE).forEach(tag);
+    arrangeActions();
   });
 }
 
@@ -72,4 +73,35 @@ export function initButtonPolish() {
   if (typeof window === 'undefined' || !('MutationObserver' in window)) return;
   new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
   schedule();
+}
+
+// ---------------------------------------------------------------------------
+// Form actions (Submit / Cancel / Save …) sit on the right, Cancel first.
+// A group whose children are only buttons becomes a right-aligned row; a lone
+// full-width action button inside a form becomes a normal-width button on the right.
+// Filter bars (buttons next to inputs) and pagination are left as they are.
+
+const ACTION_TEXT = /^(submit|cancel|save|update|close|reset|apply|confirm|ok|yes|send|discard|done|finish|change plan)\b/i;
+
+function arrangeActions() {
+  document.querySelectorAll('[data-nf-btn]:not([data-nf-btn="skip"]):not([data-nf-btn="icon"]):not([data-nf-action-checked])').forEach((btn) => {
+    btn.dataset.nfActionChecked = '';
+    const label = btn.textContent.replace(/^[^A-Za-z]+/, '').trim();
+    if (!ACTION_TEXT.test(label) || btn.closest(SKIP_INSIDE)) return;
+
+    const parent = btn.parentElement;
+    if (!parent || parent.dataset.nfActions !== undefined) return;
+    const kids = [...parent.children].filter((k) => k.offsetWidth || k.offsetHeight);
+
+    if (kids.length <= 4 && kids.every((k) => k.tagName === 'BUTTON')) {
+      parent.dataset.nfActions = '';
+      return;
+    }
+
+    // lone full-width action button in a form/card
+    const pw = parent.getBoundingClientRect().width;
+    if (pw > 0 && btn.getBoundingClientRect().width >= pw * 0.85 && !parent.querySelector(':scope > input, :scope > select')) {
+      btn.dataset.nfActionBlock = '';
+    }
+  });
 }
