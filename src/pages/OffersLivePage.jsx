@@ -28,6 +28,18 @@ const priceLabel = (price, currency) => {
   return `${Number.isFinite(numericPrice) ? numericPrice : 0} ${currency || "-"}`;
 };
 
+// columns that can be hidden from the Columns panel (Action and Options always stay)
+const TOGGLE_COLUMNS = [
+  { key: "logo", label: "Logo" },
+  { key: "offer", label: "Offer" },
+  { key: "targetGeo", label: "TargetGeo" },
+  { key: "revenue", label: "Revenue" },
+  { key: "payout", label: "Payout" },
+  { key: "status", label: "Status" },
+];
+
+const ALL_COLUMNS = Object.fromEntries(TOGGLE_COLUMNS.map((column) => [column.key, true]));
+
 const formatDateOnly = (value) => {
   if (!value) return "";
   const date = new Date(value);
@@ -46,6 +58,9 @@ export default function OffersLivePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedIds, setSelectedIds] = useState([]);
   const [openMenu, setOpenMenu] = useState(null);
+
+  const [showColumns, setShowColumns] = useState(false);
+  const [visibleColumns, setVisibleColumns] = useState(ALL_COLUMNS);
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -467,6 +482,19 @@ export default function OffersLivePage() {
     );
   }, [offers, search]);
 
+  const hiddenColumnCount = TOGGLE_COLUMNS.filter((column) => !visibleColumns[column.key]).length;
+  const columnCount = 2 + TOGGLE_COLUMNS.length - hiddenColumnCount;
+
+  // columns show / hide straight away
+  const toggleColumn = (key) => setVisibleColumns((current) => ({ ...current, [key]: !current[key] }));
+
+  useEffect(() => {
+    if (!showColumns) return undefined;
+    const onKey = (event) => { if (event.key === "Escape") setShowColumns(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showColumns]);
+
   const totalPages = Math.max(1, Math.ceil(filteredOffers.length / itemsPerPage));
   const page = Math.min(currentPage, totalPages);
   const visibleOffers = filteredOffers.slice((page - 1) * itemsPerPage, page * itemsPerPage);
@@ -524,7 +552,10 @@ export default function OffersLivePage() {
                   </select>
                   entries
                 </label>
-                <button type="button" className="live-offers-filter" title="Live offers filter"><FaFilter /></button>
+                <button type="button" className={`live-offers-filter ${hiddenColumnCount ? "is-active" : ""}`} title="Show / hide columns" aria-label="Show / hide columns" aria-expanded={showColumns} onClick={() => setShowColumns(true)}>
+                  <FaFilter />
+                  {hiddenColumnCount > 0 && <span className="nf-filter-count">{hiddenColumnCount}</span>}
+                </button>
               </div>
             </div>
 
@@ -581,30 +612,32 @@ export default function OffersLivePage() {
                         )}
                       </div>
                     </th>
-                    <th>Logo</th>
-                    <th>Offer</th>
-                    <th>TargetGeo</th>
-                    <th>Revenue</th>
-                    <th>Payout</th>
-                    <th>Status</th>
+                    {visibleColumns.logo && <th>Logo</th>}
+                    {visibleColumns.offer && <th>Offer</th>}
+                    {visibleColumns.targetGeo && <th>TargetGeo</th>}
+                    {visibleColumns.revenue && <th>Revenue</th>}
+                    {visibleColumns.payout && <th>Payout</th>}
+                    {visibleColumns.status && <th>Status</th>}
                     <th>Options</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {loading && <tr><td colSpan="8" className="live-offers-message">Loading live offers…</td></tr>}
-                  {!loading && error && <tr><td colSpan="8" className="live-offers-message error">{error}</td></tr>}
-                  {!loading && !error && visibleOffers.length === 0 && <tr><td colSpan="8" className="live-offers-message">No data available</td></tr>}
+                  {loading && <tr><td colSpan={columnCount} className="live-offers-message">Loading live offers…</td></tr>}
+                  {!loading && error && <tr><td colSpan={columnCount} className="live-offers-message error">{error}</td></tr>}
+                  {!loading && !error && visibleOffers.length === 0 && <tr><td colSpan={columnCount} className="live-offers-message">No data available</td></tr>}
                   {!loading && !error && visibleOffers.map((offer) => (
                     <tr key={offer.id}>
                       <td><input type="checkbox" checked={selectedIds.includes(offer.id)} onChange={() => toggleOffer(offer.id)} aria-label={`Select ${offer.offerName || `offer ${offer.id}`}`} /></td>
-                      <td>
-                        {offer.uploadLogo ? <img className="live-offers-logo" src={offer.uploadLogo} alt="" /> : <div className="live-offers-logo-placeholder" aria-hidden="true"><FaGift /></div>}
-                      </td>
-                      <td><button type="button" className="live-offers-name" onClick={() => navigate(`/offers/${offer.id}/edit`)}>{offer.id} : {offer.offerName || "Untitled offer"}</button></td>
-                      <td><span className="live-offers-geo">◎</span> {offer.targetGeo || "All Countries"}</td>
-                      <td>{priceLabel(offer.advertiserPrice, offer.advertiserCurrency)}</td>
-                      <td>{priceLabel(offer.affiliatePrice, offer.affiliateCurrency || offer.advertiserCurrency)}</td>
-                      <td><span className="live-offers-status">◎ Live</span></td>
+                      {visibleColumns.logo && (
+                        <td>
+                          {offer.uploadLogo ? <img className="live-offers-logo" src={offer.uploadLogo} alt="" /> : <div className="live-offers-logo-placeholder" aria-hidden="true"><FaGift /></div>}
+                        </td>
+                      )}
+                      {visibleColumns.offer && <td><button type="button" className="live-offers-name" onClick={() => navigate(`/offers/${offer.id}/edit`)}>{offer.id} : {offer.offerName || "Untitled offer"}</button></td>}
+                      {visibleColumns.targetGeo && <td><span className="live-offers-geo">◎</span> {offer.targetGeo || "All Countries"}</td>}
+                      {visibleColumns.revenue && <td>{priceLabel(offer.advertiserPrice, offer.advertiserCurrency)}</td>}
+                      {visibleColumns.payout && <td>{priceLabel(offer.affiliatePrice, offer.affiliateCurrency || offer.advertiserCurrency)}</td>}
+                      {visibleColumns.status && <td><span className="live-offers-status">◎ Live</span></td>}
                       <td>
                         <div className="live-offers-menu-wrapper">
                           <button
@@ -650,6 +683,36 @@ export default function OffersLivePage() {
           </section>
         </main>
       </div>
+
+      {showColumns && (
+        <div className="nf-filter-overlay" onClick={() => setShowColumns(false)}>
+          <aside className="nf-filter-panel" role="dialog" aria-label="Live offers columns" onClick={(event) => event.stopPropagation()}>
+            <header className="nf-filter-head">
+              <h3><FaFilter aria-hidden="true" /> Columns</h3>
+              <button type="button" className="nf-filter-close" onClick={() => setShowColumns(false)} aria-label="Close columns">×</button>
+            </header>
+
+            <div className="nf-filter-body">
+              <div className="nf-filter-section-title">
+                Columns ({TOGGLE_COLUMNS.length - hiddenColumnCount} of {TOGGLE_COLUMNS.length})
+                <button type="button" onClick={() => setVisibleColumns(ALL_COLUMNS)}>Show all</button>
+              </div>
+              <div className="nf-filter-columns">
+                {TOGGLE_COLUMNS.map((column) => (
+                  <label key={column.key}>
+                    <input type="checkbox" checked={visibleColumns[column.key]} onChange={() => toggleColumn(column.key)} />
+                    {column.label}
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <footer className="nf-filter-foot">
+              <button type="button" className="nf-filter-apply" onClick={() => setShowColumns(false)}>Done</button>
+            </footer>
+          </aside>
+        </div>
+      )}
 
       {showCategoryModal && (
         <div className="modal-overlay" onClick={() => setShowCategoryModal(false)}>

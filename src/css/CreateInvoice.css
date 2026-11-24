@@ -72,3 +72,60 @@
 .btn.small {
   font-size: 12px;
 }
+/* Fetch Reports at its own width on the right (a global button rule made it full width) */
+.form-footer { display: flex; justify-content: flex-end; }
+.form-footer .btn { width: auto !important; flex: 0 0 auto; min-width: 150px; padding: 0 22px !important; height: 38px; white-space: nowrap; }
+
+/* Offers: dropdown with a checkbox list */
+.inv-multi { position: relative; }
+.form-group .inv-multi-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100% !important;
+  height: 41px;
+  margin: 0;
+  padding: 0 34px 0 8px !important;
+  border: 1px solid var(--nf-line, #ccc) !important;
+  border-radius: 6px !important;
+  background: var(--nf-surface-2, #f8fafc) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center / 12px 10px !important;
+  color: var(--nf-ink, #1b2536) !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  text-align: left;
+  box-shadow: none !important;
+  transform: none !important;
+  cursor: pointer;
+}
+.form-group .inv-multi-field.is-open { border-color: var(--nf-p, #2f62b3) !important; box-shadow: 0 0 0 3px rgba(47, 98, 179, .15) !important; }
+.inv-multi-field span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.inv-multi-placeholder { color: var(--nf-ink-2, #6b7a88); }
+.inv-multi-menu {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  padding: 8px;
+  border: 1px solid var(--nf-line, #dce4ea);
+  border-radius: 10px;
+  background: var(--nf-surface, #fff);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, .16);
+}
+.form-group .inv-multi-search { width: 100%; height: 34px; margin: 0 0 6px !important; padding: 0 10px !important; border-radius: 7px !important; font-size: 13px; }
+.inv-multi-list { max-height: 220px; overflow-y: auto; }
+.form-group .inv-multi-option { display: flex; align-items: center; gap: 9px; margin: 0; padding: 7px 8px; border-radius: 7px; font-size: 13px; cursor: pointer; }
+.form-group .inv-multi-option:hover { background: var(--nf-surface-2, #f3f6fa); }
+.form-group .inv-multi-option input { width: 16px; height: 16px; margin: 0; padding: 0; flex: 0 0 auto; accent-color: var(--nf-p, #2f62b3); }
+.inv-multi-empty { padding: 12px 8px; color: var(--nf-ink-2, #6b7a88); font-size: 13px; text-align: center; }
+.form-group .inv-multi-clear { width: auto !important; margin: 6px 0 0 auto; padding: 4px 6px !important; border: 0 !important; background: none !important; box-shadow: none !important; color: var(--nf-p, #2f62b3) !important; font-size: 12px !important; font-weight: 600; display: block; }
+.inv-lists-error { margin-bottom: 12px; padding: 8px 12px; border-radius: 8px; background: #fef2f2; color: #b91c1c; font-size: 13px; }
+.invoice-box .form-group .inv-multi-option,
+.invoice-box .form-group .inv-multi-field span { color: var(--nf-ink, #1b2536); font-size: 14px; font-weight: 400; letter-spacing: 0; text-transform: none; }
+.invoice-box .form-group .inv-multi-field .inv-multi-placeholder { color: var(--nf-ink-2, #6b7a88); }
+
+/* "Invoices" (back to the invoice list): a normal button on the right; the page
+   title is shown in the top bar */
+.invoice-header { justify-content: flex-end; }
+.invoice-header .invoice-list-btn { display: inline-flex; align-items: center; gap: 7px; width: auto !important; flex: 0 0 auto; height: 36px; padding: 0 16px !important; white-space: nowrap; }
+.invoice-box .form-group select { padding-right: 34px; text-overflow: ellipsis; }

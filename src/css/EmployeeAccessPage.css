@@ -266,3 +266,6 @@
   opacity: .6;
   cursor: not-allowed;
 }
+
+/* keep "Create Employee" at its own width on the right (a global button rule made it full width) */
+.emp-toolbar .emp-create-btn { width: auto !important; flex: 0 0 auto; margin-left: auto; white-space: nowrap; }

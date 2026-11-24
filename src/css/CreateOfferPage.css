@@ -4657,3 +4657,17 @@ input:checked + .slider:before {
     box-sizing: border-box;
   }
 }
+
+/* Landing step: the table wrapper scrolls sideways, which also clips anything below
+   it; while a row's action menu is open, give it room so the last rows' menus show */
+.landing-table-wrap:has(.landing-action-menu) {
+  padding-bottom: 112px;
+  margin-bottom: -112px; /* borrow the empty space below instead of pushing content down */
+  position: relative;
+  z-index: 3;
+}
+
+/* Creatives step: keep the upload row buttons on one line */
+.creatives-v2-upload-row button {
+  white-space: nowrap;
+}

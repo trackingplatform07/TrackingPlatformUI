@@ -9,7 +9,8 @@ const SCOPE = '.of-main button, .main-container .content button, [class*="modal"
 // navigation-like controls keep their own design
 const SKIP_CLASS = /(tab|step|toggle|switch|chip|tag|pagination|page-|editor|toolbar|tiptap|dropdown-item|menu-item|accordion|article-header|captcha|password|theme)/i;
 const SECONDARY_TEXT = /^(cancel|close|back|discard|reset|no)\b/i;
-const SKIP_INSIDE = '[role="tablist"], [class*="editor"], .mailer-toolbar, [class*="tabs"], [class*="pagination"], .nf-shell, .nf-topbar';
+// dropdown / row menus keep their own menu-item look
+const SKIP_INSIDE = '[role="tablist"], [class*="editor"], .mailer-toolbar, [class*="tabs"], [class*="pagination"], [class*="-menu"], [class*="dropdown"], .nf-shell, .nf-topbar';
 
 function parse(color) {
   const m = color.match(/rgba?\(([^)]+)\)/);

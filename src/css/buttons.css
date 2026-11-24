@@ -184,3 +184,28 @@
 .apb-header button {
   white-space: nowrap;
 }
+
+/* row action (⋮) buttons inside tables stay compact so neighbouring rows don't touch */
+table [data-nf-btn="icon"][data-nf-size="sm"] {
+  min-width: 24px;
+  min-height: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+/* buttons inside table cells size to their label: some pages fix a width inline
+   (e.g. Create Offer > Creatives: Preview 50px, Delete 43px) that was sized for the
+   old 10px labels and now cuts the text off */
+table td [data-nf-btn]:not([data-nf-btn="icon"]):not([data-nf-btn="skip"]) {
+  width: auto !important;
+  min-width: max-content;
+  white-space: nowrap;
+}
+
+/* buttons given a fixed pixel width inline (sized for the old 9-10px labels) grow to
+   fit their label; percentage widths such as 100% are left alone */
+[data-nf-btn][style*="width"][style*="px"]:not([data-nf-btn="icon"]):not([data-nf-btn="skip"]) {
+  width: auto !important;
+  min-width: max-content;
+  white-space: nowrap;
+}

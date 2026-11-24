@@ -48,3 +48,7 @@
 .approved-offers-pagination button:disabled { opacity: .45; cursor: not-allowed; }
 @media (max-width: 1160px) { .approved-offers-toolbar { align-items: flex-start; flex-direction: column; } .approved-offers-actions { flex-wrap: wrap; } }
 @media (max-width: 640px) { .approved-offers-page { padding: 10px; } .approved-offers-actions { gap: 6px; } .approved-offers-button { padding: 0 7px; } .approved-offers-pagination { align-items: flex-start; flex-direction: column; } }
+
+/* Filters: funnel button (the drawer itself is styled in filters.css) */
+.approved-offers-filter { position: relative; height: 34px; width: 38px !important; border-radius: 8px; }
+.approved-offers-filter.is-active { background: var(--nf-p, #2f62b3); color: #fff; }

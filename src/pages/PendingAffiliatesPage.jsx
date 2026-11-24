@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
@@ -37,6 +37,20 @@ const DEFAULT_COLUMNS = {
   options: true,
 };
 
+const COLUMN_LABELS = {
+  affiliateId: "Affiliate ID",
+  name: "Name",
+  email: "Email",
+  contact: "Contact",
+  company: "Company",
+  country: "Country",
+  manager: "Manager",
+  status: "Status",
+  clicks: "Clicks",
+  conversions: "Conversions",
+  options: "Options",
+};
+
 export default function PendingAffiliatesPage() {
   const navigate = useNavigate();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -52,12 +66,10 @@ export default function PendingAffiliatesPage() {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [showFilters, setShowFilters] = useState(true);
-  const [showColumns, setShowColumns] = useState(false);
+  // one panel (funnel icon) holds the filters and the column show / hide
+  const [showFilters, setShowFilters] = useState(false);
   const [visibleColumns, setVisibleColumns] = useState(DEFAULT_COLUMNS);
   const [openRowIndex, setOpenRowIndex] = useState(null);
-
-  const columnsRef = useRef(null);
 
   const loadData = async () => {
     try {
@@ -91,14 +103,11 @@ export default function PendingAffiliatesPage() {
   }, []);
 
   useEffect(() => {
-    const close = (e) => {
-      if (columnsRef.current && !columnsRef.current.contains(e.target)) {
-        setShowColumns(false);
-      }
-    };
-    window.addEventListener("click", close);
-    return () => window.removeEventListener("click", close);
-  }, []);
+    if (!showFilters) return undefined;
+    const onKey = (e) => { if (e.key === "Escape") setShowFilters(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showFilters]);
 
   const updateStatus = async (id, status) => {
     try {
@@ -156,6 +165,7 @@ export default function PendingAffiliatesPage() {
   };
 
   const toggleColumn = (key) => setVisibleColumns((prev) => ({ ...prev, [key]: !prev[key] }));
+  const hiddenColumnCount = Object.values(visibleColumns).filter((shown) => !shown).length;
 
   return (
     <div className="of-layout">
@@ -206,26 +216,6 @@ export default function PendingAffiliatesPage() {
           </div>
 
           <div className="paff-toolbar">
-            {showFilters && (
-              <div className="paff-filter-row">
-                <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-                  <option value="">All Statuses</option>
-                  <option value="Pending">Pending</option>
-                  <option value="Approved">Approved</option>
-                  <option value="Rejected">Rejected</option>
-                </select>
-                <select value={countryFilter} onChange={(e) => setCountryFilter(e.target.value)}>
-                  <option value="">All Countries</option>
-                  {countries.map((c) => <option key={c} value={c}>{c}</option>)}
-                </select>
-                <select value={managerFilter} onChange={(e) => setManagerFilter(e.target.value)}>
-                  <option value="">All Managers</option>
-                  {managers.map((m) => <option key={m} value={m}>{m}</option>)}
-                </select>
-                <button type="button" className="paff-reset-link" onClick={resetFilters}>Reset</button>
-              </div>
-            )}
-
             <div className="paff-actions">
               <input
                 type="text"
@@ -240,22 +230,19 @@ export default function PendingAffiliatesPage() {
                 <option value={50}>50 / page</option>
                 <option value={100}>100 / page</option>
               </select>
-              <button type="button" className="btn small" onClick={() => setShowFilters((v) => !v)}>
-                Filters {activeFilterCount > 0 && <span className="paff-badge">{activeFilterCount}</span>}
+              <button
+                type="button"
+                className={`paff-filter-btn ${activeFilterCount || hiddenColumnCount ? "is-active" : ""}`}
+                title="Filters & Columns"
+                aria-label="Filters & Columns"
+                aria-expanded={showFilters}
+                onClick={() => setShowFilters(true)}
+              >
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 5H21L14 13V19L10 21V13L3 5Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                {activeFilterCount > 0 && <span className="nf-filter-count">{activeFilterCount}</span>}
               </button>
-              <div className="paff-columns-wrap" ref={columnsRef}>
-                <button type="button" className="btn small" onClick={() => setShowColumns((v) => !v)}>Columns</button>
-                {showColumns && (
-                  <div className="paff-columns-dropdown">
-                    {Object.keys(DEFAULT_COLUMNS).map((key) => (
-                      <label key={key} className="paff-columns-item">
-                        <input type="checkbox" checked={visibleColumns[key]} onChange={() => toggleColumn(key)} />
-                        <span>{key}</span>
-                      </label>
-                    ))}
-                  </div>
-                )}
-              </div>
               <button type="button" className="btn primary small" onClick={() => setShowAddModal(true)}>+ Add Affiliate</button>
             </div>
           </div>
@@ -362,6 +349,64 @@ export default function PendingAffiliatesPage() {
           <AddAffiliateModal onClose={() => { setShowAddModal(false); loadData(); }} />
         )}
       </div>
+
+      {showFilters && (
+        <div className="nf-filter-overlay" onClick={() => setShowFilters(false)}>
+          <aside className="nf-filter-panel" role="dialog" aria-label="Affiliate filters and columns" onClick={(e) => e.stopPropagation()}>
+            <header className="nf-filter-head">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" width="14" aria-hidden="true">
+                  <path d="M3 5H21L14 13V19L10 21V13L3 5Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+                </svg>
+                Filters &amp; Columns
+              </h3>
+              <button type="button" className="nf-filter-close" onClick={() => setShowFilters(false)} aria-label="Close filters">×</button>
+            </header>
+
+            <div className="nf-filter-body">
+              <div className="nf-filter-section-title">Filters</div>
+              <label>Status
+                <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+                  <option value="">All Statuses</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Approved">Approved</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+              </label>
+              <label>Country
+                <select value={countryFilter} onChange={(e) => setCountryFilter(e.target.value)}>
+                  <option value="">All Countries</option>
+                  {countries.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </label>
+              <label>Manager
+                <select value={managerFilter} onChange={(e) => setManagerFilter(e.target.value)}>
+                  <option value="">All Managers</option>
+                  {managers.map((m) => <option key={m} value={m}>{m}</option>)}
+                </select>
+              </label>
+
+              <div className="nf-filter-section-title">
+                Columns ({Object.keys(DEFAULT_COLUMNS).length - hiddenColumnCount} of {Object.keys(DEFAULT_COLUMNS).length})
+                <button type="button" onClick={() => setVisibleColumns(DEFAULT_COLUMNS)}>Show all</button>
+              </div>
+              <div className="nf-filter-columns">
+                {Object.keys(DEFAULT_COLUMNS).map((key) => (
+                  <label key={key}>
+                    <input type="checkbox" checked={visibleColumns[key]} onChange={() => toggleColumn(key)} />
+                    {COLUMN_LABELS[key] || key}
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <footer className="nf-filter-foot">
+              <button type="button" className="nf-filter-reset" onClick={resetFilters}>Reset</button>
+              <button type="button" className="nf-filter-apply" onClick={() => setShowFilters(false)}>Done</button>
+            </footer>
+          </aside>
+        </div>
+      )}
     </div>
   );
 }

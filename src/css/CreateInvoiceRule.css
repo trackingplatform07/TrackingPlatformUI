@@ -104,3 +104,9 @@
 .submit {
   margin-top: 10px;
 }
+/* "List" (back to the invoice rules): a normal button on the right; the page title
+   is shown in the top bar, so the header row needs no card */
+.rule-page .rule-header { justify-content: flex-end; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.rule-page .rule-header .list-btn { display: inline-flex; align-items: center; gap: 7px; width: auto !important; flex: 0 0 auto; height: 36px; padding: 0 18px !important; white-space: nowrap; }
+.rule-form .form-group select { padding-right: 34px; text-overflow: ellipsis; }
+.rule-page .rule-header .list-btn { border-color: var(--nf-p, #2f62b3) !important; background: linear-gradient(135deg, var(--nf-p, #2f62b3), var(--nf-top-bg, #1e2d4f)) !important; color: #fff !important; }

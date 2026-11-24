@@ -729,9 +729,10 @@ table tr:hover td {
   background-image: linear-gradient(rgba(var(--nf-p-rgb), .04), rgba(var(--nf-p-rgb), .04));
 }
 
-/* a row menu opened from a frozen cell must sit above the frozen cells of later rows */
+/* a row menu opened from a frozen cell must sit above the frozen cells of later rows
+   (!important: the frozen-cell rules above are more specific) */
 .nf-sticky-table > tbody > tr > td:has([class*="dropdown"], [class*="menu"]) {
-  z-index: 6;
+  z-index: 6 !important;
 }
 
 /* row options (⋮) button: another page's stylesheet turns its background light
@@ -818,4 +819,59 @@ table tr:hover td {
 /* Integration / Fraud Detection pages: the title card holds only the title */
 .of-main main.mobile-attribution-page > .mobile-attribution-title-card {
   display: none !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Framed search boxes (icon + input in one bordered box). A global input rule
+   adds padding / margin / border, which pushed the input out of the box. */
+.approved-offers-search, .coupons-search, .linking-rules-search, .short-url-search,
+.smart-offers-search, .suppression-search {
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  height: 34px !important;
+  min-width: 170px;
+  padding: 0 10px !important;
+  border: 1px solid var(--nf-line, #bdc9d2) !important;
+  border-radius: 8px !important;
+  background: var(--nf-surface, #fff) !important;
+  color: var(--nf-ink-2, #6b7a88);
+  transition: border-color .15s, box-shadow .15s;
+}
+.approved-offers-search:focus-within, .coupons-search:focus-within, .linking-rules-search:focus-within,
+.short-url-search:focus-within, .smart-offers-search:focus-within, .suppression-search:focus-within {
+  border-color: var(--nf-p, #2f62b3) !important;
+  box-shadow: 0 0 0 3px rgba(47, 98, 179, .15);
+}
+.approved-offers-search svg, .coupons-search svg, .linking-rules-search svg,
+.short-url-search svg, .smart-offers-search svg, .suppression-search svg { flex: 0 0 auto; width: 12px; height: 12px; }
+.approved-offers-search input, .coupons-search input, .linking-rules-search input,
+.short-url-search input, .smart-offers-search input, .suppression-search input {
+  flex: 1 1 auto;
+  width: 100% !important;
+  min-width: 0;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 2px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--nf-ink, #263945);
+  font-size: 12px !important;
+  line-height: 1;
+}
+
+/* Row ⋮ menus (Advertisers, Affiliates …): Bootstrap's .dropdown-item padding is empty
+   outside a .dropdown-menu, which squeezed the items together */
+.row-dropdown .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
 }

@@ -3,12 +3,17 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import "../css/CreateInvoiceRule.css";
 import { useNavigate } from "react-router-dom";
+import { TIMEZONES, useCurrencies } from "../data/billingOptions";
 
 const CreateInvoiceRule = () => {
 
     const navigate = useNavigate();
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  const currencies = useCurrencies();
+  const [timezone, setTimezone] = useState("");
+  const [currency, setCurrency] = useState("");
 
   return (
     <div className="of-layout">
@@ -35,7 +40,7 @@ const CreateInvoiceRule = () => {
     className="btn btn-primary list-btn ms-auto"
     onClick={() => navigate("/invoice-settings")}
   >
-    List
+    <span aria-hidden="true">☰</span> List
   </button>
 
 </div>
@@ -52,8 +57,11 @@ const CreateInvoiceRule = () => {
 
             <div className="form-group">
               <label>Timezone</label>
-              <select>
-                <option>Select Timezone</option>
+              <select value={timezone} onChange={(event) => setTimezone(event.target.value)}>
+                <option value="">Select Timezone</option>
+                {TIMEZONES.map((zone) => (
+                  <option key={zone.value} value={zone.value}>{zone.label}</option>
+                ))}
               </select>
             </div>
 
@@ -88,8 +96,11 @@ const CreateInvoiceRule = () => {
 
             <div className="form-group">
               <label>Currency</label>
-              <select>
-                <option>Select Currency</option>
+              <select value={currency} onChange={(event) => setCurrency(event.target.value)}>
+                <option value="">Select Currency</option>
+                {currencies.map((item) => (
+                  <option key={item.code} value={item.code}>{item.code} - {item.name}</option>
+                ))}
               </select>
             </div>
 
